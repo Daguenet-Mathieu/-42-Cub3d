@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   get_next_wall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 19:27:26 by auferran          #+#    #+#             */
-/*   Updated: 2023/09/15 20:09:32 by auferran         ###   ########.fr       */
+/*   Created: 2023/12/02 05:24:24 by madaguen          #+#    #+#             */
+/*   Updated: 2023/12/02 07:00:15 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int	ft_strlen(char *str)
+void	get_next_wall(t_env *env)
 {
-	int	i;
+	(void) env;
+	double	angle;
+	double	t;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	error(char *str)
-{
-	return (write(2, str, ft_strlen(str)));
+	angle = ((POV * M_PI) / 180);
+	t = tan(angle / 2);
+	env->map.distance_wall = (WIDTH / 2) / t;
 }

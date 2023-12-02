@@ -3,21 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
+#    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2023/09/15 19:17:40 by auferran         ###   ########.fr        #
+#    Updated: 2023/12/02 06:16:56 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cube3D
+NAME = cub3D
 NAME_DEBUG = cub3D_debug
 NAME_BONUS = cub3D_bonus
 
 HEADER = cub3D.h
 HEADER_BONUS = cub3D_bonus.h
 
-SRCS =
+SRCS =	main.c			\
+		utils.c			\
+		lst_utils.c		\
+		gnl.c			\
+		get_map.c		\
+		player.c		\
+		get_next_wall.c	
 SRCS_DEBUG =
 SRCS_BONUS =
 
