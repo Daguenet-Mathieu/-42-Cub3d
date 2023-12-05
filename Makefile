@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2023/12/02 06:16:56 by madaguen         ###   ########.fr        #
+#    Updated: 2023/12/05 15:08:07 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,15 +17,16 @@ NAME_BONUS = cub3D_bonus
 HEADER = cub3D.h
 HEADER_BONUS = cub3D_bonus.h
 
-SRCS =	main.c			\
-		utils.c			\
-		lst_utils.c		\
-		gnl.c			\
-		get_map.c		\
-		player.c		\
-		get_next_wall.c	\
-		calcul_wall_h.c	\
-		calcul_wall_v.c
+SRCS =	main.c				\
+		utils.c				\
+		lst_utils.c			\
+		gnl.c				\
+		get_map.c			\
+		player.c			\
+		get_next_wall.c		\
+		calcul_wall_h.c		\
+		calcul_wall_v.c		\
+		calcul_wall_utils.c
 SRCS_DEBUG =
 SRCS_BONUS =
 

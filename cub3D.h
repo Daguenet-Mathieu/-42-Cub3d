@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/02 06:59:39 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:25:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 
 
 #define POV 60
+#define	FISHBOWL -30
 #define PLAYER_HEIGHT 32
 #define SIZE_CUBE 64
-#define	WIDTH 320
-#define HEIGHT_PLANE 200
+#define	WIDTH 1280
+#define HEIGHT_PLANE 720
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
@@ -38,8 +39,6 @@
 typedef struct s_map
 {
 	char			**map;
-	unsigned int	x_player;
-	unsigned int	y_player;
 	unsigned int	pixel_x_player;
 	unsigned int	pixel_y_player;
 	double			axe_player;
@@ -73,6 +72,7 @@ typedef struct	s_mlx
 	int		*image;
 	void	*mlx;
 	void	*mlx_win;
+	void	*s_image;
 	int		win_x;
 	int		win_y;
 }				t_mlx;
@@ -107,8 +107,9 @@ void	get_pos_player(t_map *map);
 
 void	get_next_wall(t_env *env);
 
-int		find_wall_h(t_env *env);
-int		find_wall_v(t_env *env);
+void	find_wall_h(t_env *env);
+void	find_wall_v(t_env *env);
+int		its_wall(char **map, int grid_y, int grid_x);
 
 int		init_mlx(t_mlx *mlx);
 

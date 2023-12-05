@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 05:24:24 by madaguen          #+#    #+#             */
-/*   Updated: 2023/12/02 07:00:15 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:36:13 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	get_next_wall(t_env *env)
 {
 	double			c;
 	double			angle;
+	double			i;
 	unsigned int	distance_h;
 	unsigned int	distance_v;
 	unsigned int	distance;
@@ -37,17 +38,21 @@ void	get_next_wall(t_env *env)
 	c = cos(angle);
 	env->map.projection_plane = calcul_projection_plane();
 	env->map.between_rays = POV / WIDTH;
-	// Pour chaque rayon appelez :
-	find_wall_h(env);
-	find_wall_v(env);
+	i = 0;
+	while (i < POV)
+	{
+		find_wall_h(env);
+		find_wall_v(env);
+		distance_h = (env->map.pixel_x_player - env->h.new_x) / c;
+		distance_v = (env->map.pixel_x_player - env->v.new_x) / c;
+		if (distance_h <= distance_v)
+			distance = distance_h;
+		else
+			distance = distance_v;
+		i++;
+	}
 	//incrementer env->map.axe_player
 	//ensuite comparer la distance entre les deux pour savoir lequel dessiner :
-	distance_h = (env->map.pixel_x_player - env->h.new_x) / c;
-	distance_v = (env->map.pixel_x_player - env->v.new_x) / c;
-	if (distance_h >= distance_v)
-		distance = distance_h;
-	else
-		distance = distance_v;
 
 	// s'occuper de l'effet fishbowl pour eviter distorsion
 	//multiplier distance par cos(POV_2) ou POV_2 est l'angle du rayson par rapport a langle de vue

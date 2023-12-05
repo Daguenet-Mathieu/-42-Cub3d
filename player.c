@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 02:14:03 by madaguen          #+#    #+#             */
-/*   Updated: 2023/12/02 06:32:50 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:04:41 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ void	get_pos_player(t_map *map)
 			break ;
 		i++;
 	}
-	map->y_player = i;
-	map->x_player = j;
 	map->pixel_x_player = i * SIZE_CUBE + 32;
-	map->pixel_x_player = j * SIZE_CUBE + 32;
+	map->pixel_y_player = j * SIZE_CUBE + 32;
 	init_direction_de_foufurieux(map->map[i][j], &map->axe_player);
 }
