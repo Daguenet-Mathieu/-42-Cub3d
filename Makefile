@@ -23,7 +23,9 @@ SRCS =	main.c			\
 		gnl.c			\
 		get_map.c		\
 		player.c		\
-		get_next_wall.c	
+		get_next_wall.c	\
+		calcul_wall_h.c	\
+		calcul_wall_v.c
 SRCS_DEBUG =
 SRCS_BONUS =
 

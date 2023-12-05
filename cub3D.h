@@ -26,8 +26,10 @@
 
 
 #define POV 60
-#define HEIGHT_PLANE 200
+#define PLAYER_HEIGHT 32
+#define SIZE_CUBE 64
 #define	WIDTH 320
+#define HEIGHT_PLANE 200
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
@@ -36,13 +38,27 @@
 typedef struct s_map
 {
 	char			**map;
-	unsigned int	height;
-	unsigned int	width;
 	unsigned int	x_player;
 	unsigned int	y_player;
+	unsigned int	pixel_x_player;
+	unsigned int	pixel_y_player;
 	double			axe_player;
+	double			projection_plane;
 	double			distance_wall;
+	double			between_rays;
 }					t_map;
+
+typedef struct s_calcul
+{
+	int				new_x;
+	int				new_y;
+	int				old_x;
+	int				old_y;
+	int				grid_x;
+	int				grid_y;
+	int				ya;
+	int				xa;
+}					t_calcul;
 
 typedef struct s_key
 {
@@ -51,14 +67,6 @@ typedef struct s_key
 	int	left;
 	int	right;
 }				t_key;
-
-typedef struct	s_pos
-{
-	int		y;
-	int		x;
-	int		new_y;
-	int		new_x;
-}				t_pos;
 
 typedef struct	s_mlx
 {
@@ -70,8 +78,10 @@ typedef struct	s_mlx
 }				t_mlx;
 typedef struct s_env
 {
-	t_mlx	mlx;
-	t_map	map;
+	t_mlx		mlx;
+	t_map		map;
+	t_calcul	h;
+	t_calcul	v;
 }			t_env;
 
 typedef struct s_lst
@@ -96,6 +106,9 @@ char	**lst_to_tab(t_lst *lst);
 void	get_pos_player(t_map *map);
 
 void	get_next_wall(t_env *env);
+
+int		find_wall_h(t_env *env);
+int		find_wall_v(t_env *env);
 
 int		init_mlx(t_mlx *mlx);
 
