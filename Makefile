@@ -17,16 +17,17 @@ NAME_BONUS = cub3D_bonus
 HEADER = cub3D.h
 HEADER_BONUS = cub3D_bonus.h
 
-SRCS =	main.c				\
-		utils.c				\
-		lst_utils.c			\
-		gnl.c				\
-		get_map.c			\
-		player.c			\
-		get_next_wall.c		\
-		calcul_wall_h.c		\
-		calcul_wall_v.c		\
-		calcul_wall_utils.c
+SRCS =	main.c					\
+		utils.c					\
+		lst_utils.c				\
+		gnl.c					\
+		get_map.c				\
+		player.c				\
+		get_next_wall.c			\
+		calcul_wall_h.c			\
+		calcul_wall_v.c			\
+		calcul_wall_utils.c		\
+		calcul_wall_utils_2.c
 SRCS_DEBUG =
 SRCS_BONUS =
 
@@ -42,7 +43,7 @@ MLX = ${MLX_PATH} ${MLX_NAME}
 
 INC = -I ./mlx_linux/
 
-CC = cc
+CC = clang
 
 FLAGS = -Wall -Werror -Wextra -g
 

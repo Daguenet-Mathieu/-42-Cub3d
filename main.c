@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-void	printmap(char **map)
+/*void	printmap(char **map)
 {
 	int	i;
 	int	j;
@@ -29,7 +29,7 @@ void	printmap(char **map)
 		i++;
 	}
 	write(1, "\n", 1);
-}
+}*/
 
 int	main(int argc, char **argv)
 {

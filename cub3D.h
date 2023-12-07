@@ -107,9 +107,15 @@ void	get_pos_player(t_map *map);
 
 void	get_next_wall(t_env *env);
 
-void	find_wall_h(t_env *env);
-void	find_wall_v(t_env *env);
+void	find_wall_h(t_env *env, double a_p);
+void	find_wall_v(t_env *env, double a_p);
+
 int		its_wall(char **map, int grid_y, int grid_x);
+double	calcul_projection_plane(void);
+double	calcul_a_p(double axe_player);
+void	recalcul_a_p(double *a_p, double between_rays);
+double	calcul_distance(t_env *env);
+void	remove_fishbowl(double *distance, double i);
 
 int		init_mlx(t_mlx *mlx);
 
