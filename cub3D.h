@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/05 18:25:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:01:19 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@
 #define SIZE_CUBE 64
 #define	WIDTH 1280
 #define HEIGHT_PLANE 720
+#define NORTH 0x0000FF
+#define SOUTH 0xFF0000
+#define EAST 0x008000
+#define WEST 0x7F00FF
+#define FLOOR 0x70726E
+#define SKY 0x2A303D
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
@@ -107,14 +113,14 @@ void	get_pos_player(t_map *map);
 
 void	get_next_wall(t_env *env);
 
-void	find_wall_h(t_env *env, double a_p);
-void	find_wall_v(t_env *env, double a_p);
+void	find_wall_h(t_env *env, double a_p, double i);
+void	find_wall_v(t_env *env, double a_p, double i);
 
 int		its_wall(char **map, int grid_y, int grid_x);
 double	calcul_projection_plane(void);
 double	calcul_a_p(double axe_player);
 void	recalcul_a_p(double *a_p, double between_rays);
-double	calcul_distance(t_env *env);
+double	calcul_distance(t_env *env, int *x, int *y);
 void	remove_fishbowl(double *distance, double i);
 
 int		init_mlx(t_mlx *mlx);

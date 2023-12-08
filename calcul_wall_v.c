@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   calcul_wall_v.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 15:34:56 by auferran          #+#    #+#             */
+/*   Updated: 2023/12/08 19:56:20 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
-void	check_first_intersection_v(t_env *env, double a_p)
+void	check_first_intersection_v(t_env *env, double a_p, double i)
 {
 	double	angle;
 	double	t;
+	(void)	i;
 
 	angle = ((POV * M_PI) / 180);
 	t = tan(angle);
@@ -32,9 +45,9 @@ void	check_next_intersection_v(t_env *env)
 	env->v.grid_y = env->v.new_y / SIZE_CUBE;
 }
 
-void	find_wall_v(t_env *env, double a_p)
+void	find_wall_v(t_env *env, double a_p, double i)
 {
-	check_first_intersection_v(env, a_p);
+	check_first_intersection_v(env, a_p, i);
 	if (its_wall(env->map.map, env->v.grid_y, env->v.grid_x))
 		return ;
 	env->v.old_x = env->v.new_x;

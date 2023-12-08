@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   calcul_wall_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 15:35:12 by auferran          #+#    #+#             */
+/*   Updated: 2023/12/08 19:56:04 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 int	its_wall(char **map, int grid_y, int grid_x)
@@ -41,7 +53,7 @@ void	recalcul_a_p(double *a_p, double between_rays)
 		*a_p = *a_p - 359;
 }
 
-double	calcul_distance(t_env *env)
+double	calcul_distance(t_env *env, int *x, int *y)
 {
 	double			d;
 	double			d_h;
@@ -52,8 +64,14 @@ double	calcul_distance(t_env *env)
 	d_v = sqrt(pow((double)env->map.pixel_x_player - (double)env->v.new_x, 2)
 		+ pow((double)env->map.pixel_y_player - (double)env->v.new_y, 2));
 	if (d_h <= d_v)
+	{
+		*x = env->h.new_x;
 		d = d_h;
+	}
 	else
+	{
+		*y = env->v.new_y;
 		d = d_v;
+	}
 	return (d);
 }
