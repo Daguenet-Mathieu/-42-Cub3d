@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/13 23:41:44 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/14 00:51:07 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,12 +160,6 @@ int	handle_keyrelease(int key_code, t_env *env);
 void	ajust_key_press(int *key1, int *key2);
 int	handle_keypress(int key_code, t_env *env);
 int	handle_key(t_env *env);
-
-int	in_case_y(t_pos pos, int c_y, int size);
-int	player_in_case(t_pos pos, t_case this_case, int pixel);
-int	verif_case(t_env *env, t_pos pos, char c, t_case this_case);
-void	init_zone(t_case zone[4], t_pos pos);
-int	check(t_env *env, t_pos pos, char c);
 
 void set_map(t_env *env);
 
