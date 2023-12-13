@@ -18,8 +18,7 @@ void	print_wall(t_env *env, double height, int x, int y, int i_rayon)
 	int	index_img;
 	int	orientation;
 	int	y_start;
-	static int w;
-	(void) w;
+	(void) index_img;
 
 	if (x > -1)
 	{
@@ -57,29 +56,27 @@ void	get_next_wall(t_env *env)
 	double	a_p;
 	double	distance;
 	double	hauteur_tranche;
-	double	i_angle;
 	int		i_rayon;
 
-	(void)distance;
-	(void)hauteur_tranche;
 	env->map.projection_plane = calcul_projection_plane();
 	env->map.between_rays = (double)POV / (double)WIDTH;
 	a_p = calcul_a_p(env->map.axe_player);
 	i = POV / 2;
-	i_angle = 1;
 	x = -1;
 	y = -1;
 	i_rayon = 1;
 	while (i > ((double)POV / 2 * -1))
 	{
-		find_wall_h(env, a_p, i_angle);
-		find_wall_v(env, a_p, i_angle);
+		//printf("i_rayon = %d\n", i_rayon);
+		find_wall_h(env, a_p);
+		find_wall_v(env, a_p);
+		//printf("new_xh = %f\nnew_yh = %f\n", env->h.new_x, env->h.new_y);
+		//printf("new_xv = %f\nnew_yv = %f\n\n", env->v.new_x, env->v.new_y);
 		distance = calcul_distance(env, &x, &y);
 		remove_fishbowl(&distance, i);
 		hauteur_tranche = (SIZE_CUBE / distance) * env->map.projection_plane;
 		recalcul_a_p(&a_p, env->map.between_rays);
 		i = i - env->map.between_rays;
-		i_angle = i_angle + env->map.between_rays;
 		i_rayon++;
 		print_wall(env, hauteur_tranche, x, y, i_rayon);
 	}

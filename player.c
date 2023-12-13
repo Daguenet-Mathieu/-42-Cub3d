@@ -30,13 +30,13 @@ static int	its_player(char c)
 void	init_direction_de_foufurieux(char c, double *axe_player)
 {
 	if (c == 'N')
-		*axe_player = 0;
-	if (c == 'E')
 		*axe_player = 90;
-	if (c == 'S')
+	if (c == 'E')
 		*axe_player = 180;
-	if (c == 'W')
+	if (c == 'S')
 		*axe_player = 270;
+	if (c == 'W')
+		*axe_player = 0;
 }
 
 int	check_line(char *line, int *i)

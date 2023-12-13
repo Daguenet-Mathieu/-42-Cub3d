@@ -44,26 +44,26 @@
 
 typedef struct s_map
 {
-	char			**map;
-	unsigned int	pixel_x_player;
-	unsigned int	pixel_y_player;
-	double			axe_player;
-	double			projection_plane;
-	double			distance_wall;
-	double			between_rays;
-}					t_map;
+	char	**map;
+	double	pixel_x_player;
+	double	pixel_y_player;
+	double	axe_player;
+	double	projection_plane;
+	double	distance_wall;
+	double	between_rays;
+}			t_map;
 
 typedef struct s_calcul
 {
-	int				new_x;
-	int				new_y;
-	int				old_x;
-	int				old_y;
-	int				grid_x;
-	int				grid_y;
-	int				ya;
-	int				xa;
-}					t_calcul;
+	double	new_x;
+	double	new_y;
+	double	old_x;
+	double	old_y;
+	int		grid_x;
+	int		grid_y;
+	double	ya;
+	double	xa;
+}			t_calcul;
 
 typedef struct s_key
 {
@@ -113,8 +113,8 @@ void	get_pos_player(t_map *map);
 
 void	get_next_wall(t_env *env);
 
-void	find_wall_h(t_env *env, double a_p, double i);
-void	find_wall_v(t_env *env, double a_p, double i);
+void	find_wall_h(t_env *env, double a_p);
+void	find_wall_v(t_env *env, double a_p);
 
 int		its_wall(char **map, int grid_y, int grid_x);
 double	calcul_projection_plane(void);
