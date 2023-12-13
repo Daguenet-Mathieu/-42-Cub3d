@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2023/12/05 15:08:07 by madaguen         ###   ########.fr        #
+#    Updated: 2023/12/13 23:05:52 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ HEADER = cub3D.h
 HEADER_BONUS = cub3D_bonus.h
 
 SRCS =	main.c					\
+		mlx.c 					\
+		key.c					\
+		collision.c				\
 		utils.c					\
 		lst_utils.c				\
 		gnl.c					\

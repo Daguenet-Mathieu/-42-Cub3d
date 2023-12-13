@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/08 19:01:19 by auferran         ###   ########.fr       */
+/*   Updated: 2023/12/13 23:41:44 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,28 @@
 #define WEST 0x7F00FF
 #define FLOOR 0x70726E
 #define SKY 0x2A303D
+#define SPEED 1
+#define WIDTH_PLAYER 1
+#define HEIGHT_PLAYER 1
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
 # endif
 
+
+typedef struct	s_case
+{
+	unsigned int	x;
+	unsigned int	y;
+	unsigned int	area_in_case;
+}				t_case;
+
+
 typedef struct s_map
 {
 	char	**map;
+	int		x_max;
+	int		y_max;
 	double	pixel_x_player;
 	double	pixel_y_player;
 	double	axe_player;
@@ -73,6 +87,14 @@ typedef struct s_key
 	int	right;
 }				t_key;
 
+typedef struct	s_pos
+{
+		int		y;
+		int		x;
+		int		new_y;
+		int		new_x;
+}				t_pos;
+
 typedef struct	s_mlx
 {
 	int		*image;
@@ -88,6 +110,7 @@ typedef struct s_env
 	t_map		map;
 	t_calcul	h;
 	t_calcul	v;
+	t_key		key;
 }			t_env;
 
 typedef struct s_lst
@@ -124,5 +147,28 @@ double	calcul_distance(t_env *env, int *x, int *y);
 void	remove_fishbowl(double *distance, double i);
 
 int		init_mlx(t_mlx *mlx);
+void	free_struct(t_env *env);
+int	mlx_close(t_env *env);
+void	set_hooks_mlx(t_env *env);
+
+
+int	do_move(double *player, double new_pos);
+void	init_pos_l_r(t_pos *pos, t_env *env, int *move);
+void	init_pos_t_d(t_pos *pos, t_env *env, int *move);
+void	ajust_key_release(int *key1, int *key2);
+int	handle_keyrelease(int key_code, t_env *env);
+void	ajust_key_press(int *key1, int *key2);
+int	handle_keypress(int key_code, t_env *env);
+int	handle_key(t_env *env);
+
+int	in_case_y(t_pos pos, int c_y, int size);
+int	player_in_case(t_pos pos, t_case this_case, int pixel);
+int	verif_case(t_env *env, t_pos pos, char c, t_case this_case);
+void	init_zone(t_case zone[4], t_pos pos);
+int	check(t_env *env, t_pos pos, char c);
+
+void set_map(t_env *env);
+
+void init_mp_info(t_map *map);
 
 #endif

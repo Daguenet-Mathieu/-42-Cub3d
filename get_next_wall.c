@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_wall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:34:49 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/08 19:55:40 by auferran         ###   ########.fr       */
+/*   Updated: 2023/12/13 23:55:59 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	print_wall(t_env *env, double height, int x, int y, int i_rayon)
 	int	orientation;
 	int	y_start;
 	(void) index_img;
+	//static int n;
 
+	//printf("nb call == %d, height == %f\n", n++, height);
 	if (x > -1)
 	{
 		if ((int)env->map.pixel_x_player > x)
@@ -57,7 +59,11 @@ void	get_next_wall(t_env *env)
 	double	distance;
 	double	hauteur_tranche;
 	int		i_rayon;
-
+	int	p_x;
+	int	p_y;
+	
+	p_x = (int)env->map.pixel_x_player / SIZE_CUBE;
+	p_y = (int)env->map.pixel_y_player / SIZE_CUBE;
 	env->map.projection_plane = calcul_projection_plane();
 	env->map.between_rays = (double)POV / (double)WIDTH;
 	a_p = calcul_a_p(env->map.axe_player);
@@ -65,6 +71,8 @@ void	get_next_wall(t_env *env)
 	x = -1;
 	y = -1;
 	i_rayon = 1;
+	if (env->map.map[p_x][p_y] == 1)
+		return ;
 	while (i > ((double)POV / 2 * -1))
 	{
 		//printf("i_rayon = %d\n", i_rayon);
@@ -80,4 +88,5 @@ void	get_next_wall(t_env *env)
 		i_rayon++;
 		print_wall(env, hauteur_tranche, x, y, i_rayon);
 	}
+	mlx_put_image_to_window(env->mlx.mlx, env->mlx.mlx_win, env->mlx.s_image, 0, 0);
 }
