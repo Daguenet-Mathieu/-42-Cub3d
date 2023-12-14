@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2023/12/14 00:51:18 by madaguen         ###   ########.fr        #
+#    Updated: 2023/12/14 00:53:56 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ MLX = ${MLX_PATH} ${MLX_NAME}
 
 INC = -I ./mlx_linux/
 
-CC = clang
+CC = clang #penser a remetttre cc avant de push
 
 FLAGS = -Wall -Werror -Wextra -g
 
