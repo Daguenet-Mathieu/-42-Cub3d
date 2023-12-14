@@ -30,7 +30,7 @@ void	check_first_intersection_h(t_env *env, double a_p)
 	else
 		env->h.new_y = floor(env->map.pixel_y_player / SIZE_CUBE) * (SIZE_CUBE) + SIZE_CUBE;
 	env->h.new_x = env->map.pixel_x_player + (env->map.pixel_y_player - env->h.new_y) / t;
-	env->h.xa = env->h.ya / t;
+	env->h.xa = (env->h.ya * -1) / t;
 	env->h.grid_y = env->h.new_y / SIZE_CUBE;
 	env->h.grid_x = env->h.new_x / SIZE_CUBE;
 	//printf("xah = %f\nyah = %f\n", env->h.xa, env->h.ya);
