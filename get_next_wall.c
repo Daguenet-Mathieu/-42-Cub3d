@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_wall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/08 15:34:49 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/13 23:55:59 by madaguen         ###   ########.fr       */
+/*   Created: 2023/12/14 19:04:12 by auferran          #+#    #+#             */
+/*   Updated: 2023/12/14 21:19:49 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3D.h"
 
@@ -61,11 +62,11 @@ void	get_next_wall(t_env *env)
 	double	distance;
 	double	hauteur_tranche;
 	int		i_rayon;
-	int	p_x;
-	int	p_y;
+	//int	p_x;
+	//int	p_y;
 
-	p_x = (int)env->map.pixel_x_player / SIZE_CUBE;
-	p_y = (int)env->map.pixel_y_player / SIZE_CUBE;
+	//p_x = (int)env->map.pixel_x_player / SIZE_CUBE;
+	//p_y = (int)env->map.pixel_y_player / SIZE_CUBE;
 	env->map.projection_plane = calcul_projection_plane();
 	env->map.between_rays = (double)POV / (double)WIDTH;
 	a_p = calcul_a_p(env->map.axe_player);
@@ -73,8 +74,8 @@ void	get_next_wall(t_env *env)
 	x = -1;
 	y = -1;
 	i_rayon = 1;
-	if (env->map.map[p_x][p_y] == 1)
-		return ;
+	//if (env->map.map[p_x][p_y] == 1)
+	//	return ;
 	while (i > ((double)POV / 2 * -1))
 	{
 		//printf("player_x = %f\nplayer_y = %f\n", env->map.pixel_x_player, env->map.pixel_y_player);
@@ -90,6 +91,11 @@ void	get_next_wall(t_env *env)
 		//printf("distance = %f\n", distance);
 		//printf("env->map.projection_plane = %f\n", env->map.projection_plane);
 		hauteur_tranche = SIZE_CUBE / distance * env->map.projection_plane;
+		//printf("hauteur_tranche = %f\n", hauteur_tranche);
+		hauteur_tranche = (SIZE_CUBE / distance) * env->map.projection_plane;
+		if (hauteur_tranche > HEIGHT_PLANE)
+			hauteur_tranche = HEIGHT_PLANE;
+		//printf("projection plane = %f\n", env->map.projection_plane);
 		//printf("hauteur_tranche = %f\n", hauteur_tranche);
 		recalcul_a_p(&a_p, env->map.between_rays);
 		i = i - env->map.between_rays;
