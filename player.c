@@ -63,8 +63,8 @@ void	get_pos_player(t_map *map)
 			break ;
 		i++;
 	}
-	map->pixel_x_player = i * SIZE_CUBE + 32;
-	map->pixel_y_player = j * SIZE_CUBE + 32;
+	map->pixel_x_player = j * SIZE_CUBE + 32;
+	map->pixel_y_player = i * SIZE_CUBE + 32;
 	init_direction_de_foufurieux(map->map[i][j], &map->axe_player);
 }
 

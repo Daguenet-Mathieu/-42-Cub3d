@@ -42,8 +42,8 @@ double	calcul_projection_plane(void)
 	double	angle;
 	double	t;
 
-	angle = ((POV * M_PI) / 180);
-	t = tan(angle / 2);
+	angle = (((POV / 2) * M_PI) / 180);
+	t = tan(angle);
 	nb = (WIDTH / 2) / t;
 	return (nb);
 }
@@ -76,18 +76,20 @@ double	calcul_distance(t_env *env, int *x, int *y)
 	double			d_h;
 	double			d_v;
 
+	*y = -1;
+	*x = -1;
 	d_h = sqrt(pow((double)env->map.pixel_x_player - (double)env->h.new_x, 2)
 		+ pow((double)env->map.pixel_y_player - (double)env->h.new_y, 2));
 	d_v = sqrt(pow((double)env->map.pixel_x_player - (double)env->v.new_x, 2)
 		+ pow((double)env->map.pixel_y_player - (double)env->v.new_y, 2));
 	if (d_h <= d_v)
 	{
-		*x = env->h.new_x;
+		*y = env->h.new_y;
 		d = d_h;
 	}
 	else
 	{
-		*y = env->v.new_y;
+		*x = env->v.new_x;
 		d = d_v;
 	}
 	return (d);

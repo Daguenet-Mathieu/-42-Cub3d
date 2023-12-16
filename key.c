@@ -62,7 +62,7 @@ void	ajust_key_release(int *key1, int *key2)
 
 int	handle_keyrelease(int key_code, t_env *env)
 {
-	printf ("keucode == %d\n", key_code);
+	//printf ("keucode == %d\n", key_code);
 	if (key_code == 65363 || key_code == 100)
 		ajust_key_release(&env->key.right, &env->key.left);
 	else if (key_code == 65362 || key_code == 119)
@@ -92,7 +92,7 @@ int	handle_keypress(int key_code, t_env *env)
 //		env->minimap.active = env->minimap.active ^ 1;
 //		load_map(env);
 //	}
-	printf ("keucode == %d", key_code);
+	//printf ("keucode == %d", key_code);
 	if (key_code == 65361)
 		env->map.axe_player -= 1;
 	if (key_code == 65363)
@@ -109,7 +109,7 @@ int	handle_keypress(int key_code, t_env *env)
 		ajust_key_press(&env->key.left, &env->key.right);
 	else if (key_code == 115)
 		ajust_key_press(&env->key.down, &env->key.up);
-	printf ("down == %d, up == %d\n", env->key.down, env->key.up);
+	//printf ("down == %d, up == %d\n", env->key.down, env->key.up);
 	return (key_code);
 }
 
@@ -135,7 +135,7 @@ int	handle_key(t_env *env)
 		set_map(env);
 		get_next_wall(env);
 		player_axe = env->map.axe_player;
-		printf("player_axe == %d\n", player_axe);
+		//printf("player_axe == %d\n", player_axe);
 	}
 	return (0);
 }

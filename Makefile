@@ -47,7 +47,7 @@ INC = -I ./mlx_linux/
 
 CC = clang #penser a remetttre cc avant de push
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -g -gdwarf-4
 
 $(NAME) : $(OBJS) $(HEADER)
 		 make -C ./mlx_linux all
