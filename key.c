@@ -9,24 +9,42 @@ int	do_move(double *player, double new_pos)
 
 void	init_pos_l_r(t_pos *pos, t_env *env, int *move)
 {
+	double angle;
+
 	pos->x = env->map.pixel_x_player;
 	pos->y = env->map.pixel_y_player;
 	pos->new_x = pos->x;
 	pos->new_y = pos->y;
 	if (env->key.right)
 	{
-		pos->new_x += SPEED;
+		angle = env->map.axe_player + 90;
+		if (angle > 359)
+			angle = (int)angle % 360;
+		printf("y == %d, x == %d\n", pos->y, pos->x);
+		pos->new_y = pos->y + SPEED * ((180/M_PI) * sin(angle));
+		pos->new_x = pos->x + SPEED * ((180/M_PI) * cos(angle));
 		*move = *move + 1;
+		printf("y == %d, x == %d\n", pos->new_y, pos->new_x);
 	}
 	if (env->key.left)
 	{
-		pos->new_x -= SPEED;
+		angle = env->map.axe_player - 90;
+		if (angle < 0)
+			angle = (int)angle + 360;
+		printf("y == %d, x == %d\n", pos->y, pos->x);
+		pos->new_y = pos->y - SPEED * ((180/M_PI) * sin(angle));
+		pos->new_x = pos->x - SPEED * ((180/M_PI) * cos(angle));
 		*move = *move + 1;
+		printf("y == %d, x == %d\n", pos->new_y, pos->new_x);
 	}
 	if (pos->new_x <= 0)
 		pos->new_x = env->map.x_max - 1;
 	else if (pos->new_x <= env->map.x_max)
-		pos->new_x = 1;
+		pos->new_x = 64;
+	if (pos->new_y >= env->map.y_max)
+		pos->new_y = 64;
+	else if (pos->new_y <= 0)
+		pos->new_y = env->map.y_max - 1;
 }
 
 void	init_pos_t_d(t_pos *pos, t_env *env, int *move)
@@ -37,18 +55,29 @@ void	init_pos_t_d(t_pos *pos, t_env *env, int *move)
 	pos->new_y = pos->y;
 	if (env->key.down)
 	{
-		pos->new_y = pos->y + SPEED;
+		printf("y == %d, x == %d\n", pos->y, pos->x);
+		pos->new_y = pos->y + SPEED * ((180/M_PI) * sin(env->map.axe_player));
+		pos->new_x = pos->x + SPEED * ((180/M_PI) * cos(env->map.axe_player));
+		printf("y == %d, x == %d\n", pos->new_y, pos->new_x);
 		*move = *move + 1;
 	}
 	if (env->key.up)
 	{
-		pos->new_y = pos->y - SPEED;
+		printf("y == %d, x == %d\n", pos->y, pos->x);
+		pos->new_y = pos->y - SPEED * ((180/M_PI) * sin(env->map.axe_player));
+		pos->new_x = pos->x - SPEED * ((180/M_PI) * cos(env->map.axe_player));
+		printf("y == %d, x == %d\n", pos->new_y, pos->new_x);
 		*move = *move + 1;
 	}
 	if (pos->new_y >= env->map.y_max)
-		pos->new_y = 1;
+		pos->new_y = 64;
 	else if (pos->new_y <= 0)
 		pos->new_y = env->map.y_max - 1;
+	if (pos->new_x <= 0)
+		pos->new_x = env->map.x_max - 1;
+	else if (pos->new_x <= env->map.x_max)
+		pos->new_x = 64;
+	//printf("%d\n",env->map.y_max);
 }
 
 void	ajust_key_release(int *key1, int *key2)

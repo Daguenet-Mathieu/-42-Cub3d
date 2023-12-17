@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/14 00:51:07 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/17 04:57:08 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 #define WEST 0x7F00FF
 #define FLOOR 0x70726E
 #define SKY 0x2A303D
-#define SPEED 1
+#define SPEED 0.05f
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
 

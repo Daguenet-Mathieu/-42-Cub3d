@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 02:14:03 by madaguen          #+#    #+#             */
-/*   Updated: 2023/12/13 23:41:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/17 04:45:15 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void init_mp_info(t_map *map)
 	int i;
 
 	i = 0;
-	map->x_max = ft_strlen(*map->map);
+	map->x_max = ft_strlen(*map->map) * SIZE_CUBE;
 	while (map->map[i])
 		i++;
-	map->y_max = i;
+	map->y_max = i * SIZE_CUBE;
 }
