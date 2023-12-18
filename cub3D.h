@@ -180,6 +180,7 @@ int		handle_keyrelease(int key_code, t_env *env);
 void	ajust_key_press(int *key1, int *key2);
 int		handle_keypress(int key_code, t_env *env);
 int		handle_key(t_env *env);
+int		mouse_movement(t_env *env);
 
 void 	set_map(t_env *env);
 
