@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/13 23:53:32 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/18 05:06:01 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void set_map(t_env *env)
 		i = 0;
 		while (i < (WIDTH))
 		{
-			env->mlx.image[(y * WIDTH) + i] = SKY;
+			env->mlx.image[(y * WIDTH) + i] = env->map.ceiling;
 			i++;
 		}
 		y++;
@@ -53,7 +53,7 @@ void set_map(t_env *env)
 		i = 0;
 		while (i < (WIDTH))
 		{
-			env->mlx.image[(y * WIDTH) + i] = FLOOR;
+			env->mlx.image[(y * WIDTH) + i] = env->map.floor;
 			i++;
 		}
 		y++;
@@ -86,14 +86,12 @@ int	main(int argc, char **argv)
 	if (!env.mlx.s_image)
 			return (write(2, "IMAGE FAILURE\n", 15));
 	env.mlx.image = (int *)mlx_get_data_addr(env.mlx.s_image, &bpp, &size_line, &endian);
-	//y = 0;
+	printf("plafond == %x sol == %x\n",env.map.ceiling, env.map.floor);
 	set_map(&env);
 	get_next_wall(&env);
 	set_hooks_mlx(&env);
 	mlx_loop(env.mlx.mlx);
-	while(1);
 	//display_map(env);
-	//pas oublier de set les hooks
 	//mlx_loop();
 	//destroy_all(&env);
 	return (0);

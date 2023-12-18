@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/17 04:57:08 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/18 05:50:47 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@
 #  define BUFFER_SIZE 150
 # endif
 
+enum e_dir
+{
+	NO = 1,
+	SO,
+	WE,
+	EA,
+	EMPTY_LINE,
+	C,
+	F,
+};
 
 typedef struct	s_case
 {
@@ -66,6 +76,17 @@ typedef struct s_map
 	double	projection_plane;
 	double	distance_wall;
 	double	between_rays;
+	int		ceiling;
+	int		floor;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		*texture_no;
+	int		*texture_so;
+	int		*texture_we;
+	int		*texture_ea;
+
 }			t_map;
 
 typedef struct s_calcul

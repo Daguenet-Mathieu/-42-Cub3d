@@ -36,6 +36,7 @@ int	mlx_close(t_env *env)
 
 void	set_hooks_mlx(t_env *env)
 {
+	//mlx_xpm_file_to_image();
 	mlx_hook(env->mlx.mlx_win, 17, 0, mlx_close, env);
 	mlx_hook(env->mlx.mlx_win, 3, 1 << 1, handle_keyrelease, env);
 	mlx_hook(env->mlx.mlx_win, 2, 1L << 0, handle_keypress, env);
