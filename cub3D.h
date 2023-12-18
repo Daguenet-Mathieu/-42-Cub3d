@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/18 07:06:51 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/18 07:09:58 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct	s_case
 	unsigned int	area_in_case;
 }				t_case;
 
-
 typedef struct s_img
 {
 	void	*ptr;
@@ -90,10 +89,10 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_image	*texture_no;
-	t_image	*texture_so;
-	t_image	*texture_we;
-	t_image	*texture_ea;
+	t_image	texture_no;
+	t_image	texture_so;
+	t_image	texture_we;
+	t_image	texture_ea;
 
 }			t_map;
 
