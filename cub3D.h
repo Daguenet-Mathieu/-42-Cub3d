@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/18 06:49:12 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/18 07:06:51 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_img
 	void	*ptr;
 	int		size_line;
 	int		height;
-}			t_img;
+}			t_image;
 
 typedef struct s_map
 {
@@ -90,10 +90,10 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_img	*texture_no;
-	t_img	*texture_so;
-	t_img	*texture_we;
-	t_img	*texture_ea;
+	t_image	*texture_no;
+	t_image	*texture_so;
+	t_image	*texture_we;
+	t_image	*texture_ea;
 
 }			t_map;
 
