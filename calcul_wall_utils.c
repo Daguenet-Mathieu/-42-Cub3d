@@ -53,21 +53,21 @@ double	calcul_a_p(double axe_player)
 	double	a_p;
 	double	tmp;
 
-	if (axe_player < 30)
+	if (axe_player > 329)
 	{
-		tmp = 30 - axe_player;
-		a_p = 360 - tmp;
+		tmp = 30 + axe_player;
+		a_p = tmp - 360;
 	}
 	else
-		a_p = axe_player - 30;
+		a_p = axe_player + 30;
 	return (a_p);
 }
 
 void	recalcul_a_p(double *a_p, double between_rays)
 {
-	*a_p = *a_p + between_rays;
-	if (*a_p > 359)
-		*a_p = *a_p - 359;
+	*a_p = *a_p - between_rays;
+	if (*a_p <= 0)
+		*a_p = *a_p + 360;
 }
 
 double	calcul_distance(t_env *env, int *x, int *y)

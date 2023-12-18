@@ -37,7 +37,7 @@
 #define WEST 0x7F00FF
 #define FLOOR 0x70726E
 #define SKY 0x2A303D
-#define SPEED 0.5
+#define SPEED 0.3
 #define	SPEED_2 3
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
@@ -168,21 +168,21 @@ void	remove_fishbowl(double *distance, double i);
 
 int		init_mlx(t_mlx *mlx);
 void	free_struct(t_env *env);
-int	mlx_close(t_env *env);
+int		mlx_close(t_env *env);
 void	set_hooks_mlx(t_env *env);
 
 
-int	do_move(double *player, double new_pos);
+int		do_move(double *player, double new_pos);
 void	init_pos_l_r(t_pos *pos, t_env *env, int *move);
 void	init_pos_t_d(t_pos *pos, t_env *env, int *move);
 void	ajust_key_release(int *key1, int *key2);
-int	handle_keyrelease(int key_code, t_env *env);
+int		handle_keyrelease(int key_code, t_env *env);
 void	ajust_key_press(int *key1, int *key2);
-int	handle_keypress(int key_code, t_env *env);
-int	handle_key(t_env *env);
+int		handle_keypress(int key_code, t_env *env);
+int		handle_key(t_env *env);
 
-void set_map(t_env *env);
+void 	set_map(t_env *env);
 
-void init_mp_info(t_map *map);
+void 	init_mp_info(t_map *map);
 
 #endif

@@ -22,7 +22,7 @@ void	check_first_intersection_h(t_env *env, double a_p)
 	t = tan(angle);
 	//printf("t = %f\n", t);
 	env->h.ya = SIZE_CUBE;
-	if (a_p >= 0 && a_p <= 179)
+	if (a_p >= 0 && a_p < 180)
 	{
 		env->h.ya = SIZE_CUBE * -1;
 		env->h.new_y = floor(env->map.pixel_y_player / SIZE_CUBE) * (SIZE_CUBE) - 0.0001;
@@ -55,5 +55,4 @@ void	find_wall_h(t_env *env, double a_p)
 		return ;
 	while (!its_wall(env->map.map, env->h.grid_y, env->h.grid_x))
 		check_next_intersection_h(env);
-	return ;
 }

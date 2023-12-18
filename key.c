@@ -11,9 +11,9 @@ double	calcul_angle_l_r(double axe_player, int nb)
 	double	angle;
 
 	if (nb == 1)
-		angle = axe_player + 90;
-	if (nb == 2)
 		angle = axe_player - 90;
+	if (nb == 2)
+		angle = axe_player + 90;
 	if (angle > 359)
 		angle -= 360;
 	else if (angle < 0)
@@ -108,9 +108,9 @@ int	handle_keypress(int key_code, t_env *env)
 	if (key_code == 65307)
 		return (write(1, "\n", 1), free_struct(env), 0);
 	if (key_code == 65361)
-		env->map.axe_player -= SPEED_2;
-	if (key_code == 65363)
 		env->map.axe_player += SPEED_2;
+	if (key_code == 65363)
+		env->map.axe_player -= SPEED_2;
 	if (env->map.axe_player < 0)
 		env->map.axe_player = 359;
 	if (env->map.axe_player > 360)
@@ -152,7 +152,6 @@ int	handle_key(t_env *env)
 	}
 	if (move || env->map.axe_player != player_axe)
 	{
-		//printf("axe_player = %f\n", env->map.axe_player);
 		set_map(env);
 		get_next_wall(env);
 		player_axe = env->map.axe_player;

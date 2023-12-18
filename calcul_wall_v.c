@@ -17,12 +17,14 @@ void	check_first_intersection_v(t_env *env, double a_p)
 	double	angle;
 	double	t;
 
-	//printf("a_p v = %f\n", a_p);
+	//printf("a_p v = %f\n", a_p);;
+	if (a_p == 0)
+		a_p = 360;
 	angle = ((a_p * M_PI) / 180);
 	t = tan(angle);
 	//printf("t = %f\n", t);
 	env->v.xa = SIZE_CUBE;
-	if (a_p >= 90 && a_p <= 269)
+	if (a_p > 90 && a_p < 270)
 	{
 		env->v.xa = SIZE_CUBE * -1;
 		env->v.new_x = floor(env->map.pixel_x_player / SIZE_CUBE) * (SIZE_CUBE) - 0.0001;
