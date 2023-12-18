@@ -1,5 +1,19 @@
 #include "cub3D.h"
 
+int check_collision(t_pos pos, t_env env)
+{
+	int	x;
+	int	y;
+
+	printf("new x == %f, new y == %f\n", pos.new_x, pos.new_y);
+	x = (int)(env.map.pixel_x_player + pos.new_x) / SIZE_CUBE;
+	y = (int)(env.map.pixel_y_player + pos.new_y) / SIZE_CUBE;
+	printf("x == %d, y == %d\n", x, y);
+	if (env.map.map[y][x] == '1')
+		return (1);
+	return (0);
+}
+
 int	do_move(double *player, double new_pos)
 {
 	*player += new_pos;
@@ -148,16 +162,22 @@ int	handle_key(t_env *env)
 	init_pos_t_d(&pos, env, &check_move);
 	if (check_move)
 	{
-		move = do_move(&env->map.pixel_y_player, pos.new_y);
-		move = do_move(&env->map.pixel_x_player, pos.new_x);
+		if (!check_collision(pos, *env) || BONUS == 0)
+		{
+			move = do_move(&env->map.pixel_y_player, pos.new_y);
+			move = do_move(&env->map.pixel_x_player, pos.new_x);
+		}
 	}
 	ft_memset(&pos, 0, sizeof(t_pos));
 	check_move = 0;
 	init_pos_l_r(&pos, env, &check_move);
 	if (check_move)
 	{
-		move = do_move(&env->map.pixel_y_player, pos.new_y);
-		move = do_move(&env->map.pixel_x_player, pos.new_x);
+		if (!check_collision(pos, *env) || BONUS == 0)
+		{
+			move = do_move(&env->map.pixel_y_player, pos.new_y);
+			move = do_move(&env->map.pixel_x_player, pos.new_x);
+		}
 	}
 	if (move || env->map.axe_player != player_axe)
 	{

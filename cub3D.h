@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/18 07:09:58 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/18 07:52:45 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,6 @@ int		mlx_close(t_env *env);
 void	set_hooks_mlx(t_env *env);
 
 
-int		do_move(double *player, double new_pos);
 void	init_pos_l_r(t_pos *pos, t_env *env, int *move);
 void	init_pos_t_d(t_pos *pos, t_env *env, int *move);
 void	ajust_key_release(int *key1, int *key2);
