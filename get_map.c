@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 23:43:31 by madaguen          #+#    #+#             */
-/*   Updated: 2023/12/18 04:59:22 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/18 08:49:49 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ int atouc(char *nb, int *j)
 	printf("2, %s\n", nb+i);
 	if (nb[i] != '\0' && nb[i] != ',' && nb[i] == '\n')
 		return (-1);
+	if (nb[i] == ',' && nb[i + 1] == ',')
+		return (-1);
 	printf("3\n");
-	*j = i;
+	*j = *j + i;
+	printf("char === %c i == %d\n",nb[i], i);
 	return (res);
 }
 
@@ -54,18 +57,23 @@ int get_color(char *map)
 	if (rgb == -1) 
 		return (-2);
 	color += rgb<<16;
+	printf("i == %d\n", i);
 	rgb = atouc(map + i + 1, &i);
 	if (rgb == -1) 
 		return (-2);
-	printf("rgb == %d\n", rgb);
 	color += rgb<<8;
-	rgb = atouc(map + i + 1, &i);
+	//printf("rgb == %d\n", rgb);
+	printf("i == %d\n", i);
+	//printf("color == %x\n", color);
+	rgb = atouc(map + i + 2, &i);
 	if (rgb == -1) 
 		return (-2);
-	printf("rgb == %d\n", rgb);
+	//printf("rgb == %d\n", rgb);
+	printf("i == %d\n", i);
+	//printf("color == %x\n", color);
 	color += rgb;
-	printf("rgb == %d\n", rgb);
-	printf("color == %x\n", color);
+	//printf("rgb == %d\n", rgb);
+	//printf("color == %x\n", color);
 	return (color);
 }
 
