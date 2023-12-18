@@ -1,83 +1,75 @@
 #include "cub3D.h"
 
-
 int	do_move(double *player, double new_pos)
 {
-	*player = new_pos;
+	*player += new_pos;
 	return (1);
+}
+
+double	calcul_angle_l_r(double axe_player, int nb)
+{
+	double	angle;
+
+	if (nb == 1)
+		angle = axe_player + 90;
+	if (nb == 2)
+		angle = axe_player - 90;
+	if (angle > 359)
+		angle -= 360;
+	else if (angle < 0)
+		angle += 360;
+	return (angle);
 }
 
 void	init_pos_l_r(t_pos *pos, t_env *env, int *move)
 {
-	double angle;
+	double	angle;
+	double	y_displacement;
+	double	x_displacement;
 
-	pos->x = env->map.pixel_x_player;
-	pos->y = env->map.pixel_y_player;
-	pos->new_x = pos->x;
-	pos->new_y = pos->y;
 	if (env->key.right)
 	{
-		angle = env->map.axe_player + 90;
-		if (angle > 359)
-			angle = (int)angle % 360;
-		printf("y == %d, x == %d\n", pos->y, pos->x);
-		pos->new_y = pos->y + SPEED * ((180/M_PI) * sin(angle));
-		pos->new_x = pos->x + SPEED * ((180/M_PI) * cos(angle));
-		*move = *move + 1;
-		printf("y == %d, x == %d\n", pos->new_y, pos->new_x);
+		angle = calcul_angle_l_r(env->map.axe_player, 1);
+		angle = (angle * M_PI) / 180;
+		y_displacement = sin(angle) * SPEED;
+		x_displacement = cos(angle) * SPEED;
+		pos->new_x += x_displacement;
+		pos->new_y -= y_displacement;
+		*move += 1;
 	}
 	if (env->key.left)
 	{
-		angle = env->map.axe_player - 90;
-		if (angle < 0)
-			angle = (int)angle + 360;
-		printf("y == %d, x == %d\n", pos->y, pos->x);
-		pos->new_y = pos->y - SPEED * ((180/M_PI) * sin(angle));
-		pos->new_x = pos->x - SPEED * ((180/M_PI) * cos(angle));
-		*move = *move + 1;
-		printf("y == %d, x == %d\n", pos->new_y, pos->new_x);
+		angle = calcul_angle_l_r(env->map.axe_player, 2);
+		angle = (angle * M_PI) / 180;
+		y_displacement = sin(angle) * SPEED;
+		x_displacement = cos(angle) * SPEED;
+		pos->new_x += x_displacement;
+		pos->new_y -= y_displacement;
+		*move += 1;
 	}
-	if (pos->new_x <= 0)
-		pos->new_x = env->map.x_max - 1;
-	else if (pos->new_x <= env->map.x_max)
-		pos->new_x = 64;
-	if (pos->new_y >= env->map.y_max)
-		pos->new_y = 64;
-	else if (pos->new_y <= 0)
-		pos->new_y = env->map.y_max - 1;
 }
 
 void	init_pos_t_d(t_pos *pos, t_env *env, int *move)
 {
-	pos->x = env->map.pixel_x_player;
-	pos->y = env->map.pixel_y_player;
-	pos->new_x = pos->x;
-	pos->new_y = pos->y;
+	double	angle;
+	double	y_displacement;
+	double	x_displacement;
+
+	angle = (env->map.axe_player * M_PI) / 180;
+	y_displacement = sin(angle) * SPEED;
+	x_displacement = cos(angle) * SPEED;
 	if (env->key.down)
 	{
-		printf("y == %d, x == %d\n", pos->y, pos->x);
-		pos->new_y = pos->y + SPEED * ((180/M_PI) * sin(env->map.axe_player));
-		pos->new_x = pos->x + SPEED * ((180/M_PI) * cos(env->map.axe_player));
-		printf("y == %d, x == %d\n", pos->new_y, pos->new_x);
-		*move = *move + 1;
+		pos->new_x -= x_displacement;
+		pos->new_y += y_displacement;
+		*move += 1;
 	}
 	if (env->key.up)
 	{
-		printf("y == %d, x == %d\n", pos->y, pos->x);
-		pos->new_y = pos->y - SPEED * ((180/M_PI) * sin(env->map.axe_player));
-		pos->new_x = pos->x - SPEED * ((180/M_PI) * cos(env->map.axe_player));
-		printf("y == %d, x == %d\n", pos->new_y, pos->new_x);
-		*move = *move + 1;
+		pos->new_x += x_displacement;
+		pos->new_y -= y_displacement;
+		*move += 1;
 	}
-	if (pos->new_y >= env->map.y_max)
-		pos->new_y = 64;
-	else if (pos->new_y <= 0)
-		pos->new_y = env->map.y_max - 1;
-	if (pos->new_x <= 0)
-		pos->new_x = env->map.x_max - 1;
-	else if (pos->new_x <= env->map.x_max)
-		pos->new_x = 64;
-	//printf("%d\n",env->map.y_max);
 }
 
 void	ajust_key_release(int *key1, int *key2)
@@ -91,7 +83,6 @@ void	ajust_key_release(int *key1, int *key2)
 
 int	handle_keyrelease(int key_code, t_env *env)
 {
-	//printf ("keucode == %d\n", key_code);
 	if (key_code == 65363 || key_code == 100)
 		ajust_key_release(&env->key.right, &env->key.left);
 	else if (key_code == 65362 || key_code == 119)
@@ -116,19 +107,13 @@ int	handle_keypress(int key_code, t_env *env)
 {
 	if (key_code == 65307)
 		return (write(1, "\n", 1), free_struct(env), 0);
-//	if (key_code == 101)
-//	{
-//		env->minimap.active = env->minimap.active ^ 1;
-//		load_map(env);
-//	}
-	//printf ("keucode == %d", key_code);
 	if (key_code == 65361)
-		env->map.axe_player -= 1;
+		env->map.axe_player -= SPEED_2;
 	if (key_code == 65363)
-		env->map.axe_player += 1;
-	if (env->map.axe_player == -1)
+		env->map.axe_player += SPEED_2;
+	if (env->map.axe_player < 0)
 		env->map.axe_player = 359;
-	if (env->map.axe_player == 360)
+	if (env->map.axe_player > 360)
 		env->map.axe_player = 0;
 	if (key_code == 100)
 		ajust_key_press(&env->key.right, &env->key.left);
@@ -138,33 +123,39 @@ int	handle_keypress(int key_code, t_env *env)
 		ajust_key_press(&env->key.left, &env->key.right);
 	else if (key_code == 115)
 		ajust_key_press(&env->key.down, &env->key.up);
-	//printf ("down == %d, up == %d\n", env->key.down, env->key.up);
 	return (key_code);
 }
 
 int	handle_key(t_env *env)
 {
-	t_pos	pos;
-	int		move;
-	int		check_move;
+	t_pos		pos;
+	int			move;
+	int			check_move;
 	static int player_axe;
-	//static int i;
+
 	move = 0;
 	check_move = 0;
+	ft_memset(&pos, 0, sizeof(t_pos));
 	init_pos_t_d(&pos, env, &check_move);
 	if (check_move)
+	{
 		move = do_move(&env->map.pixel_y_player, pos.new_y);
+		move = do_move(&env->map.pixel_x_player, pos.new_x);
+	}
+	ft_memset(&pos, 0, sizeof(t_pos));
 	check_move = 0;
 	init_pos_l_r(&pos, env, &check_move);
 	if (check_move)
+	{
+		move = do_move(&env->map.pixel_y_player, pos.new_y);
 		move = do_move(&env->map.pixel_x_player, pos.new_x);
+	}
 	if (move || env->map.axe_player != player_axe)
 	{
-		//printf("i == %d player x == %f, player y == %f\n", i++, env->map.pixel_x_player, env->map.pixel_y_player);
+		//printf("axe_player = %f\n", env->map.axe_player);
 		set_map(env);
 		get_next_wall(env);
 		player_axe = env->map.axe_player;
-		//printf("player_axe == %d\n", player_axe);
 	}
 	return (0);
 }

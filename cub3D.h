@@ -37,7 +37,8 @@
 #define WEST 0x7F00FF
 #define FLOOR 0x70726E
 #define SKY 0x2A303D
-#define SPEED 0.05f
+#define SPEED 0.5
+#define	SPEED_2 3
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
 
@@ -89,10 +90,8 @@ typedef struct s_key
 
 typedef struct	s_pos
 {
-		int		y;
-		int		x;
-		int		new_y;
-		int		new_x;
+		double	new_y;
+		double	new_x;
 }				t_pos;
 
 typedef struct	s_mlx

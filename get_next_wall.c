@@ -62,11 +62,7 @@ void	get_next_wall(t_env *env)
 	double	distance;
 	double	hauteur_tranche;
 	int		i_rayon;
-	//int	p_x;
-	//int	p_y;
 
-	//p_x = (int)env->map.pixel_x_player / SIZE_CUBE;
-	//p_y = (int)env->map.pixel_y_player / SIZE_CUBE;
 	env->map.projection_plane = calcul_projection_plane();
 	env->map.between_rays = (double)POV / (double)WIDTH;
 	a_p = calcul_a_p(env->map.axe_player);
@@ -74,13 +70,11 @@ void	get_next_wall(t_env *env)
 	x = -1;
 	y = -1;
 	i_rayon = 1;
-	//if (env->map.map[p_x][p_y] == 1)
-	//	return ;
 	while (i > ((double)POV / 2 * -1))
 	{
 		//printf("player_x = %f\nplayer_y = %f\n", env->map.pixel_x_player, env->map.pixel_y_player);
 		//printf("i_rayon = %d\n", i_rayon);
-		//printf("a_p = %f\n", a_p);
+		//printf("axe_player = %f\n", env->map.axe_player);
 		//printf("y_player = %f\nx_player = %f\n", env->map.pixel_y_player, env->map.pixel_x_player);
 		find_wall_h(env, a_p);
 		find_wall_v(env, a_p);
