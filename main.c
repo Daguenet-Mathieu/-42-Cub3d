@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/18 05:06:01 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/18 06:52:34 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ int	main(int argc, char **argv)
 			return (write(2, "IMAGE FAILURE\n", 15));
 	env.mlx.image = (int *)mlx_get_data_addr(env.mlx.s_image, &bpp, &size_line, &endian);
 	printf("plafond == %x sol == %x\n",env.map.ceiling, env.map.floor);
+	set_hooks_mlx(&env);
 	set_map(&env);
 	get_next_wall(&env);
-	set_hooks_mlx(&env);
 	mlx_loop(env.mlx.mlx);
 	//display_map(env);
 	//mlx_loop();

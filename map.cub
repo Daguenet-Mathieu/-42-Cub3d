@@ -4,7 +4,7 @@ F 255,165,0
 
 C 255,127,80
 
-NO ./path_to_the_south_texture
+NO ./pexels-photo-207142.xpm
 SO ./path_to_the_south_texture
 EA ./path_to_the_south_texture
 WE ./path_to_the_south_texture

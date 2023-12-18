@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/18 05:50:47 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/18 06:49:12 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 #define	SPEED_2 3
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
+#define BONUS 1
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
@@ -65,6 +66,13 @@ typedef struct	s_case
 }				t_case;
 
 
+typedef struct s_img
+{
+	void	*ptr;
+	int		size_line;
+	int		height;
+}			t_img;
+
 typedef struct s_map
 {
 	char	**map;
@@ -82,10 +90,10 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	int		*texture_no;
-	int		*texture_so;
-	int		*texture_we;
-	int		*texture_ea;
+	t_img	*texture_no;
+	t_img	*texture_so;
+	t_img	*texture_we;
+	t_img	*texture_ea;
 
 }			t_map;
 

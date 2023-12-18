@@ -36,9 +36,11 @@ int	mlx_close(t_env *env)
 
 void	set_hooks_mlx(t_env *env)
 {
-	//mlx_xpm_file_to_image();
+	//env->map.texture_no->ptr = mlx_xpm_file_to_image(env->mlx.mlx, "pexels-photo-207142.xpm", &env->map.texture_no->size_line, &env->map.texture_no->height);
 	mlx_hook(env->mlx.mlx_win, 17, 0, mlx_close, env);
 	mlx_hook(env->mlx.mlx_win, 3, 1 << 1, handle_keyrelease, env);
 	mlx_hook(env->mlx.mlx_win, 2, 1L << 0, handle_keypress, env);
 	mlx_loop_hook(env->mlx.mlx, &handle_key, env);
+	//printf("x == %d, y == %d\n", env->map.texture_no->size_line, env->map.texture_no->height);
+	//mlx_put_image_to_window(env->mlx.mlx, env->mlx.mlx_win,env->map.texture_no, x, y);
 }
