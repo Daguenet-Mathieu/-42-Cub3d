@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 23:43:31 by madaguen          #+#    #+#             */
-/*   Updated: 2023/12/18 08:49:49 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/19 01:14:10 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int atouc(char *nb, int *j)
 {
 	int i;
 	int res;
-	
+
 	i = 0;
 	res = 0;
-	printf("line == %s\n", nb);
+	//printf("line == %s\n", nb);
 	while (nb[i] == 32 || (nb[i] >= 9 && nb[i] <= 13))
 		i++;
 	while (nb[i] && nb[i] >= '0' && nb[i] <= '9' && res < 256)
@@ -27,21 +27,21 @@ int atouc(char *nb, int *j)
 		res = res * 10 + (nb[i] - '0');
 		i++;
 	}
-	printf("char == %d, i == %d\n", res, i);
+	//printf("char == %d, i == %d\n", res, i);
 	if (res >= 256)
 		return (-1);
-		
-	printf("1\n");
+
+	//printf("1\n");
 	while (nb[i] == 32 || (nb[i] >= 9 && nb[i] <= 13))
 		i++;
-	printf("2, %s\n", nb+i);
+	//printf("2, %s\n", nb+i);
 	if (nb[i] != '\0' && nb[i] != ',' && nb[i] == '\n')
 		return (-1);
 	if (nb[i] == ',' && nb[i + 1] == ',')
 		return (-1);
-	printf("3\n");
+	//printf("3\n");
 	*j = *j + i;
-	printf("char === %c i == %d\n",nb[i], i);
+	//printf("char === %c i == %d\n",nb[i], i);
 	return (res);
 }
 
@@ -50,26 +50,26 @@ int get_color(char *map)
 	int color;
 	int rgb;
 	int i;
-	
+
 	color = 0;
 	i = 0;
 	rgb = atouc(map, &i);
-	if (rgb == -1) 
+	if (rgb == -1)
 		return (-2);
 	color += rgb<<16;
-	printf("i == %d\n", i);
+	//printf("i == %d\n", i);
 	rgb = atouc(map + i + 1, &i);
-	if (rgb == -1) 
+	if (rgb == -1)
 		return (-2);
 	color += rgb<<8;
 	//printf("rgb == %d\n", rgb);
-	printf("i == %d\n", i);
+	//printf("i == %d\n", i);
 	//printf("color == %x\n", color);
 	rgb = atouc(map + i + 2, &i);
-	if (rgb == -1) 
+	if (rgb == -1)
 		return (-2);
 	//printf("rgb == %d\n", rgb);
-	printf("i == %d\n", i);
+	//printf("i == %d\n", i);
 	//printf("color == %x\n", color);
 	color += rgb;
 	//printf("rgb == %d\n", rgb);
@@ -87,7 +87,7 @@ char line_check(char *line, int *j)
 	while (line[i] == 32 || (line[i] >= 9 && line[i] <= 13))
 		i++;
 	if (line[i] == 'F' || line[i] == 'C')
-	{	
+	{
 		if (line[i] == 'F')
 			ret = F;
 		else if (line[i] == 'C')
@@ -120,7 +120,7 @@ int		get_map(t_map *map, char *file_name)
 	int		done;
 	char	verif_line;
 	int 	i;
-	
+
 	lst = NULL;
 	map->ceiling = -1;
 	map->floor = -1;
@@ -151,7 +151,7 @@ int		get_map(t_map *map, char *file_name)
 			else if (verif_line == EA)
 				map->ea = line + i;
 			else if (verif_line != EMPTY_LINE)
-				return (printf("line == %s\n", line), free(line), write(2, "PARSING ERROR\n", 15),0);	
+				return (free(line), write(2, "PARSING ERROR\n", 15),0);
 			if (map->ceiling == -2 || map->floor == -2)
 				return (free(line), write(2, "ERROR COLOR\n", 13), 0);
 			free(line);

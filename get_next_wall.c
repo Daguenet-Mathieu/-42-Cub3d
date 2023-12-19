@@ -6,28 +6,40 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:04:12 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/14 21:19:49 by auferran         ###   ########.fr       */
+/*   Updated: 2023/12/19 10:37:32 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3D.h"
+
+int	get_pixel(double ratio_leon, int column, int i, int	*img)
+{
+	int	pixel;
+
+	pixel = (i * ratio_leon) * column;
+	return (img[pixel]);
+}
 
 void	print_wall(t_env *env, double height, int x, int y, int i_rayon)
 {
 	int	i;
-	int	index_img;
+	int	j;
+	double	index_img;
 	int	orientation;
 	int	y_start;
+	int	*img;
+	double	column;
+	double	ratio_leon;
 	(void) index_img;
 
+	img = env->map.texture_no.img;
 	if (x > -1)
 	{
 		if ((int)env->map.pixel_x_player > x)
 			orientation = WEST;
 		else
 			orientation = EAST;
-		index_img = x % 64;
+		index_img = x % SIZE_CUBE;
 	}
 	else
 	{
@@ -35,16 +47,32 @@ void	print_wall(t_env *env, double height, int x, int y, int i_rayon)
 			orientation = NORTH;
 		else
 			orientation = SOUTH;
-		index_img = y % 64;
+		index_img = y % SIZE_CUBE;
 	}
 	i = 0;
+	j = 0;
 	if (height > HEIGHT_PLANE)
 		height = HEIGHT_PLANE;
 	y_start = (HEIGHT_PLANE / 2) - (height / 2);
+	ratio_leon = (double)env->map.texture_no.height / height;
+	//printf("ratio_leon = %f\n", ratio_leon);
+	column = index_img * env->map.texture_no.size_line / SIZE_CUBE;
+	//printf("x = %d\n", x);
+	//printf("y = %d\n", y);
+	//printf("index_img = %f\n", index_img);
+	//printf("column = %f\n", column);
 	while (i < (int)height)
 	{
-		env->mlx.image[((y_start + i) * WIDTH) + i_rayon] = orientation; //a termes ce sera index_img dans image
-		i++;
+		if (orientation == NORTH)
+		{
+			env->mlx.image[((y_start + i) * WIDTH) + i_rayon] = get_pixel(ratio_leon, column, i, img);
+			i++;
+		}
+		else
+		{
+			env->mlx.image[((y_start + i) * WIDTH) + i_rayon] = orientation; //a termes ce sera index_img dans image
+			i++;
+		}
 	}
 }
 
@@ -70,8 +98,9 @@ void	get_next_wall(t_env *env)
 		find_wall_h(env, a_p);
 		find_wall_v(env, a_p);
 		distance = calcul_distance(env, &x, &y);
+		//printf("x = %d\n", x);
+		//printf("y = %d\n", y);
 		remove_fishbowl(&distance, i);
-		hauteur_tranche = SIZE_CUBE / distance * env->map.projection_plane;
 		hauteur_tranche = (SIZE_CUBE / distance) * env->map.projection_plane;
 		if (hauteur_tranche > HEIGHT_PLANE)
 			hauteur_tranche = HEIGHT_PLANE;

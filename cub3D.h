@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/18 07:52:45 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/19 01:28:03 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <math.h>
 # include <stdio.h>
 
-
 #define POV 60
 #define	FISHBOWL -30
 #define PLAYER_HEIGHT 32
@@ -33,7 +32,7 @@
 #define HEIGHT_PLANE 720
 #define NORTH 0x0000FF
 #define SOUTH 0xFF0000
-#define EAST 0x008000
+#define EAST 0xDAA520
 #define WEST 0x7F00FF
 #define FLOOR 0x70726E
 #define SKY 0x2A303D
@@ -70,6 +69,9 @@ typedef struct s_img
 	void	*ptr;
 	int		size_line;
 	int		height;
+	int		*img;
+	int		bpp;
+	int		endian;
 }			t_image;
 
 typedef struct s_map

@@ -5,10 +5,10 @@ int check_collision(t_pos pos, t_env env)
 	int	x;
 	int	y;
 
-	printf("new x == %f, new y == %f\n", pos.new_x, pos.new_y);
+	//printf("new x == %f, new y == %f\n", pos.new_x, pos.new_y);
 	x = (int)(env.map.pixel_x_player + pos.new_x) / SIZE_CUBE;
 	y = (int)(env.map.pixel_y_player + pos.new_y) / SIZE_CUBE;
-	printf("x == %d, y == %d\n", x, y);
+	//printf("x == %d, y == %d\n", x, y);
 	if (env.map.map[y][x] == '1')
 		return (1);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/18 06:52:34 by madaguen         ###   ########.fr       */
+/*   Updated: 2023/12/19 09:55:26 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,73 @@ int	main(int argc, char **argv)
 	if (!env.mlx.s_image)
 			return (write(2, "IMAGE FAILURE\n", 15));
 	env.mlx.image = (int *)mlx_get_data_addr(env.mlx.s_image, &bpp, &size_line, &endian);
-	printf("plafond == %x sol == %x\n",env.map.ceiling, env.map.floor);
+	//printf("plafond == %x sol == %x\n",env.map.ceiling, env.map.floor);
 	set_hooks_mlx(&env);
 	set_map(&env);
 	get_next_wall(&env);
 	mlx_loop(env.mlx.mlx);
+	/*int i = 0;
+	int	k = 0;
+	int j = 0;
+	int *ptr = env.mlx.image;
+	while (j < env.map.texture_no.height)
+	{
+		ptr[k] = env.map.texture_no.img[i];
+		i++;
+		if (i == env.map.texture_no.size_line)
+		{
+			env.map.texture_no.img += env.map.texture_no.size_line;
+			ptr += WIDTH;
+			i = 0;
+			k = 0;
+			j++;
+		}
+		else
+		{
+			i++;
+			k++;
+		}
+	}*/
+
+	// int	i = 0;
+	// int	j = 0;
+	// int	k = 0;
+	 //int *ptr = env.mlx.image;
+	 //int o;
+	//  while (j < env.map.texture_no.height)
+	//  {
+	//  	printf("j = %d\n", j);
+	//  	printf("map.texture_no.height = %d\n", env.map.texture_no.height);
+	// 	printf("map.texture_no.size_line = %d\n", env.map.texture_no.size_line);
+	// 	i = 0;
+	// 	o = 0;
+	//  	while (i < env.map.texture_no.size_line)
+	//  	{
+	//  		ptr[o] = env.map.texture_no.img[k + i];
+	//  		i += 8;
+	// 		o++;
+	//  	}
+	//  	j += 8;
+	//  	k = k + (env.map.texture_no.size_line * 8);
+	//  	ptr += WIDTH;
+	//  }
+	//while (i < env.map.texture_no.size_line)
+	//{
+		//j = 0;
+		//o = 0;
+		//while (j < 720 * env.map.texture_no.size_line/*env.map.texture_no.height*/)
+		//{
+		//	ptr[o] = env.map.texture_no.img[k + j];
+	 	//	j += (env.map.texture_no.size_line * 7);
+		//	o += WIDTH;
+		//}
+	 	//i+=7;
+	 	//k+=7;
+	 	//ptr++;
+	//}
+	//mlx_put_image_to_window(env.mlx.mlx,env.mlx.mlx_win, env.mlx.s_image, 0, 0);
+	//while(1)
+	//	;
 	//display_map(env);
 	//mlx_loop();
 	//destroy_all(&env);
