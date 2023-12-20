@@ -15,22 +15,21 @@
 int	get_pixel(double ratio_leon, int column, int i, int	*img)
 {
 	int	pixel;
-
-	pixel = (i * ratio_leon) * column;
+	(void) column;
+	(void) ratio_leon;
+	pixel = i + column;
 	return (img[pixel]);
 }
 
 void	print_wall(t_env *env, double height, int x, int y, int i_rayon)
 {
 	int	i;
-	int	j;
 	double	index_img;
-	int	orientation;
-	int	y_start;
-	int	*img;
-	double	column;
+	int		orientation;
+	int		y_start;
+	int		*img;
+	double		column;
 	double	ratio_leon;
-	(void) index_img;
 
 	img = env->map.texture_no.img;
 	if (x > -1)
@@ -39,33 +38,36 @@ void	print_wall(t_env *env, double height, int x, int y, int i_rayon)
 			orientation = WEST;
 		else
 			orientation = EAST;
-		index_img = x % SIZE_CUBE;
+		index_img = (int)env->v.new_y % SIZE_CUBE;
 	}
-	else
+	if (y > -1)
 	{
 		if ((int)env->map.pixel_y_player > y)
 			orientation = NORTH;
 		else
 			orientation = SOUTH;
-		index_img = y % SIZE_CUBE;
+		index_img = (int)env->h.new_x % SIZE_CUBE;
 	}
 	i = 0;
-	j = 0;
 	if (height > HEIGHT_PLANE)
 		height = HEIGHT_PLANE;
 	y_start = (HEIGHT_PLANE / 2) - (height / 2);
-	ratio_leon = (double)env->map.texture_no.height / height;
-	//printf("ratio_leon = %f\n", ratio_leon);
-	column = index_img * env->map.texture_no.size_line / SIZE_CUBE;
-	//printf("x = %d\n", x);
-	//printf("y = %d\n", y);
+	ratio_leon = env->map.texture_no.height / height;
+	// printf("env->h.new_x = %f\n", env->h.new_x);
+	// printf("index_img = %f\n", index_img);
+	// printf("no.height = %d\n", env->map.texture_no.height);
+	// printf("height = %f\n", height);
+	// printf("ratio_leon = %f\n", ratio_leon);
+	column = env->map.texture_no.size_line * index_img / SIZE_CUBE;
+	column *= ratio_leon;
 	//printf("index_img = %f\n", index_img);
+	//printf("column = %d\n\n", column);
 	//printf("column = %f\n", column);
 	while (i < (int)height)
 	{
 		if (orientation == NORTH)
 		{
-			env->mlx.image[((y_start + i) * WIDTH) + i_rayon] = get_pixel(ratio_leon, column, i, img);
+			env->mlx.image[((y_start + i) * WIDTH) + i_rayon] = get_pixel(ratio_leon, column, i * env->map.texture_no.size_line * ratio_leon, img);
 			i++;
 		}
 		else
@@ -90,11 +92,11 @@ void	get_next_wall(t_env *env)
 	env->map.between_rays = (double)POV / (double)WIDTH;
 	a_p = calcul_a_p(env->map.axe_player);
 	i = POV / 2;
-	x = -1;
-	y = -1;
 	i_rayon = 1;
 	while (i > ((double)POV / 2 * -1))
 	{
+		x = -1;
+		y = -1;
 		find_wall_h(env, a_p);
 		find_wall_v(env, a_p);
 		distance = calcul_distance(env, &x, &y);
