@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/19 01:28:03 by auferran         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:47:38 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 #define	SPEED_2 3
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
-#define BONUS 1
+#define BONUS 0
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
