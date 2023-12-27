@@ -36,7 +36,7 @@
 #define WEST 0x7F00FF
 #define FLOOR 0x70726E
 #define SKY 0x2A303D
-#define SPEED 0.3
+#define SPEED 0.8
 #define	SPEED_2 3
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
@@ -79,6 +79,8 @@ typedef struct s_map
 	char	**map;
 	int		x_max;
 	int		y_max;
+	int		*img;
+	double	diff;
 	double	pixel_x_player;
 	double	pixel_y_player;
 	double	axe_player;
@@ -120,9 +122,9 @@ typedef struct s_key
 
 typedef struct	s_pos
 {
-		double	new_y;
-		double	new_x;
-}				t_pos;
+	double	new_y;
+	double	new_x;
+}			t_pos;
 
 typedef struct	s_mlx
 {
