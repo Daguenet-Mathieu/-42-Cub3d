@@ -43,13 +43,13 @@ void	draw_pixel(t_print_wall s, t_env *env, int i_rayon)
 				get_pixel(env, s, env->map.texture_no.size_line);
 		else if (s.orientation == SOUTH)
 			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] =
-				get_pixel(env, s, env->map.texture_no.size_line);
+				get_pixel(env, s, env->map.texture_so.size_line);
 		else if (s.orientation == EAST)
 			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] =
-				get_pixel(env, s, env->map.texture_no.size_line);
+				get_pixel(env, s, env->map.texture_ea.size_line);
 		else if (s.orientation == WEST)
 			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] =
-				get_pixel(env, s, env->map.texture_no.size_line);
+				get_pixel(env, s, env->map.texture_we.size_line);
 		s.i++;
 	}
 }

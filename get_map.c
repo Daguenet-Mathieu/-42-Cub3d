@@ -96,13 +96,13 @@ char line_check(char *line, int *j)
 	}
 	else
 	{
-		if (line[i] == 'N' && line[i + 1] == 'O')
+		if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')//check white space
 			ret = NO;
-		if (line[i] == 'S' && line[i + 1] == 'O')
+		if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
 			ret = SO;
-		if (line[i] == 'W' && line[i + 1] == 'E')
+		if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
 			ret = WE;
-		if (line[i] == 'E' && line[i + 1] == 'A')
+		if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
 			ret = EA;
 		if (ret)
 			*j = i + 2;
@@ -110,6 +110,27 @@ char line_check(char *line, int *j)
 	if (line[i] == '\0')
 		ret = EMPTY_LINE;
 	return (ret);
+}
+
+char *ft_strdup(const char *str)
+{
+	int	i;
+	int	j;
+	char	*new;
+
+	i = 0;
+	j = 0;
+	new = malloc(ft_strlen((char *)str) + 1);
+	while (str[j] == 32 || (str[j] <= 13 && str[j] >= 9))
+		j++;
+	while (str[j] && str[j] != '\n')
+	{
+		new[i] = str[j];
+		i++;
+		j++;
+	}
+	new[i] = 0;
+	return (new);
 }
 
 int		get_map(t_map *map, char *file_name)
@@ -143,13 +164,13 @@ int		get_map(t_map *map, char *file_name)
 			else if (verif_line == F)
 				map->floor = get_color(line + i);
 			else if (verif_line == NO)
-				map->no = line + i;
+				map->no = ft_strdup(line + i);
 			else if (verif_line == SO)
-				map->so = line + i;
+				map->so = ft_strdup(line + i);
 			else if (verif_line == WE)
-				map->we = line + i;
+				map->we = ft_strdup(line + i);
 			else if (verif_line == EA)
-				map->ea = line + i;
+				map->ea = ft_strdup(line + i);
 			else if (verif_line != EMPTY_LINE)
 				return (free(line), write(2, "PARSING ERROR\n", 15),0);
 			if (map->ceiling == -2 || map->floor == -2)
