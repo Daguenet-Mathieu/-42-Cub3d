@@ -29,7 +29,8 @@ SRCS =	main.c					\
 		calcul_wall_h.c			\
 		calcul_wall_v.c			\
 		calcul_wall_utils.c		\
-		calcul_wall_utils_2.c
+		calcul_wall_utils_2.c	\
+		print_wall.c
 SRCS_DEBUG =
 SRCS_BONUS =
 

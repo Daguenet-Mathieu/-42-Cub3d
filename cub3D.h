@@ -40,7 +40,7 @@
 #define	SPEED_2 3
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
-#define BONUS 0
+#define BONUS 1
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
@@ -80,7 +80,6 @@ typedef struct s_map
 	int		x_max;
 	int		y_max;
 	int		*img;
-	double	diff;
 	double	pixel_x_player;
 	double	pixel_y_player;
 	double	axe_player;
@@ -99,6 +98,28 @@ typedef struct s_map
 	t_image	texture_ea;
 
 }			t_map;
+
+typedef struct s_print_wall
+{
+	int		i;
+	double	height_draw;
+	double	index_wall;
+	double	ratio_leon;
+	double	column_texture;
+	double	diff;
+	int		orientation;
+	int		y_start;
+}			t_print_wall;
+
+typedef struct s_get_next_wall
+{
+	int		x;
+	int		y;
+	double	i;
+	double	a_p;
+	double	height;
+	int		i_rayon;
+}			t_get_next_wall;
 
 typedef struct s_calcul
 {
@@ -166,6 +187,8 @@ char	**lst_to_tab(t_lst *lst);
 void	get_pos_player(t_map *map);
 
 void	get_next_wall(t_env *env);
+
+void	print_wall(t_env *env, t_get_next_wall wall);
 
 void	find_wall_h(t_env *env, double a_p);
 void	find_wall_v(t_env *env, double a_p);

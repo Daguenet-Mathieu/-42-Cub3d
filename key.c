@@ -140,15 +140,6 @@ int	handle_keypress(int key_code, t_env *env)
 	return (key_code);
 }
 
-int	mouse_movement(t_env *env)
-{
-	(void) env;
-
-	//env->map.axe_player -= 1;
-	//printf("test\n");
-	return (0);
-}
-
 int	handle_key(t_env *env)
 {
 	t_pos		pos;
