@@ -1,14 +1,14 @@
 #include "cub3D.h"
 
-int	get_pixel(t_env *env, t_print_wall s)
+int	get_pixel(t_env *env, t_print_wall s, int size_line)
 {
 	double	j;
 	double	tmp;
 	double	pixel;
 
-	j = s.diff * env->map.texture_no.size_line;
-	j += (s.i * env->map.texture_no.size_line * s.ratio_leon);
-	tmp = (int)j % env->map.texture_no.size_line;
+	j = s.diff * size_line;
+	j += s.i * size_line * s.ratio_leon;
+	tmp = (int)j % size_line;
 	j -= tmp;
 	pixel = j + s.column_texture;
 	return (env->map.img[(int)pixel]);
@@ -39,15 +39,18 @@ void	draw_pixel(t_print_wall s, t_env *env, int i_rayon)
 	while (s.i < (int)s.height_draw)
 	{
 		if (s.orientation == NORTH)
-		{
-			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] = get_pixel(env, s);
-			s.i++;
-		}
-		else
-		{
-			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] = s.orientation;
-			s.i++;
-		}
+			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] =
+				get_pixel(env, s, env->map.texture_no.size_line);
+		else if (s.orientation == SOUTH)
+			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] =
+				get_pixel(env, s, env->map.texture_no.size_line);
+		else if (s.orientation == EAST)
+			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] =
+				get_pixel(env, s, env->map.texture_no.size_line);
+		else if (s.orientation == WEST)
+			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] =
+				get_pixel(env, s, env->map.texture_no.size_line);
+		s.i++;
 	}
 }
 
