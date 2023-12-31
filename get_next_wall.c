@@ -16,6 +16,7 @@ void	get_next_wall(t_env *env)
 {
 	t_get_next_wall	s;
 
+	ft_memset(&s, 0, sizeof(t_get_next_wall));
 	env->map.projection_plane = calcul_projection_plane();
 	env->map.between_rays = (double)POV / (double)WIDTH;
 	s.a_p = calcul_a_p(env->map.axe_player);

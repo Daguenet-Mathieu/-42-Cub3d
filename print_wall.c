@@ -1,42 +1,48 @@
 #include "cub3D.h"
 
-void	init_orientation_indexwall(t_print_wall *s, t_env *env, t_get_next_wall wall)
+void	init_print_value_x(t_print_wall *s, t_env *env, t_get_next_wall wall)
 {
-	if (wall.x > -1)
+	s->index_wall = fmod(env->v.new_y, SIZE_CUBE);
+	if ((int)env->map.pixel_x_player > wall.x)
 	{
-		s->index_wall = fmod(env->v.new_y, SIZE_CUBE);
-		if ((int)env->map.pixel_x_player > wall.x)
-		{
-			s->orientation = WEST;
-			env->map.img = env->map.texture_we.img;
-			s->ratio_leon = env->map.texture_we.height / wall.height;
-			s->column_texture = s->index_wall * (double)env->map.texture_we.height / (double)SIZE_CUBE;
-		}
-		else
-		{
-			s->orientation = EAST;
-			env->map.img = env->map.texture_ea.img;
-			s->ratio_leon = env->map.texture_ea.height / wall.height;
-			s->column_texture = s->index_wall * (double)env->map.texture_ea.height / (double)SIZE_CUBE;
-		}
+		s->orientation = WEST;
+		env->map.img = env->map.texture_we.img;
+		s->ratio_leon = env->map.texture_we.height / wall.height;
+		s->column_texture = s->index_wall *
+			(double)env->map.texture_we.height / (double)SIZE_CUBE;
+		s->diff /= wall.height / env->map.texture_we.height * 2;
 	}
-	if (wall.y > -1)
+	else
 	{
-		s->index_wall = fmod(env->h.new_x, SIZE_CUBE);
-		if ((int)env->map.pixel_y_player > wall.y)
-		{
-			s->orientation = NORTH;
-			env->map.img = env->map.texture_no.img;
-			s->ratio_leon = env->map.texture_no.height / wall.height;
-			s->column_texture = s->index_wall * (double)env->map.texture_no.height / (double)SIZE_CUBE;
-		}
-		else
-		{
-			s->orientation = SOUTH;
-			env->map.img = env->map.texture_so.img;
-			s->ratio_leon = env->map.texture_so.height / wall.height;
-			s->column_texture = s->index_wall * (double)env->map.texture_so.height / (double)SIZE_CUBE;
-		}
+		s->orientation = EAST;
+		env->map.img = env->map.texture_ea.img;
+		s->ratio_leon = env->map.texture_ea.height / wall.height;
+		s->column_texture = s->index_wall *
+			(double)env->map.texture_ea.height / (double)SIZE_CUBE;
+		s->diff /= wall.height / env->map.texture_ea.height * 2;
+	}
+}
+
+void	init_print_value_y(t_print_wall *s, t_env *env, t_get_next_wall wall)
+{
+	s->index_wall = fmod(env->h.new_x, SIZE_CUBE);
+	if ((int)env->map.pixel_y_player > wall.y)
+	{
+		s->orientation = NORTH;
+		env->map.img = env->map.texture_no.img;
+		s->ratio_leon = env->map.texture_no.height / wall.height;
+		s->column_texture = s->index_wall *
+			(double)env->map.texture_no.height / (double)SIZE_CUBE;
+		s->diff /= wall.height / env->map.texture_no.height * 2;
+	}
+	else
+	{
+		s->orientation = SOUTH;
+		env->map.img = env->map.texture_so.img;
+		s->ratio_leon = env->map.texture_so.height / wall.height;
+		s->column_texture = s->index_wall *
+			(double)env->map.texture_so.height / (double)SIZE_CUBE;
+		s->diff /= wall.height / env->map.texture_so.height * 2;
 	}
 }
 
@@ -79,17 +85,16 @@ void	print_wall(t_env *env, t_get_next_wall wall)
 	t_print_wall	s;
 
 	ft_memset(&s, 0, sizeof(t_print_wall));
-	init_orientation_indexwall(&s, env, wall);
-	s.i = 0;
 	s.height_draw = wall.height;
 	if (s.height_draw > HEIGHT_PLANE)
 	{
 		s.height_draw = HEIGHT_PLANE;
-		s.diff = (wall.height - s.height_draw) / (wall.height / s.height_draw * 2);
+		s.diff = (wall.height - s.height_draw);
 	}
-	//printf("height = %f\n", wall.height);
-	//printf("height_draw = %f\n", s.height_draw);
-	//printf("diff = %f\n", s.diff);
+	if (wall.x > -1)
+		init_print_value_x(&s, env, wall);
+	else if (wall.y > -1)
+		init_print_value_y(&s, env, wall);
 	s.y_start = (HEIGHT_PLANE / 2) - (s.height_draw / 2);
 	draw_pixel(s, env, wall.i_rayon);
 }
