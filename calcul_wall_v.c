@@ -17,12 +17,10 @@ void	check_first_intersection_v(t_env *env, double a_p)
 	double	angle;
 	double	t;
 
-	//printf("a_p v = %f\n", a_p);;
 	if (a_p == 0)
 		a_p = 360;
 	angle = ((a_p * M_PI) / 180);
 	t = tan(angle);
-	//printf("t = %f\n", t);
 	env->v.xa = SIZE_CUBE;
 	if (a_p > 90 && a_p < 270)
 	{
@@ -35,9 +33,6 @@ void	check_first_intersection_v(t_env *env, double a_p)
 	env->v.ya = (env->v.xa * -1) * t;
 	env->v.grid_y = env->v.new_y / SIZE_CUBE;
 	env->v.grid_x = env->v.new_x / SIZE_CUBE;
-	//printf("xav = %f\nyav = %f\n", env->v.xa, env->v.ya);
-	//printf("new_xv calcul if = %f\nnew_yv calcul if = %f\n", env->v.new_x, env->v.new_y);
-	//printf("grid_xv calcul if = %d\ngrid_yv calcul if = %d\n\n", env->v.grid_x, env->v.grid_y);
 }
 
 void	check_next_intersection_v(t_env *env)
@@ -46,8 +41,6 @@ void	check_next_intersection_v(t_env *env)
 	env->v.new_y += env->v.ya;
 	env->v.grid_x = env->v.new_x / SIZE_CUBE;
 	env->v.grid_y = env->v.new_y / SIZE_CUBE;
-	//printf("new_xv calcul while = %f\nnew_yv calcul while = %f\n", env->v.new_x, env->v.new_y);
-	//printf("grid_xv calcul while = %d\ngrid_yv calcul while = %d\n\n", env->v.grid_x, env->v.grid_y);
 }
 
 void	find_wall_v(t_env *env, double a_p)

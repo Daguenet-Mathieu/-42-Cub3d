@@ -36,8 +36,6 @@ int	mlx_close(t_env *env)
 
 void	set_hooks_mlx(t_env *env)
 {
-	// void *ptr;
-	// ptr = mlx_xpm_file_to_image(env->mlx.mlx, "pexels-photo-207142.xpm", &x, &y);
 	env->map.texture_no.ptr = mlx_xpm_file_to_image(env->mlx.mlx, env->map.no, &env->map.texture_no.size_line, &env->map.texture_no.height);
 	env->map.texture_so.ptr = mlx_xpm_file_to_image(env->mlx.mlx, env->map.so, &env->map.texture_so.size_line, &env->map.texture_so.height);
 	env->map.texture_we.ptr = mlx_xpm_file_to_image(env->mlx.mlx, env->map.we, &env->map.texture_we.size_line, &env->map.texture_we.height);
@@ -51,12 +49,11 @@ void	set_hooks_mlx(t_env *env)
 	mlx_hook(env->mlx.mlx_win, 17, 0, mlx_close, env);
 	mlx_hook(env->mlx.mlx_win, 3, 1 << 1, handle_keyrelease, env);
 	mlx_hook(env->mlx.mlx_win, 2, 1L << 0, handle_keypress, env);
-	mlx_mouse_hide(env->mlx.mlx, env->mlx.mlx_win);
+	if (BONUS == 1)
+		mlx_mouse_hide(env->mlx.mlx, env->mlx.mlx_win);
 	mlx_loop_hook(env->mlx.mlx, &handle_key, env);
 	env->map.texture_no.size_line /= 4;
 	env->map.texture_so.size_line /= 4;
 	env->map.texture_we.size_line /= 4;
 	env->map.texture_ea.size_line /= 4;
-	//mlx_put_image_to_window(env->mlx.mlx, env->mlx.mlx_win,env->map.texture_no.ptr, 0, 0);
-	//while(1);
 }

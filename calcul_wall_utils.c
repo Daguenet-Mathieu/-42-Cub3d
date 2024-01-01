@@ -24,7 +24,6 @@ int	size_map(char **map)
 
 int	its_wall(char **map, int grid_y, int grid_x)
 {
-	//printf("grid_y = %d\ngrid_x = %d\n", grid_y, grid_x);
 	if (grid_y < 0 || grid_x < 0)
 		return (1);
 	if (grid_y > (size_map(map) - 1))
@@ -34,18 +33,6 @@ int	its_wall(char **map, int grid_y, int grid_x)
 	if (map[grid_y][grid_x] == '1')
 		return (1);
 	return (0);
-}
-
-double	calcul_projection_plane(void)
-{
-	double	nb;
-	double	angle;
-	double	t;
-
-	angle = (((POV / 2) * M_PI) / 180);
-	t = tan(angle);
-	nb = (WIDTH / 2) / t;
-	return (nb);
 }
 
 double	calcul_a_p(double axe_player)

@@ -12,6 +12,18 @@
 
 #include "cub3D.h"
 
+double	calcul_projection_plane(void)
+{
+	double	nb;
+	double	angle;
+	double	t;
+
+	angle = (((POV / 2) * M_PI) / 180);
+	t = tan(angle);
+	nb = (WIDTH / 2) / t;
+	return (nb);
+}
+
 void	remove_fishbowl(double *distance, double i)
 {
 	double	c;
