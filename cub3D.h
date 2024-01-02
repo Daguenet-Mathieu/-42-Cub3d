@@ -38,7 +38,7 @@
 #define SKY 0x2A303D
 #define SPEED 1.5
 #define	SPEED_2 3
-#define SPEED_MOUSE 1.4
+#define SPEED_MOUSE 1
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
 #define BONUS 1
