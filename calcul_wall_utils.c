@@ -42,18 +42,18 @@ double	calcul_a_p(double axe_player)
 
 	if (axe_player > 329)
 	{
-		tmp = 30 + axe_player;
+		tmp = axe_player + (POV / 2);
 		a_p = tmp - 360;
 	}
 	else
-		a_p = axe_player + 30;
+		a_p = axe_player + (POV / 2);
 	return (a_p);
 }
 
 void	recalcul_a_p(double *a_p, double between_rays)
 {
 	*a_p = *a_p - between_rays;
-	if (*a_p <= 0)
+	if (*a_p < 0)
 		*a_p = *a_p + 360;
 }
 

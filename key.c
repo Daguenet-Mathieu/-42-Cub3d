@@ -149,6 +149,8 @@ int	handle_key(t_env *env)
 	check_move = 0;
 	ft_memset(&pos, 0, sizeof(t_pos));
 	init_pos_t_d(&pos, env, &check_move);
+	if (BONUS == 1)
+		check_mouse(env);
 	if (check_move)
 	{
 		if (!check_collision(pos, *env) || BONUS == 0)

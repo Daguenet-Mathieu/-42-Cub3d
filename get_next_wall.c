@@ -32,9 +32,9 @@ void	get_next_wall(t_env *env)
 		remove_fishbowl(&env->map.distance_wall, s.i);
 		s.height = (SIZE_CUBE / env->map.distance_wall) * env->map.projection_plane;
 		recalcul_a_p(&s.a_p, env->map.between_rays);
+		print_wall(env, s);
 		s.i = s.i - env->map.between_rays;
 		s.i_rayon++;
-		print_wall(env, s);
 	}
 	mlx_put_image_to_window(env->mlx.mlx, env->mlx.mlx_win, env->mlx.s_image, 0, 0);
 }

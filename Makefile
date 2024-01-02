@@ -30,7 +30,8 @@ SRCS =	main.c					\
 		calcul_wall_v.c			\
 		calcul_wall_utils.c		\
 		calcul_wall_utils_2.c	\
-		print_wall.c
+		print_wall.c			\
+		manage_mouse.c
 SRCS_DEBUG =
 SRCS_BONUS =
 

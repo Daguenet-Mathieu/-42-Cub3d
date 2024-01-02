@@ -20,7 +20,7 @@ void	check_first_intersection_h(t_env *env, double a_p)
 	angle = ((a_p * M_PI) / 180);
 	t = tan(angle);
 	env->h.ya = SIZE_CUBE;
-	if (a_p >= 0 && a_p < 180)
+	if (a_p < 180)
 	{
 		env->h.ya = SIZE_CUBE * -1;
 		env->h.new_y = floor(env->map.pixel_y_player / SIZE_CUBE) * (SIZE_CUBE) - 0.0001;

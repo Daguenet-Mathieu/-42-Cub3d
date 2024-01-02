@@ -17,8 +17,6 @@ void	check_first_intersection_v(t_env *env, double a_p)
 	double	angle;
 	double	t;
 
-	if (a_p == 0)
-		a_p = 360;
 	angle = ((a_p * M_PI) / 180);
 	t = tan(angle);
 	env->v.xa = SIZE_CUBE;
