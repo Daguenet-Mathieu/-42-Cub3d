@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/21 19:47:38 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:06:43 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_image	texture_no;
+	t_image	texture_no;//verifier que c'est bien unique
 	t_image	texture_so;
 	t_image	texture_we;
 	t_image	texture_ea;

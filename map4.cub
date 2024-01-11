@@ -4,10 +4,10 @@ F 255,165,0
 
 C 255,99,80
 
-NO ./pexels-photo-207142.xpm
-SO ./path_to_the_south_texture
-EA ./path_to_the_south_texture
-WE ./path_to_the_south_texture
+NO img/test/N.xpm
+SO img/test/S.xpm
+EA img/test/E.xpm
+WE img/test/W.xpm
 
 
 111111111111111111111111
