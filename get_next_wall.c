@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_wall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:04:12 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/19 10:37:32 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:19:53 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void print_minimap(t_minimap mini, t_mlx mlx)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < (mini.height))
+	{
+		j = 0;
+		while (j < mini.width)
+		{
+			if ((unsigned int)mini.map[i * mini.width + j] != TRANSPARENT)
+				mlx.image[i * WIDTH + j] = mini.map[i * mini.width + j];
+			j++;
+		}
+		i++;
+	}
+}
 
 void	get_next_wall(t_env *env)
 {
@@ -36,5 +55,6 @@ void	get_next_wall(t_env *env)
 		s.i = s.i - env->map.between_rays;
 		s.i_rayon++;
 	}
+	print_minimap(env->mini, env->mlx);
 	mlx_put_image_to_window(env->mlx.mlx, env->mlx.mlx_win, env->mlx.s_image, 0, 0);
 }

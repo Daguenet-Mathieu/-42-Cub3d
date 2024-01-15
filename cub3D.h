@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/10 17:06:43 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:58:31 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
+# include "minimap/minimap.h" 
 
 #define POV 60
 #define	FISHBOWL -30
@@ -36,7 +37,7 @@
 #define WEST 0x7F00FF
 #define FLOOR 0x70726E
 #define SKY 0x2A303D
-#define SPEED 1.5
+#define SPEED 3
 #define	SPEED_2 3
 #define SPEED_MOUSE 1
 #define WIDTH_PLAYER 1
@@ -156,21 +157,23 @@ typedef struct	s_mlx
 	void	*s_image;
 	int		win_x;
 	int		win_y;
-}				t_mlx;
-typedef struct s_env
-{
-	t_mlx		mlx;
-	t_map		map;
-	t_calcul	h;
-	t_calcul	v;
-	t_key		key;
-}			t_env;
+}			t_mlx;
 
 typedef struct s_lst
 {
 	char			*data;
 	struct s_lst	*next;
 }					t_lst;
+
+typedef struct s_env
+{
+	t_mlx		mlx;
+	t_map		map;
+	t_minimap	mini;
+	t_calcul	h;
+	t_calcul	v;
+	t_key		key;
+}			t_env;
 
 int		ft_strlen(char *str);
 void	ft_putstr(char *str);
@@ -219,5 +222,7 @@ void	check_mouse(t_env *env);
 void 	set_map(t_env *env);
 
 void 	init_mp_info(t_map *map);
+
+void	print_minimap(t_minimap mini, t_mlx);
 
 #endif

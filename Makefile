@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2023/12/14 00:53:56 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/15 23:36:59 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRCS =	main.c					\
 		calcul_wall_utils.c		\
 		calcul_wall_utils_2.c	\
 		print_wall.c			\
+		minimap/minimap.c		\
+		minimap/minimap_utils.c	\
 		manage_mouse.c
 SRCS_DEBUG =
 SRCS_BONUS =

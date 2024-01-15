@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:02:43 by auferran          #+#    #+#             */
-/*   Updated: 2023/09/15 20:03:17 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:53:21 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*get_next_line(int fd)
 		line = join_line(line, buffer, &tmp);
 		if (!line)
 			return (free(tmp), NULL);
-		ft_memset(buffer, BUFFER_SIZE, 0);
+		ft_memset(buffer, 0, BUFFER_SIZE);
 		str_copy(buffer, tmp);
 		free(tmp);
 		if (find_c(line, &nl, '\n') || r < BUFFER_SIZE)

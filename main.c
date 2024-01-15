@@ -6,13 +6,13 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/21 19:29:48 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:41:31 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/*void	printmap(char **map)
+void	printmap(char **map)
 {
 	int	i;
 	int	j;
@@ -29,7 +29,7 @@
 		i++;
 	}
 	write(1, "\n", 1);
-}*/
+}
 
 void set_map(t_env *env)
 {
@@ -72,8 +72,11 @@ int	main(int argc, char **argv)
 		return (write(2, "Incorrect number of arguments\n", 31));
 	if (!get_map(&env.map, argv[1]))
 		return (1);
+	printmap(env.map.map);
 	get_pos_player(&env.map);
 	init_mp_info(&env.map);
+	if (!create_minimap(&env.mini, env.map.map))
+		return (free_struct(&env), 0);
 	env.mlx.mlx = mlx_init();
 	if (!env.mlx.mlx)
 		return (write(2, "MLX FAILURE\n", 13));

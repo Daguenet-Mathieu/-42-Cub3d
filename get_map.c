@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 23:43:31 by madaguen          #+#    #+#             */
-/*   Updated: 2023/12/19 01:14:10 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/15 23:40:51 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,15 @@ int		get_map(t_map *map, char *file_name)
 			if (map->ea && map->we && map->no && map->so && map->ceiling != -1 && map->floor !=-1)
 				done = 1;
 		}
+		else if (line_check(line, &i) == EMPTY_LINE)
+		{
+			free(line);
+			line = NULL;
+		}
 		else if (!add_to_list(line, &lst))
 			lst_clear(&lst);
+		printf("line == %s\n", line);
+		line = NULL;
 	}
 	map->map = lst_to_tab(lst);
 	if (!map->map)

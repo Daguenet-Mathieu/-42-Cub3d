@@ -1,7 +1,8 @@
-NO ./assets/n.xpm
-SO ./assets/s.xpm
-WE ./assets/w.xpm
-EA ./assets/e.xpm
+NO img/new/N.xpm
+SO img/new/S.xpm
+EA img/new/E.xpm
+WE img/new/W.xpm
+
 
 F 255,0,255
 C 11,38,75

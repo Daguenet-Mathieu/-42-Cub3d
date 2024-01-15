@@ -1,25 +1,139 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/15 23:17:07 by madaguen          #+#    #+#             */
+/*   Updated: 2024/01/15 23:53:53 by madaguen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minimap.h"
+#include <stdio.h>
 
-void	set_minimap(t_minimap mini, t_map map)
+void	set_case(int *ptr, int color, int size_line)
 {
+	int	i;
+	int	j;
 
+	i = 0;
+	while (i < M_SIZE)
+	{
+		j = 0;
+		while (j < M_SIZE)
+		{
+			ptr[j] = color;
+			j++;
+		}
+		i++;
+		ptr += (size_line);
+	}
 }
 
-int	create_minimap(t_minimap *mini, t_map map)
+void	draw_minimap(t_minimap m, char **map)
 {
-	mini->width = map.x_max * SIZE_MINICUB;
-	mini->height = map.y_max * SIZE_MINICUB;
-	mini->width_img = WIDTH_MAP * SIZE_MINICUB;
-	mini->height_img = HEIGHT_MAP * SIZE_CUBE;
-	if (mini->width_img > mini->width)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] && map[i][j] != '\n')
+		{
+			if (map[i][j] == '0')
+				set_case(m.map + ptr_offset(i, j, m.width, M_SIZE), G, m.width);
+			if (map[i][j] == '1')
+				set_case(m.map + ptr_offset(i, j, m.width, M_SIZE), W, m.width);
+			j++;
+		}
+		i++;
+	}
+}
+
+// static int	ft_strlen(char *s)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (s[i])
+// 		i++;
+// 	return (i);
+// }
+
+// static int	tab_size(char **t)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (t[i])
+// 		i++;
+// 	return (i);
+// }
+
+/*void	print_mini_player(int *ptr, double p_x, double p_y, int size_cub)
+{
+	// diviser par szecub et multiplier par M_SIZE
+//utiliser setcase
+}*/
+
+void	get_height_width(char **map, int *width, int *height)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] && map[i][j] != '\n')
+			j++;
+		if (j > *width)
+			*width = j;
+		i++;
+	}
+	*height = i;
+}
+
+void	init_minimap_data(t_minimap *mini, char **map)
+{
+	get_height_width(map, &mini->width, &mini->height);
+	mini->height *= M_SIZE;
+	mini->width *= M_SIZE;
+	mini->height_img = HEIGHT_MAP * M_SIZE;
+	mini->width_img = WIDTH_MAP * M_SIZE;
+	if (mini->width < mini->width_img)
 		mini->width_img = mini->width;
-	if (mini->height_img > mini->height)
+	if (mini->height < mini->height_img)
 		mini->height_img = mini->height;
-	mini->map = malloc(sizeof(int) * (mini->width * mini->height));
+}
+
+
+int	create_minimap(t_minimap *mini, char **map)
+{
+	int	i;
+	int	size;
+
+	init_minimap_data(mini, map);
+	mini->height_img = HEIGHT_MAP * M_SIZE;
+	mini->width_img = WIDTH_MAP * M_SIZE;
+	if (mini->width < mini->width_img)
+		mini->width_img = mini->width;
+	if (mini->height < mini->height_img)
+		mini->height_img = mini->height;
+	mini->map = malloc(mini->width * mini->height * sizeof(int));
 	if (!mini->map)
 		return (0);
-	mini->img = malloc(sizeof(int) * (mini->width_img * mini->height_img));
+	mini->img = malloc(mini->width_img * mini->height_img * sizeof(int));
 	if (!mini->img)
-		return (free(mini->map), 0);
+		return (0);
+	i = 0;
+	size = mini->width * mini->height;
+	while (i < size)
+		mini->map[i++] = TRANSPARENT;
+	//printf("color == %u\n", mini.img[i * M_SIZE + (j * M_SIZE)]);
+	draw_minimap(*mini, map);
 	return (1);
 }
