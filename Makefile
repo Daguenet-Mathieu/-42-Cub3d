@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/16 21:24:47 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/17 07:57:28 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,12 @@ NAME = cub3D
 NAME_DEBUG = cub3D_debug
 NAME_BONUS = cub3D_bonus
 CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($$4)}')
+
+ifeq ($(CPU_INFO),4)
+	SPEED := 3
+else
+	SPEED := 1
+endif
 
 HEADER = cub3D.h
 HEADER_BONUS = cub3D_bonus.h
@@ -57,6 +63,10 @@ FLAGS = -Wall -Werror -Wextra -g -gdwarf-4
 #test:
 #	echo $(CPU_INFO)
 
+test:
+    @echo "CPU_INFO: $(CPU_INFO)"
+    @echo "SPEED: $(SPEED)"
+
 $(NAME) : $(OBJS) $(HEADER)
 		 make -C ./mlx_linux all
 		 $(CC) $(FLAGS) $(OBJS) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $(NAME)
@@ -72,7 +82,7 @@ $(NAME_DEBUG) : $(OBJS_DEBUG) $(HEADER)
 %.o: %.c
 		$(CC) $(FLAGS) -MMD -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
-all : $(NAME)
+all : test $(NAME)
 
 clean :
 		rm -f $(OBJS) $(OBJS_BONUS) $(OBJS_DEBUG) $(DEPS)
