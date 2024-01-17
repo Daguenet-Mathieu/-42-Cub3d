@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:04:12 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/17 07:32:33 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/17 08:05:01 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	set_square_minimap(t_minimap minimap, double x, double y)
 	int	start[2];
 	int *ptr;
 	int	*img;
-	int	c;
+	//int	c;
 
 	size = minimap.height_img * minimap.width_img;
 	i = 0;
-	c = 0;
+	//c = 0;
 	img = minimap.img;
 	ptr = minimap.map;
 	//printf("size == %d\n", size);
