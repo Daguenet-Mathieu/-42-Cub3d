@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 23:17:29 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/15 23:35:43 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/17 04:49:15 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_minimap
 
 int		create_minimap(t_minimap *minimap, char **map);
 void	draw_minimap(t_minimap minimap, char **map);
-void	set_square_minimap(t_minimap minimap);
-void	set_circle_minimap(t_minimap minimap);
-int	ptr_offset(int l, int c, int width, int s_cub);
+void	set_square_minimap(t_minimap minimap, double x, double y);
+void	set_circle_minimap(t_minimap minimap, double x, double y);
+int		ptr_offset(int l, int c, int width, int s_cub);
 
 #endif

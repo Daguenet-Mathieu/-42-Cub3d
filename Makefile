@@ -6,13 +6,14 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/15 23:36:59 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/16 21:24:47 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 NAME_DEBUG = cub3D_debug
 NAME_BONUS = cub3D_bonus
+CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($$4)}')
 
 HEADER = cub3D.h
 HEADER_BONUS = cub3D_bonus.h
@@ -52,6 +53,9 @@ INC = -I ./mlx_linux/
 CC = clang #penser a remetttre cc avant de push
 
 FLAGS = -Wall -Werror -Wextra -g -gdwarf-4
+
+#test:
+#	echo $(CPU_INFO)
 
 $(NAME) : $(OBJS) $(HEADER)
 		 make -C ./mlx_linux all

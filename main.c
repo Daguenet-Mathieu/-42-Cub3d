@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/15 23:41:31 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/17 04:02:29 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int	main(int argc, char **argv)
 			return (write(2, "IMAGE FAILURE\n", 15));
 	env.mlx.image = (int *)mlx_get_data_addr(env.mlx.s_image, &bpp, &size_line, &endian);
 	set_hooks_mlx(&env);
-	set_map(&env);
-	get_next_wall(&env);
+	//set_map(&env);
+	//get_next_wall(&env);
 	mlx_loop(env.mlx.mlx);
 	return (0);
 }

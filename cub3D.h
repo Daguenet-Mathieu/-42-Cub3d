@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/15 22:58:31 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/17 07:31:49 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 #define SKY 0x2A303D
 #define SPEED 3
 #define	SPEED_2 3
-#define SPEED_MOUSE 1
+#define SPEED_MOUSE 6
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
 #define BONUS 1
