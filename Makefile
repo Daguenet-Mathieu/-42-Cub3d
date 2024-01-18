@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/17 08:07:51 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/18 19:26:49 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,13 +59,6 @@ INC = -I ./mlx_linux/
 CC = clang #penser a remetttre cc avant de push
 
 FLAGS = -Wall -Werror -Wextra -g -gdwarf-4
-
-#test:
-#	echo $(CPU_INFO)
-
-test:
-    @echo "CPU_INFO: $(CPU_INFO)"
-    @echo "SPEED: $(SPEED)"
 
 $(NAME) : $(OBJS) $(HEADER)
 		 make -C ./mlx_linux all

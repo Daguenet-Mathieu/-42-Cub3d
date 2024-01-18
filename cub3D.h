@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/17 07:31:49 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/18 23:41:26 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@
 #define WEST 0x7F00FF
 #define FLOOR 0x70726E
 #define SKY 0x2A303D
-#define SPEED 3
+#define SPEED 1
 #define	SPEED_2 3
 #define SPEED_MOUSE 6
+#define MARGIN 50
 #define WIDTH_PLAYER 1
 #define HEIGHT_PLAYER 1
 #define BONUS 1
