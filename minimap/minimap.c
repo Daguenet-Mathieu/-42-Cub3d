@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 23:17:07 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/18 22:28:29 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/20 00:15:32 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,17 @@ void	init_minimap_data(t_minimap *mini, char **map)
 	mini->width *= M_SIZE;
 	mini->height_img = HEIGHT_MAP * M_SIZE;
 	mini->width_img = WIDTH_MAP * M_SIZE;
-	//printf("h == %d, w == %d, mh == %d, mw == %d\n", mini->height, mini->width, mini->height_img, mini->width_img);
 	if (mini->width < mini->width_img)
 		mini->width_img = mini->width;
 	if (mini->height < mini->height_img)
 		mini->height_img = mini->height;
 	mini->radius = mini->height_img;
-	if (mini->radius < mini->width_img)
+	if (mini->radius > mini->width_img)
 		mini->radius = mini->width_img;
+	mini->width_img = mini->radius;
+	mini->width_img = mini->radius;
 	mini->radius /= 2;
+	
 }
 
 
