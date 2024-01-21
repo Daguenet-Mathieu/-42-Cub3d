@@ -6,13 +6,13 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 00:39:24 by madaguen          #+#    #+#             */
-/*   Updated: 2023/12/02 06:15:28 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/21 19:11:58 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int		add_to_list(char *line, t_lst **lst)
+int	add_to_list(char *line, t_lst **lst)
 {
 	t_lst	*new;
 	t_lst	*tmp;
@@ -64,7 +64,7 @@ void	lst_clear(t_lst **lst)
 	}
 }
 
-int		lst_size(t_lst *lst)
+int	lst_size(t_lst *lst)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/18 19:26:49 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/21 22:46:35 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,12 @@ HEADER_BONUS = cub3D_bonus.h
 SRCS =	main.c					\
 		mlx.c 					\
 		key.c					\
+		key_util.c				\
+		key_utils2.c			\
 		utils.c					\
 		lst_utils.c				\
 		gnl.c					\
+		get_map_utils.c			\
 		get_map.c				\
 		player.c				\
 		get_next_wall.c			\
@@ -40,6 +43,7 @@ SRCS =	main.c					\
 		print_wall.c			\
 		minimap/minimap.c		\
 		minimap/minimap_utils.c	\
+		minimap/display_minimap.c	\
 		manage_mouse.c
 SRCS_DEBUG =
 SRCS_BONUS =
@@ -75,7 +79,7 @@ $(NAME_DEBUG) : $(OBJS_DEBUG) $(HEADER)
 %.o: %.c
 		$(CC) $(FLAGS) -MMD -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
-all : test $(NAME)
+all : $(NAME)
 
 clean :
 		rm -f $(OBJS) $(OBJS_BONUS) $(OBJS_DEBUG) $(DEPS)

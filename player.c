@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 02:14:03 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/15 19:35:38 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:55:41 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	get_pos_player(t_map *map)
 	init_direction_de_foufurieux(map->map[i][j], &map->axe_player);
 }
 
-void init_mp_info(t_map *map)
+void	init_mp_info(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	map->x_max = (ft_strlen(*map->map) - 1) * SIZE_CUBE;

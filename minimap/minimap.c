@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 23:17:07 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/20 00:15:32 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:46:29 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	draw_minimap(t_minimap m, char **map)
 		{
 			if (map[i][j] == '1')
 				set_case(m.map + ptr_offset(i, j, m.width, M_SIZE), W, m.width);
-			//if (map[i][j] == '1')
 			else
 				set_case(m.map + ptr_offset(i, j, m.width, M_SIZE), G, m.width);
 			j++;
@@ -89,9 +88,7 @@ void	init_minimap_data(t_minimap *mini, char **map)
 	mini->width_img = mini->radius;
 	mini->width_img = mini->radius;
 	mini->radius /= 2;
-	
 }
-
 
 int	create_minimap(t_minimap *mini, char **map)
 {
@@ -99,12 +96,6 @@ int	create_minimap(t_minimap *mini, char **map)
 	int	size;
 
 	init_minimap_data(mini, map);
-//	mini->height_img = HEIGHT_MAP * M_SIZE;
-//	mini->width_img = WIDTH_MAP * M_SIZE;
-//	if (mini->width < mini->width_img)
-//		mini->width_img = mini->width;
-//	if (mini->height < mini->height_img)
-//		mini->height_img = mini->height;
 	mini->map = malloc(mini->width * mini->height * sizeof(int));
 	if (!mini->map)
 		return (0);
@@ -115,8 +106,6 @@ int	create_minimap(t_minimap *mini, char **map)
 	size = mini->width * mini->height;
 	while (i < size)
 		mini->map[i++] = TRANSPARENT;
-//	printf("h == %d, w == %d, mh == %d, mw == %d\n", mini->height, mini->width, mini->height_img, mini->width_img);
-	//printf("color == %u\n", mini.img[i * M_SIZE + (j * M_SIZE)]);
 	draw_minimap(*mini, map);
 	return (1);
 }

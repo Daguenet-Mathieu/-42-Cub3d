@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul_wall_v.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:34:56 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/08 19:56:20 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:52:44 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ void	check_first_intersection_v(t_env *env, double a_p)
 	if (a_p > 90 && a_p < 270)
 	{
 		env->v.xa = SIZE_CUBE * -1;
-		env->v.new_x = floor(env->map.pixel_x_player / SIZE_CUBE) * (SIZE_CUBE) - 0.0001;
+		env->v.new_x = \
+		floor(env->map.pixel_x_player / SIZE_CUBE) * (SIZE_CUBE) - 0.0001;
 	}
 	else
-		env->v.new_x = floor(env->map.pixel_x_player / SIZE_CUBE) * (SIZE_CUBE) + SIZE_CUBE;
-	env->v.new_y = env->map.pixel_y_player + (env->map.pixel_x_player - env->v.new_x) * t;
+		env->v.new_x = \
+		floor(env->map.pixel_x_player / SIZE_CUBE) * (SIZE_CUBE) + SIZE_CUBE;
+	env->v.new_y = \
+	env->map.pixel_y_player + (env->map.pixel_x_player - env->v.new_x) * t;
 	env->v.ya = (env->v.xa * -1) * t;
 	env->v.grid_y = env->v.new_y / SIZE_CUBE;
 	env->v.grid_x = env->v.new_x / SIZE_CUBE;

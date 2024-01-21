@@ -6,14 +6,14 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/18 23:41:26 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:45:58 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "mlx_linux/mlx.h"
+# include "mlx_linux/mlx.h"
 # include <X11/keysymdef.h>
 # include <X11/keysym.h>
 # include <sys/stat.h>
@@ -25,25 +25,27 @@
 # include <stdio.h>
 # include "minimap/minimap.h" 
 
-#define POV 60
-#define	FISHBOWL -30
-#define PLAYER_HEIGHT 32
-#define SIZE_CUBE 64
-#define	WIDTH 1920
-#define HEIGHT_PLANE 1080
-#define NORTH 0x0000FF
-#define SOUTH 0xFF0000
-#define EAST 0xDAA520
-#define WEST 0x7F00FF
-#define FLOOR 0x70726E
-#define SKY 0x2A303D
-#define SPEED 1
-#define	SPEED_2 3
-#define SPEED_MOUSE 6
-#define MARGIN 50
-#define WIDTH_PLAYER 1
-#define HEIGHT_PLAYER 1
-#define BONUS 1
+# define POV 60
+# define FISHBOWL -30
+# define PLAYER_HEIGHT 32
+# define SIZE_CUBE 64
+# define WIDTH 1920
+# define HEIGHT_PLANE 1080
+# define NORTH 0x0000FF
+# define SOUTH 0xFF0000
+# define EAST 0xDAA520
+# define WEST 0x7F00FF
+# define FLOOR 0x70726E
+# define SKY 0x2A303D
+# ifndef SPEED
+#  define SPEED 1
+# endif
+# define SPEED_2 3
+# define SPEED_MOUSE 5
+# define MARGIN 50
+# define WIDTH_PLAYER 1
+# define HEIGHT_PLAYER 1
+# define BONUS 1
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
@@ -60,12 +62,12 @@ enum e_dir
 	F,
 };
 
-typedef struct	s_case
+typedef struct s_case
 {
 	unsigned int	x;
 	unsigned int	y;
 	unsigned int	area_in_case;
-}				t_case;
+}	t_case;
 
 typedef struct s_img
 {
@@ -75,7 +77,7 @@ typedef struct s_img
 	int		*img;
 	int		bpp;
 	int		endian;
-}			t_image;
+}	t_image;
 
 typedef struct s_map
 {
@@ -95,12 +97,12 @@ typedef struct s_map
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_image	texture_no;//verifier que c'est bien unique
-	t_image	texture_so;
-	t_image	texture_we;
-	t_image	texture_ea;
+	t_image	t_no;
+	t_image	t_so;
+	t_image	t_we;
+	t_image	t_ea;
 
-}			t_map;
+}	t_map;
 
 typedef struct s_print_wall
 {
@@ -108,11 +110,11 @@ typedef struct s_print_wall
 	double	height_draw;
 	double	index_wall;
 	double	ratio_leon;
-	double	column_texture;
+	double	column_t;
 	double	diff;
 	int		orientation;
 	int		y_start;
-}			t_print_wall;
+}	t_print_wall;
 
 typedef struct s_get_next_wall
 {
@@ -142,15 +144,15 @@ typedef struct s_key
 	int	down;
 	int	left;
 	int	right;
-}				t_key;
+}	t_key;
 
-typedef struct	s_pos
+typedef struct s_pos
 {
 	double	new_y;
 	double	new_x;
-}			t_pos;
+}	t_pos;
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	int		*image;
 	void	*mlx;
@@ -158,13 +160,26 @@ typedef struct	s_mlx
 	void	*s_image;
 	int		win_x;
 	int		win_y;
-}			t_mlx;
+	int		bpp;
+	int		endian;
+	int		size_line;
+}	t_mlx;
 
 typedef struct s_lst
 {
 	char			*data;
 	struct s_lst	*next;
-}					t_lst;
+}	t_lst;
+
+typedef struct s_verif_map
+{
+	int		fd;
+	char	*line;
+	t_lst	*lst;
+	int		done;
+	char	verif_line;
+	int		i;
+}	t_verif_map;
 
 typedef struct s_env
 {
@@ -208,8 +223,7 @@ void	remove_fishbowl(double *distance, double i);
 int		init_mlx(t_mlx *mlx);
 void	free_struct(t_env *env);
 int		mlx_close(t_env *env);
-void	set_hooks_mlx(t_env *env);
-
+int		set_hooks_mlx(t_env *env);
 
 void	init_pos_l_r(t_pos *pos, t_env *env, int *move);
 void	init_pos_t_d(t_pos *pos, t_env *env, int *move);
@@ -220,10 +234,26 @@ int		handle_keypress(int key_code, t_env *env);
 int		handle_key(t_env *env);
 void	check_mouse(t_env *env);
 
-void 	set_map(t_env *env);
+void	set_map(t_env *env);
+char	*ft_strdup(const char *str);
+int		ft_isspace(char c);
 
-void 	init_mp_info(t_map *map);
+void	init_mp_info(t_map *map);
 
-void	print_minimap(t_minimap mini, t_mlx);
+void	ajust_key_release(int *key1, int *key2);
+int		handle_keyrelease(int key_code, t_env *env);
+void	ajust_key_press(int *key1, int *key2);
+int		handle_keypress(int key_code, t_env *env);
+void	init_pos_t_d(t_pos *pos, t_env *env, int *move);
+void	init_pos_l_r(t_pos *pos, t_env *env, int *move);
+double	calcul_angle_l_r(double axe_player, int nb);
+int		do_move(double *player, double new_pos);
+int		check_collision(t_pos pos, t_env env);
+
+int		atouc(char *nb, int *j);
+int		get_color(char *map);
+void	line_check_util(char *line, int i, int *j, char *ret);
+char	line_check(char *line, int *j);
+int	verif_dulicate(char verif_line, t_map *map);
 
 #endif

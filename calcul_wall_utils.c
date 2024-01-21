@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul_wall_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:35:12 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/19 10:33:50 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:53:30 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ double	calcul_distance(t_env *env, int *x, int *y)
 
 	*y = -1;
 	*x = -1;
-	d_h = sqrt(pow((double)env->map.pixel_x_player - (double)env->h.new_x, 2)
+	d_h = sqrt(pow((double)env->map.pixel_x_player - (double)env->h.new_x, 2) \
 		+ pow((double)env->map.pixel_y_player - (double)env->h.new_y, 2));
-	d_v = sqrt(pow((double)env->map.pixel_x_player - (double)env->v.new_x, 2)
+	d_v = sqrt(pow((double)env->map.pixel_x_player - (double)env->v.new_x, 2) \
 		+ pow((double)env->map.pixel_y_player - (double)env->v.new_y, 2));
 	if (d_h <= d_v)
 	{
