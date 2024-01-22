@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 20:05:22 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/22 23:00:45 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/22 23:03:37 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,15 @@ int	mlx_close(t_env *env)
 	return (0);
 }
 
-int	get_door(env)
+int	get_door(t_env *env)
 {
+	(void) env;
 	return (1);
 }
 
-int	get_weapon(env)
+int	get_weapon(t_env *env)
 {
+	(void) env;
 	return (1);	
 }
 
