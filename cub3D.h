@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/21 22:45:58 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/22 22:55:11 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,14 @@ typedef struct s_case
 
 typedef struct s_img
 {
-	void	*ptr;
-	int		size_line;
-	int		height;
-	int		*img;
-	int		bpp;
-	int		endian;
+	void				*ptr;
+	int					size_line;
+	int					height;
+	int					*img;
+	int					bpp;
+	int					endian;
+	unsigned long long	time_start;
+	unsigned long long	interval;
 }	t_image;
 
 typedef struct s_map
@@ -101,7 +103,9 @@ typedef struct s_map
 	t_image	t_so;
 	t_image	t_we;
 	t_image	t_ea;
-
+	t_image	gun;
+	t_image	door1;
+	t_image	door2;
 }	t_map;
 
 typedef struct s_print_wall
@@ -254,6 +258,9 @@ int		atouc(char *nb, int *j);
 int		get_color(char *map);
 void	line_check_util(char *line, int i, int *j, char *ret);
 char	line_check(char *line, int *j);
-int	verif_dulicate(char verif_line, t_map *map);
+int		verif_dulicate(char verif_line, t_map *map);
+int		check_map(t_map *map);
+int		its_player(char c);
+int		check_map(t_map *map);
 
 #endif

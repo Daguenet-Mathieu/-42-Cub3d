@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/21 19:10:16 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:42:28 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	printmap(char **map)
 			write(1, &map[i][j], 1);
 			j++;
 		}
+		write(1, "\n", 1);
 		i++;
 	}
 	write(1, "\n", 1);
@@ -76,6 +77,60 @@ int	init_win(t_env *env)
 	return (0);
 }
 
+int	check_char(char **map)
+{
+	int	player;
+	int	i;
+	int	j;
+
+	j = 0;
+	player = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i] && map[j][i] != '\n')
+		{
+			if (its_player(map[j][i]))
+				player++;
+			else if (map[j][i] != '1' && map[j][i] != '0' && \
+			!ft_isspace(map[j][i]))
+				return (write(2, "invalid char in map\n", 21), 0);
+			i++;
+		}
+		j++;
+	}
+	if (player > 1 || player == 0)
+		return (write(2, "only one player required\n", 26), 0);
+	return (1);
+}
+
+int	check_char_bonus(char **map)
+{
+	int	player;
+	int	i;
+	int	j;
+
+	j = 0;
+	player = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i] && map[j][i] != '\n')
+		{
+			if (its_player(map[j][i]))
+				player++;
+			else if (map[j][i] != '1' && map[j][i] != '0' && map[j][i] != 'D' \
+			&& !ft_isspace(map[j][i]))
+				return (write(2, "invalid char in map\n", 21), 0);
+			i++;
+		}
+		j++;
+	}
+	if (player > 1 || player == 0)
+		return (write(2, "only one player required\n", 26), 0);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_env	env;
@@ -85,13 +140,18 @@ int	main(int argc, char **argv)
 		return (write(2, "Incorrect number of arguments\n", 31));
 	if (!get_map(&env.map, argv[1]))
 		return (1);
+	if (!check_char(env.map.map))
+		return (1);
 	get_pos_player(&env.map);
+	if (!check_map(&env.map))
+		return (1);
 	init_mp_info(&env.map);
 	if (!create_minimap(&env.mini, env.map.map))
 		return (free_struct(&env), 0);
 	if (init_win(&env))
 		return (1);
-	set_hooks_mlx(&env);
+	if (!set_hooks_mlx(&env))
+		return (1);
 	mlx_loop(env.mlx.mlx);
 	return (0);
 }

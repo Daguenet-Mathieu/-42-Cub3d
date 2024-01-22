@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 00:39:24 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/21 19:11:58 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:25:19 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ int	add_to_list(char *line, t_lst **lst)
 {
 	t_lst	*new;
 	t_lst	*tmp;
+	int		len;
 
 	new = malloc(sizeof(t_lst));
 	if (!new)
 		return (write(2, "MALLOC FAILURE\n", 16), 0);
+	len = ft_strlen(line);
+	if (line[len - 1] == '\n')
+		line[len - 1] = 0;
 	new->next = NULL;
 	new->data = line;
 	tmp = *lst;

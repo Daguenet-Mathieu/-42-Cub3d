@@ -6,13 +6,13 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 02:14:03 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/21 21:55:41 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:43:35 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int	its_player(char c)
+int	its_player(char c)
 {
 	int			i;
 	const char	*str = "NSEW";
@@ -63,6 +63,7 @@ void	get_pos_player(t_map *map)
 			break ;
 		i++;
 	}
+	map->map[i][j] = '0';
 	map->pixel_x_player = j * SIZE_CUBE + 32;
 	map->pixel_y_player = i * SIZE_CUBE + 32;
 	init_direction_de_foufurieux(map->map[i][j], &map->axe_player);

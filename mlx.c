@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 20:05:22 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/21 22:47:54 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/22 23:00:45 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,35 @@ void	free_tab(char **tab)
 	}
 }
 
+void	free_struct_util(t_env *env)
+{
+	if (env->mini.img)
+		free (env->mini.img);
+	if (env->mini.map)
+		free (env->mini.map);
+	if (env->map.no)
+		free(env->map.no);
+	if (env->map.so)
+		free(env->map.so);
+	if (env->map.we)
+		free(env->map.we);
+	if (env->map.ea)
+		free(env->map.ea);
+}
+
 void	free_struct(t_env *env)
 {
-	if (env->mlx.image)
+	free_struct_util(env);
+	if (env->mlx.s_image)
 		mlx_destroy_image(env->mlx.mlx, env->mlx.s_image);
+	if (env->map.t_no.ptr)
+		mlx_destroy_image(env->mlx.mlx, env->map.t_no.ptr);
+	if (env->map.t_so.ptr)
+		mlx_destroy_image(env->mlx.mlx, env->map.t_so.ptr);
+	if (env->map.t_we.ptr)
+		mlx_destroy_image(env->mlx.mlx, env->map.t_we.ptr);
+	if (env->map.t_ea.ptr)
+		mlx_destroy_image(env->mlx.mlx, env->map.t_ea.ptr);
 	if (env->mlx.mlx_win)
 		mlx_destroy_window(env->mlx.mlx, env->mlx.mlx_win);
 	if (env->mlx.mlx)
@@ -39,11 +64,22 @@ void	free_struct(t_env *env)
 	exit(0);
 }
 
+
 int	mlx_close(t_env *env)
 {
 	write(1, "\n", 1);
 	free_struct(env);
 	return (0);
+}
+
+int	get_door(env)
+{
+	return (1);
+}
+
+int	get_weapon(env)
+{
+	return (1);	
 }
 
 int	init_img(t_env *env)
@@ -72,8 +108,8 @@ int	init_img(t_env *env)
 
 int	set_hooks_mlx(t_env *env)
 {
-	if (!init_img(env))
-		return (0);
+	if (!init_img(env) || get_door(env) || get_weapon(env))
+		return (write(2, "fail to load img\n", 18), 0);
 	mlx_hook(env->mlx.mlx_win, 17, 0, mlx_close, env);
 	mlx_hook(env->mlx.mlx_win, 3, 1 << 1, handle_keyrelease, env);
 	mlx_hook(env->mlx.mlx_win, 2, 1L << 0, handle_keypress, env);
