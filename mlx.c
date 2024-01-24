@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 20:05:22 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/22 23:03:37 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:45:01 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	init_img(t_env *env)
 
 int	set_hooks_mlx(t_env *env)
 {
-	if (!init_img(env) || get_door(env) || get_weapon(env))
+	if (!init_img(env) || !get_door(env) || !get_weapon(env))
 		return (write(2, "fail to load img\n", 18), 0);
 	mlx_hook(env->mlx.mlx_win, 17, 0, mlx_close, env);
 	mlx_hook(env->mlx.mlx_win, 3, 1 << 1, handle_keyrelease, env);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/24 03:59:39 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/24 07:00:21 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 void	printmap(char **map)
 {
@@ -152,6 +152,12 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!set_hooks_mlx(&env))
 		return (1);
+	env.map.gun.time_start = ft_get_time();
+	env.map.gun.interval = GUN_TIME / 4;
+	env.map.door1.time_start = ft_get_time();
+	env.map.door2.time_start = ft_get_time();
+	env.map.door1.interval = DOOR_TIME / 100;
+	env.map.door2.interval = DOOR_TIME / 100;
 	mlx_loop(env.mlx.mlx);
 	return (0);
 }

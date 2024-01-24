@@ -6,11 +6,10 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:12:35 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/22 22:19:04 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/24 06:50:22 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
 #include "cub3D_bonus.h"
 
 void	handle_key_util(int check_move, t_pos pos, t_env *env, int *move)
@@ -44,6 +43,20 @@ int	handle_key(t_env *env)
 
 	move = 0;
 	check_move = 0;
+	if (env->key.space)
+		env->map.gun.anim_state = ON_TOP;
+	if (env->map.gun.anim_state == ON_TOP && check_time(env->map.gun.time_start, env->map.gun.interval) == 1)
+	{
+		move = 1;
+		env->map.gun.time_start = ft_get_time();
+		env->map.gun.curr_img++;
+		if (env->map.gun.curr_img == 4)
+		{
+			env->map.gun.curr_img = 0;
+			env->map.gun.anim_state = OFF;
+		}
+		env->map.gun.cur_img = env->map.gun.img[env->map.gun.curr_img];
+	}
 	ft_memset(&pos, 0, sizeof(t_pos));
 	init_pos_t_d(&pos, env, &check_move);
 	if (BONUS == 1)
