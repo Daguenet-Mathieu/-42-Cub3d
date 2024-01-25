@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/24 07:18:55 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:24:23 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct s_map
 	double	projection_plane;
 	double	distance_wall;
 	double	between_rays;
+	int		shading;
 	int		ceiling;
 	int		floor;
 	char	*no;
@@ -238,6 +239,7 @@ typedef struct s_env
 int		ft_strlen(char *str);
 void	ft_putstr(char *str);
 void	ft_memset(void *pointer, int value, size_t count);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*get_next_line(int fd);
 
 int		get_map(t_map *map, char *map_title);

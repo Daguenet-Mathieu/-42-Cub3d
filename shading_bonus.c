@@ -31,7 +31,7 @@ int	get_shading_floor_ceiling(int red, int green, int blue, int y)
 	double	factor;
 
 	y += 300;
-	factor = (1.0 / y) * 300;
+	factor = (1.0 / y) * 150;
 	red = (int)((double)red * factor);
 	green = (int)((double)green * factor);
 	blue = (int)((double)blue * factor);

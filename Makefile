@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
+#    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/24 06:51:02 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/25 19:15:33 by auferran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,7 @@ clean :
 		make -C ./mlx_linux clean
 
 fclean : clean
-		rm -f $(NAME) $(NAME_BONUS) $(NAME_DEBUG)
+		rm -f $(NAME) $(NAME_BONUS) $(NAME_DEBUG) $(DEPS) $(DEPS_BONUS)
 
 re : fclean all
 
