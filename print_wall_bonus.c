@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 21:54:03 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/25 20:53:27 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:25:23 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,13 @@ int	get_pixel(t_env *env, t_print_wall s, int size_line)
 	j -= tmp;
 	pixel = j + s.column_t;
 	pixel_color = env->map.img[(int)pixel];
-	get_rgb(pixel_color, &red, &green, &blue);
-	new_color = get_shading_wall(red, green, blue, env->map.distance_wall);
+	if (env->map.distance_wall > 150)
+	{
+		get_rgb(pixel_color, &red, &green, &blue);
+		new_color = get_shading_wall(red, green, blue, env->map.distance_wall);
+	}
+	else
+		new_color = pixel_color;
 	return (new_color);
 }
 

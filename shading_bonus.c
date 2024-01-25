@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 20:58:09 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/25 20:58:10 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:25:51 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int	get_shading_wall(int red, int green, int blue, double distance_wall)
 {
 	double	factor;
 
-	factor = 1.0;
-	if (distance_wall > 150)
-		factor = (1.0 / distance_wall) * 150;
+	factor = (1.0 / distance_wall) * 150;
 	red = (int)((double)red * factor);
 	green = (int)((double)green * factor);
 	blue = (int)((double)blue * factor);
