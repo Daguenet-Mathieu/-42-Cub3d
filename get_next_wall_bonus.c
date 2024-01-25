@@ -18,7 +18,7 @@ void	print_weapon(int *image, t_image weapon)
 	int	size = weapon.new_height * weapon.new_size_line;
 	int	i;
 
-	i = 0; 
+	i = 0;
 	while (i < size)
 	{
 		if ((unsigned int)weapon.new_img[i] != 0)
@@ -35,7 +35,7 @@ void	print_weapon(int *image, t_image weapon)
 // 	int	size = weapon.height * weapon.size_line;
 // 	int	i;
 
-// 	i = 0; 
+// 	i = 0;
 // 	while (i < size)
 // 	{
 // 		if ((unsigned int)weapon.img[i] != 0)
@@ -45,6 +45,33 @@ void	print_weapon(int *image, t_image weapon)
 // 			start += WIDTH;
 // 	}
 // }
+
+void	print_crosshair(int *image)
+{
+	int	i;
+	int	j;
+	int	center;
+
+	i = 0;
+	center = WIDTH * (HEIGHT_PLANE / 2) + (WIDTH / 2);
+	j = center - 12;
+	while (i < 25)
+	{
+		if (i < 10 || i > 14)
+			image[j] = WHITE;
+		j++;
+		i++;
+	}
+	i = 0;
+	j = center - (WIDTH * 12);
+	while (i < 25)
+	{
+		if (i < 10 || i > 14)
+			image[j] = WHITE;
+		j += WIDTH;
+		i++;
+	}
+}
 
 void	get_next_wall_loop(t_get_next_wall *s, t_env *env)
 {
@@ -82,6 +109,7 @@ void	get_next_wall(t_env *env)
 	SIZE_CUBE, env->map.pixel_x_player / SIZE_CUBE, env->mini);
 	print_minimap(env->mini, env->mlx.image, WIDTH);
 	print_weapon(env->mlx.image, env->map.gun.cur_img);
+	print_crosshair(env->mlx.image);
 	mlx_put_image_to_window(env->mlx.mlx, env->mlx.mlx_win, \
 	env->mlx.s_image, 0, 0);
 }

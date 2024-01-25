@@ -46,7 +46,7 @@ SRCS =	main.c						\
 		check_map.c					\
 		minimap/display_minimap.c	\
 		manage_mouse.c
-		
+
 SRCS_BONUS =	main_bonus.c						\
 				mlx_bonus.c 						\
 				key_bonus.c							\
@@ -64,12 +64,13 @@ SRCS_BONUS =	main_bonus.c						\
 				calcul_wall_utils_bonus.c			\
 				calcul_wall_utils_2_bonus.c			\
 				print_wall_bonus.c					\
-				minimap/minimap.c				\
-				minimap/minimap_utils.c		\
+				minimap/minimap.c					\
+				minimap/minimap_utils.c				\
 				check_map_bonus.c					\
 				minimap/display_minimap.c			\
 				time_bonus.c						\
-				manage_mouse_bonus.c
+				manage_mouse_bonus.c				\
+				shading_bonus.c
 
 SRCS_DEBUG =
 OBJS = $(SRCS:.c=.o)

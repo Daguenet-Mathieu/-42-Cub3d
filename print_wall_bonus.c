@@ -63,13 +63,21 @@ int	get_pixel(t_env *env, t_print_wall s, int size_line)
 	double	j;
 	double	tmp;
 	double	pixel;
+	int		pixel_color;
+	int		red;
+	int		green;
+	int		blue;
+	int		new_color;
 
 	j = s.diff * size_line;
 	j += s.i * size_line * s.ratio_leon;
 	tmp = (int)j % size_line;
 	j -= tmp;
 	pixel = j + s.column_t;
-	return (env->map.img[(int)pixel]);
+	pixel_color = env->map.img[(int)pixel];
+	get_RGB(pixel_color, &red, &green, &blue);
+	new_color = get_shading_wall(red, green, blue, env->map.distance_wall);
+	return (new_color);
 }
 
 void	draw_pixel(t_print_wall s, t_env *env, int i_rayon)

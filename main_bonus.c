@@ -36,6 +36,7 @@ void	set_map(t_env *env)
 {
 	int	y;
 	int	i;
+	int	x;
 
 	y = 0;
 	while (y < ((HEIGHT_PLANE) / 2))
@@ -43,20 +44,23 @@ void	set_map(t_env *env)
 		i = 0;
 		while (i < (WIDTH))
 		{
-			env->mlx.image[(y * WIDTH) + i] = env->map.ceiling;
+			env->mlx.image[(y * WIDTH) + i] = c_f_shading(env->map.ceiling, y);
 			i++;
 		}
 		y++;
 	}
-	while (y < ((HEIGHT_PLANE)))
+	x = 0;
+	y = HEIGHT_PLANE;
+	while (y > ((HEIGHT_PLANE / 2)))
 	{
 		i = 0;
 		while (i < (WIDTH))
 		{
-			env->mlx.image[(y * WIDTH) + i] = env->map.floor;
+			env->mlx.image[(y * WIDTH) + i] = c_f_shading(env->map.floor, x);
 			i++;
 		}
-		y++;
+		x++;
+		y--;
 	}
 }
 

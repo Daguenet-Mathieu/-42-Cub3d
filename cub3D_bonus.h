@@ -24,7 +24,7 @@
 # include <math.h>
 # include <stdio.h>
  #include <sys/time.h>
-# include "minimap/minimap.h" 
+# include "minimap/minimap.h"
 
 # define POV 60
 # define FISHBOWL -30
@@ -50,6 +50,7 @@
 # define WEAPON_RESIZE 3.5
 # define GUN_TIME 500000
 # define DOOR_TIME 3000000
+# define WHITE 0XFFFFFF
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
@@ -252,6 +253,10 @@ void	get_pos_player(t_map *map);
 void	get_next_wall(t_env *env);
 
 void	print_wall(t_env *env, t_get_next_wall wall);
+
+int		get_shading_wall(int red, int green, int blue, double distance_wall);
+void	get_RGB(int	color, int *red, int *green, int *blue);
+int		c_f_shading(int color, int y);
 
 void	find_wall_h(t_env *env, double a_p);
 void	find_wall_v(t_env *env, double a_p);
