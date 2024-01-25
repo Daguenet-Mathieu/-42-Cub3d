@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/25 19:24:23 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:10:35 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@
 # define GUN_TIME 500000
 # define DOOR_TIME 3000000
 # define WHITE 0XFFFFFF
+# ifndef LEAK
+#  define LEAK 0
+# endif
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
@@ -132,9 +135,9 @@ typedef struct s_map
 	double	projection_plane;
 	double	distance_wall;
 	double	between_rays;
-	int		shading;
 	int		ceiling;
 	int		floor;
+	int		*cpy_c_f;
 	char	*no;
 	char	*so;
 	char	*we;
@@ -284,7 +287,7 @@ int		handle_keypress(int key_code, t_env *env);
 int		handle_key(t_env *env);
 void	check_mouse(t_env *env);
 
-void	set_map(t_env *env);
+void	set_map(t_env *env, int *ptr);
 char	*ft_strdup(const char *str);
 int		ft_isspace(char c);
 

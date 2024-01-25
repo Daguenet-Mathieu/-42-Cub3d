@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:12:35 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/24 06:50:22 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:54:58 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	display(int move, t_env *env, int player_axe)
 {
 	if (move || env->map.axe_player != player_axe)
 	{
-		set_map(env);
+		ft_memcpy(env->mlx.image, env->map.cpy_c_f, (WIDTH * HEIGHT_PLANE) * sizeof(int));
 		get_next_wall(env);
 		player_axe = env->map.axe_player;
 	}

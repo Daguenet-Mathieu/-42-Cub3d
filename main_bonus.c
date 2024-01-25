@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/25 19:26:25 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:03:18 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,34 @@ void	printmap(char **map)
 	write(1, "\n", 1);
 }
 
-void	set_map(t_env *env)
+void	set_map(t_env *env, int *ptr)
 {
 	int	y;
 	int	i;
 	int	x;
+	int	color;
 
 	y = 0;
 	while (y < ((HEIGHT_PLANE) / 2))
 	{
 		i = 0;
+		color = c_f_shading(env->map.ceiling, y);
 		while (i < (WIDTH))
 		{
-			env->mlx.image[(y * WIDTH) + i] = c_f_shading(env->map.ceiling, y);
+			ptr[(y * WIDTH) + i] = color;
 			i++;
 		}
 		y++;
 	}
 	x = 0;
-	y = HEIGHT_PLANE;
-	while (y > ((HEIGHT_PLANE / 2)))
+	y = HEIGHT_PLANE - 1;
+	while (y >= ((HEIGHT_PLANE / 2)))
 	{
 		i = 0;
+		color = c_f_shading(env->map.floor, x);
 		while (i < (WIDTH))
 		{
-			env->mlx.image[(y * WIDTH) + i] = c_f_shading(env->map.floor, x);
+			ptr[(y * WIDTH) + i] = color;
 			i++;
 		}
 		x++;

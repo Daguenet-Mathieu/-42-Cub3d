@@ -6,12 +6,11 @@
 #    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/25 19:15:33 by auferran         ###   ########.fr        #
+#    Updated: 2024/01/25 20:28:28 by auferran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
-NAME_DEBUG = cub3D_debug
 NAME_BONUS = cub3D_bonus
 CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($$4)}')
 
@@ -53,6 +52,7 @@ SRCS_BONUS =	main_bonus.c						\
 				key_util_bonus.c					\
 				key_utils2_bonus.c					\
 				utils_bonus.c						\
+				utils_2_bonus.c						\
 				lst_utils_bonus.c					\
 				gnl_bonus.c							\
 				get_map_utils_bonus.c				\
@@ -72,10 +72,35 @@ SRCS_BONUS =	main_bonus.c						\
 				manage_mouse_bonus.c				\
 				shading_bonus.c
 
-SRCS_DEBUG =
+SRCS_LEAK =	main_bonus.c						\
+				mlx_bonus.c 						\
+				key_bonus.c							\
+				key_util_bonus.c					\
+				key_utils2_bonus.c					\
+				utils_bonus.c						\
+				utils_2_bonus.c						\
+				lst_utils_bonus.c					\
+				gnl_bonus.c							\
+				get_map_utils_bonus.c				\
+				get_map_bonus.c						\
+				player_bonus.c						\
+				get_next_wall_bonus.c				\
+				calcul_wall_h_bonus.c				\
+				calcul_wall_v_bonus.c				\
+				calcul_wall_utils_bonus.c			\
+				calcul_wall_utils_2_bonus.c			\
+				print_wall_bonus.c					\
+				minimap/minimap.c					\
+				minimap/minimap_utils.c				\
+				check_map_bonus.c					\
+				minimap/display_minimap.c			\
+				time_bonus.c						\
+				manage_mouse_bonus.c				\
+				shading_bonus.c
+
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
-OBJS_DEBUG = $(SRCS_DEBUG:.c=.o)
+OBJS_LEAK = $(SRCS_LEAK:.c=.o)
 DEPS = $(SRCS:.c=.d)
 DEPS_BONUS = $(SRCS_BONUS:.c=.d)
 
@@ -95,11 +120,11 @@ $(NAME) : $(OBJS) $(HEADER)
 
 $(NAME_BONUS) : $(OBJS_BONUS) $(HEADER_BONUS)
 		 make -C ./mlx_linux all
-		 $(CC) $(FLAGS) $(OBJS_BONUS) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
+		 $(CC) $(FLAGS) -D LEAK=0 $(OBJS_BONUS) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
 
-$(NAME_DEBUG) : $(OBJS_DEBUG) $(HEADER)
+$(NAME_LEAK) : $(OBJS_LEAK) $(HEADER_BONUS)
 		 make -C ./mlx_linux all
-		 $(CC) $(FLAGS) -fsanitize=address $(OBJS) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+		 $(CC) $(FLAGS) -D LEAK=1 $(OBJS_LEAK) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
 
 %.o: %.c
 		$(CC) $(FLAGS) -MMD -I/usr/include -Imlx_linux -O3 -c $< -o $@
@@ -108,15 +133,17 @@ all : $(NAME)
 
 bonus : $(NAME_BONUS)
 
+leak : $(NAME_LEAK)
+
 clean :
-		rm -f $(OBJS) $(OBJS_BONUS) $(OBJS_DEBUG) $(DEPS)
+		rm -f $(OBJS) $(OBJS_BONUS) $(OBJS_LEAK) $(DEPS)
 		make -C ./mlx_linux clean
 
 fclean : clean
-		rm -f $(NAME) $(NAME_BONUS) $(NAME_DEBUG) $(DEPS) $(DEPS_BONUS)
+		rm -f $(NAME) $(NAME_BONUS) $(DEPS) $(DEPS_BONUS)
 
 re : fclean all
 
--include : $(DEPS)
+-include : $(DEPS) $(DEPS_BONUS)
 
 .PHONY: all clean fclean re

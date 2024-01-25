@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 20:05:22 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/23 20:45:01 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:14:16 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	get_door(t_env *env)
 int	get_weapon(t_env *env)
 {
 	(void) env;
-	return (1);	
+	return (1);
 }
 
 int	init_img(t_env *env)
