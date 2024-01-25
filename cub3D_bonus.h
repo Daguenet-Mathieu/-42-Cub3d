@@ -6,7 +6,7 @@
 /*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/25 20:10:35 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:52:58 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ void	get_next_wall(t_env *env);
 void	print_wall(t_env *env, t_get_next_wall wall);
 
 int		get_shading_wall(int red, int green, int blue, double distance_wall);
-void	get_RGB(int	color, int *red, int *green, int *blue);
+void	get_rgb(int	color, int *red, int *green, int *blue);
 int		c_f_shading(int color, int y);
 
 void	find_wall_h(t_env *env, double a_p);

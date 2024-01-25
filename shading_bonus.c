@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shading_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/25 20:58:09 by auferran          #+#    #+#             */
+/*   Updated: 2024/01/25 20:58:10 by auferran         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
-void	get_RGB(int	color, int *red, int *green, int *blue)
+void	get_rgb(int	color, int *red, int *green, int *blue)
 {
 	*red = (color>>16) & 0xFF;
 	*green = (color>>8) & 0xFF;
@@ -51,7 +63,7 @@ int	c_f_shading(int color, int y)
 	int	blue;
 	int	new_color;
 
-	get_RGB(color, &red, &green, &blue);
+	get_rgb(color, &red, &green, &blue);
 	new_color = get_shading_floor_ceiling(red, green, blue, y);
 	return (new_color);
 }

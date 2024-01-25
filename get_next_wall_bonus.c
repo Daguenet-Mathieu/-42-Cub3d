@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_wall_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:04:12 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/24 06:14:06 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:51:10 by auferran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ void	print_crosshair(int *image)
 
 void	get_next_wall_loop(t_get_next_wall *s, t_env *env)
 {
+	if (s->i_rayon == WIDTH - 1)
+	{
+		s->i = s->i - env->map.between_rays;
+		s->i_rayon++;
+		return ;
+	}
 	s->x = -1;
 	s->y = -1;
 	find_wall_h(env, s->a_p);
@@ -99,7 +105,7 @@ void	get_next_wall(t_env *env)
 	env->map.between_rays = (double)POV / (double)WIDTH;
 	s.a_p = calcul_a_p(env->map.axe_player);
 	s.i = POV / 2;
-	s.i_rayon = 1;
+	s.i_rayon = 0;
 	while (s.i > ((double)POV / 2 * -1))
 		get_next_wall_loop(&s, env);
 	set_square_minimap(env->mini, env->map.pixel_y_player / SIZE_CUBE, \
