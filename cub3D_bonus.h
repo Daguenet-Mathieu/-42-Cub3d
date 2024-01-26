@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/25 20:52:58 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/26 03:47:18 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define WIDTH_PLAYER 1
 # define HEIGHT_PLAYER 1
 # define BONUS 1
-# define WEAPON_RESIZE 3.5
+# define W_SIZE 3.5
 # define GUN_TIME 500000
 # define DOOR_TIME 3000000
 # define WHITE 0XFFFFFF
@@ -79,7 +79,7 @@ enum e_anim_state
 
 enum e_door_state
 {
-	OPEN,
+	OPEN = 3,
 	CLOSE,
 };
 
@@ -120,7 +120,11 @@ typedef struct s_door
 	unsigned long long	time_start;
 	unsigned long long	interval;
 	int					anim_state;
-	int					is_open;
+	int					is_openning;
+	int					x;
+	int					y;
+	int					calcul_x;
+	int					calcul_y;
 }	t_door;
 
 typedef struct s_map
@@ -134,7 +138,9 @@ typedef struct s_map
 	double	axe_player;
 	double	projection_plane;
 	double	distance_wall;
+	double	distance_door;
 	double	between_rays;
+	int		door_here;
 	int		ceiling;
 	int		floor;
 	int		*cpy_c_f;
@@ -147,18 +153,21 @@ typedef struct s_map
 	t_image	t_we;
 	t_image	t_ea;
 	t_gun	gun;
-	t_door	door1;
-	t_door	door2;
+	t_door	*door1;
+	int		nb_door;
+	t_image	door;
 }	t_map;
 
 typedef struct s_print_wall
 {
 	int		i;
 	double	height_draw;
+	double	height_draw_door;
 	double	index_wall;
 	double	ratio_leon;
 	double	column_t;
 	double	diff;
+	double	diff_door;
 	int		orientation;
 	int		y_start;
 }	t_print_wall;
@@ -167,9 +176,12 @@ typedef struct s_get_next_wall
 {
 	int		x;
 	int		y;
+	int		x_door;
+	int		y_door;
 	double	i;
 	double	a_p;
 	double	height;
+	double	height_door;
 	int		i_rayon;
 }			t_get_next_wall;
 
@@ -177,10 +189,14 @@ typedef struct s_calcul
 {
 	double	new_x;
 	double	new_y;
+	int		y_door;
+	int		x_door;
 	double	old_x;
 	double	old_y;
 	int		grid_x;
 	int		grid_y;
+	int		grid_x_door;
+	int		grid_y_door;
 	double	ya;
 	double	xa;
 }			t_calcul;
@@ -192,6 +208,8 @@ typedef struct s_key
 	int	left;
 	int	right;
 	int	space;
+	int	arrow_left;
+	int	arrow_right;
 }	t_key;
 
 typedef struct s_pos
@@ -237,7 +255,8 @@ typedef struct s_env
 	t_calcul	h;
 	t_calcul	v;
 	t_key		key;
-}			t_env;
+	t_door		door;
+}	t_env;
 
 int		ft_strlen(char *str);
 void	ft_putstr(char *str);
@@ -271,6 +290,7 @@ double	calcul_projection_plane(void);
 double	calcul_a_p(double axe_player);
 void	recalcul_a_p(double *a_p, double between_rays);
 double	calcul_distance(t_env *env, int *x, int *y);
+double	calcul_distance_door(t_env *env, int *x, int *y);
 void	remove_fishbowl(double *distance, double i);
 
 int		init_mlx(t_mlx *mlx);
@@ -308,10 +328,11 @@ int		get_color(char *map);
 void	line_check_util(char *line, int i, int *j, char *ret);
 char	line_check(char *line, int *j);
 int		verif_dulicate(char verif_line, t_map *map);
-int		check_map(t_map *map);
+int		check_map(t_map *map, t_env *env);
 int		its_player(char c);
-int		check_map(t_map *map);
 int		check_time(unsigned long long time, unsigned long long intreval);
 unsigned long long	ft_get_time();
+
+int		its_door(t_env env, int x, int y);
 
 #endif

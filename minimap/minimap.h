@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 23:17:29 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/21 18:32:07 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/25 23:02:57 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # define M_SIZE 10
 # define HEIGHT_MAP 25
 # define WIDTH_MAP 25
+# define WHITE 0XFFFFFF
 # define W 0x545454
 # define G 0x00bb77
-# define D 0x49311d
+# define D 0x0080ff
 # define TRANSPARENT 0xffffffff
 # define MARGIN 50
 

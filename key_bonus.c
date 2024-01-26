@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:12:35 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/25 19:54:58 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/26 00:20:34 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,44 @@ void	display(int move, t_env *env, int player_axe)
 	}
 }
 
+void	handdle_angle(t_env *env)
+{
+	if (env->key.arrow_right)
+		env->map.axe_player += SPEED_2;
+	if (env->key.arrow_left)
+		env->map.axe_player -= SPEED_2;
+	if (env->map.axe_player < 0)
+		env->map.axe_player = 359;
+	if (env->map.axe_player > 360)
+		env->map.axe_player = 0;
+}
+
+void	check_anim_door(t_env *env, int *move)
+{
+	int	i;
+
+	i = 0;
+	while (i < env->map.nb_door)
+	{
+		if ((env->map.door1[i].anim_state == ON_TOP || env->map.door1[i].anim_state == ON_DOWN) && check_time(env->map.door1[i].time_start, env->map.door1[i].interval) == 1)
+		{
+			*move = 1;
+			env->map.door1[i].time_start = ft_get_time();
+			if (env->map.door1[i].is_openning == ON_TOP)
+				env->map.door1[i].anim_state += 1;
+			if (env->map.door1[i].is_openning == ON_DOWN)
+				env->map.door1[i].anim_state -= 1;
+			if (env->map.door1[i].anim_state == 0)
+				env->map.door1[i].is_openning = CLOSE;
+			if (env->map.door1[i].anim_state == 100)
+				env->map.door1[i].is_openning = OPEN;	
+			env->map.gun.cur_img = env->map.gun.img[env->map.gun.curr_img];
+		}
+		i++;
+	}
+}
+
+
 int	handle_key(t_env *env)
 {
 	t_pos		pos;
@@ -43,6 +81,8 @@ int	handle_key(t_env *env)
 
 	move = 0;
 	check_move = 0;
+	handdle_angle(env);
+	check_anim_door(env, &move);
 	if (env->key.space)
 		env->map.gun.anim_state = ON_TOP;
 	if (env->map.gun.anim_state == ON_TOP && check_time(env->map.gun.time_start, env->map.gun.interval) == 1)

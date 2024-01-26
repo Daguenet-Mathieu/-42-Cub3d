@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_wall_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:04:12 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/25 20:51:10 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/26 04:26:48 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,6 @@ void	print_weapon(int *image, t_image weapon)
 			start += WIDTH;
 	}
 }
-
-// void	print_weapon(int *image, t_image weapon)
-// {
-// 	int	start = ((HEIGHT_PLANE - weapon.height) * WIDTH) + (((WIDTH / 4) * 3) - (weapon.size_line / 2));
-// 	int	size = weapon.height * weapon.size_line;
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		if ((unsigned int)weapon.img[i] != 0)
-// 			image[start + (i % weapon.size_line)] = weapon.img[i];
-// 		i++;
-// 		if (i % weapon.size_line == 0)
-// 			start += WIDTH;
-// 	}
-// }
 
 void	print_crosshair(int *image)
 {
@@ -90,6 +73,14 @@ void	get_next_wall_loop(t_get_next_wall *s, t_env *env)
 	remove_fishbowl(&env->map.distance_wall, s->i);
 	s->height = \
 	(SIZE_CUBE / env->map.distance_wall) * env->map.projection_plane;
+	if (env->map.door_here == 1)
+	{
+		env->map.distance_door = \
+		calcul_distance_door(env, &s->x_door, &s->y_door);
+		remove_fishbowl(&env->map.distance_door, s->i);
+		s->height_door = \
+		(SIZE_CUBE / env->map.distance_door) * env->map.projection_plane;
+	}
 	recalcul_a_p(&s->a_p, env->map.between_rays);
 	print_wall(env, *s);
 	s->i = s->i - env->map.between_rays;

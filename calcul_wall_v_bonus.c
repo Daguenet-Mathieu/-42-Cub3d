@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calcul_wall_v _bonus.c                             :+:      :+:    :+:   */
+/*   calcul_wall_v_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:34:56 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/23 22:53:42 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/26 02:32:04 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,23 @@ void	check_next_intersection_v(t_env *env)
 
 void	find_wall_v(t_env *env, double a_p)
 {
+	int	nb;
+
 	check_first_intersection_v(env, a_p);
-	if (its_wall(env->map.map, env->v.grid_y, env->v.grid_x))
-		return ;
-	while (!its_wall(env->map.map, env->v.grid_y, env->v.grid_x))
+	while (1)
+	{
+		nb = its_wall(env->map.map, env->v.grid_y, env->v.grid_x);
+		if (nb == 1)
+			return ;
+		if (nb == 2)
+		{
+			env->v.grid_x_door = env->v.grid_x;
+			env->v.grid_y_door = env->v.grid_y; 
+			printf("y = %d\nx= %d\n", env->v.grid_y, env->v.grid_x);
+			env->v.y_door = env->v.new_y;
+			env->v.x_door = env->v.new_x;
+			env->map.door_here = 1;
+		}
 		check_next_intersection_v(env);
+	}
 }

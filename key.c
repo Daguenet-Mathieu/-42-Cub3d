@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:12:35 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/21 19:40:52 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:29:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,18 @@ void	display(int move, t_env *env, int player_axe)
 	}
 }
 
+void	handdle_angle(t_env *env)
+{
+	if (env->key.arrow_right)
+		env->map.axe_player += SPEED_2;
+	if (env->key.arrow_left)
+		env->map.axe_player -= SPEED_2;
+	if (env->map.axe_player < 0)
+		env->map.axe_player = 359;
+	if (env->map.axe_player > 360)
+		env->map.axe_player = 0;
+}
+
 int	handle_key(t_env *env)
 {
 	t_pos		pos;
@@ -43,6 +55,7 @@ int	handle_key(t_env *env)
 
 	move = 0;
 	check_move = 0;
+	handdle_angle(env);
 	ft_memset(&pos, 0, sizeof(t_pos));
 	init_pos_t_d(&pos, env, &check_move);
 	if (BONUS == 1)

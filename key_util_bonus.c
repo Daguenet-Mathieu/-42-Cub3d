@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_util _bonus.c                                  :+:      :+:    :+:   */
+/*   key_util_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:41:17 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/23 22:54:31 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/26 01:31:19 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
+
+int	its_door(t_env env, int x, int y)
+{
+	int	i;
+
+	i = 0;
+	while (i < env.map.nb_door)
+	{
+		if (env.map.door1[i].x == x && env.map.door1[i].y == y)
+			return (env.map.door1[i].anim_state);
+		i++;
+	}
+	return (0);
+}
 
 int	check_collision(t_pos pos, t_env env)
 {
@@ -20,6 +34,8 @@ int	check_collision(t_pos pos, t_env env)
 	x = (int)(env.map.pixel_x_player + pos.new_x) / SIZE_CUBE;
 	y = (int)(env.map.pixel_y_player + pos.new_y) / SIZE_CUBE;
 	if (env.map.map[y][x] == '1')
+		return (1);
+	if (its_door(env, x, y))
 		return (1);
 	return (0);
 }

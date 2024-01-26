@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calcul_wall_utils _bonus.c                         :+:      :+:    :+:   */
+/*   calcul_wall_utils_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:35:12 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/23 22:53:27 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/26 03:47:34 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	its_wall(char **map, int grid_y, int grid_x)
 		return (1);
 	else if (grid_x > ft_strlen(map[grid_y]))
 		return (1);
+	if(map[grid_y][grid_x] == 'd')
+		return (2);
 	if (map[grid_y][grid_x] == '1')
 		return (1);
 	return (0);
@@ -55,6 +57,31 @@ void	recalcul_a_p(double *a_p, double between_rays)
 	*a_p = *a_p - between_rays;
 	if (*a_p < 0)
 		*a_p = *a_p + 360;
+}
+
+double	calcul_distance_door(t_env *env, int *x, int *y)
+{
+	double			d;
+	double			d_h;
+	double			d_v;
+
+	*y = -1;
+	*x = -1;
+	d_h = sqrt(pow((double)env->map.pixel_x_player - (double)env->h.x_door, 2) \
+		+ pow((double)env->map.pixel_y_player - (double)env->h.y_door, 2));
+	d_v = sqrt(pow((double)env->map.pixel_x_player - (double)env->v.x_door, 2) \
+		+ pow((double)env->map.pixel_y_player - (double)env->v.y_door, 2));
+	if (d_h <= d_v)
+	{
+		*y = env->h.y_door;
+		d = d_h;
+	}
+	else
+	{
+		*x = env->v.x_door;
+		d = d_v;
+	}
+	return (d);
 }
 
 double	calcul_distance(t_env *env, int *x, int *y)

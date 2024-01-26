@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 23:17:07 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/21 17:46:29 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:59:27 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	draw_minimap(t_minimap m, char **map)
 		{
 			if (map[i][j] == '1')
 				set_case(m.map + ptr_offset(i, j, m.width, M_SIZE), W, m.width);
+			else if (map[i][j] == 'd')
+				set_case(m.map + ptr_offset(i, j, m.width, M_SIZE), D, m.width);
 			else
 				set_case(m.map + ptr_offset(i, j, m.width, M_SIZE), G, m.width);
 			j++;

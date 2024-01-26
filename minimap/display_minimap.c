@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 17:42:44 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/21 17:57:08 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/25 23:01:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ void	print_mini_player(int *ptr, double p_x, double p_y, t_minimap mini)
 	p_y = p_y * M_SIZE;
 	p_x = p_x * M_SIZE;
 	ptr += (mini.width_img * mini.height_img / 2) + (mini.width_img / 2);
-	*ptr = 0xffffff;
-	*(ptr + 1) = 0xffffff;
-	*(ptr + mini.width_img) = 0xffffff;
-	*((ptr + mini.width_img) + 1) = 0xffffff;
+	*ptr = WHITE;
+	*(ptr + 1) = WHITE;
+	*(ptr + mini.width_img) = WHITE;
+	*((ptr + mini.width_img) + 1) = WHITE;
 }
 
 void	print_minimap(t_minimap mini, int *ptr, int width)

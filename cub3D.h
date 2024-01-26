@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/22 22:55:11 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:28:49 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,10 @@ typedef struct s_key
 	int	down;
 	int	left;
 	int	right;
+	int	space;
+	int	arrow_left;
+	int	arrow_right;
 }	t_key;
-
 typedef struct s_pos
 {
 	double	new_y;

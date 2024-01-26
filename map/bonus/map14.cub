@@ -1,0 +1,15 @@
+
+F 34,139,34
+
+C 30,144,255
+
+NO img/feuille/north_wall.xpm
+SO img/feuille/south_wall.xpm
+EA img/feuille/east_wall.xpm
+WE img/feuille/west_wall.xpm
+
+11111111111111111111111
+10000000000000000000001
+10N0001111111111D000001
+10000000000000000000001
+11111111111111111111111

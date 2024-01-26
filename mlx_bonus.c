@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 20:05:22 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/25 20:14:05 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/26 00:24:18 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,127 +74,128 @@ int	mlx_close(t_env *env)
 	return (0);
 }
 
-int	get_door(t_env *env)
+void	init_sprite(t_env *env, char *img, t_image *i)
 {
-	(void) env;
+	i->ptr = mlx_xpm_file_to_image(env->mlx.mlx, img, &i->size_line, &i->height);
+}
+
+int	*get_data(t_image *i)
+{
+	return ((int *)mlx_get_data_addr(i->ptr, &i->bpp, &i->size_line, &i->endian));
+}
+
+void	get_coord(char **map, t_door *doors)
+{
+	int	d;
+	int	i;
+	int	j;
+
+	j = 0;
+	d = 0;
+	while (map[j])
+	{
+		i = 0;
+		while (map[j][i])
+		{
+			if (map[j][i] == 'd')
+			{
+				doors[d].x = i;
+				doors[d].y = j;
+				d++;
+			}
+			i++;
+		}
+		j++;
+	}
+}
+
+int	init_door(t_env *env)
+{
+	int	i;
+	
+	env->map.door1 = malloc(sizeof(t_door) * env->map.nb_door);
+	if (!env->map.door1)
+		return (0);
+	get_coord(env->map.map, env->map.door1);
+	i = 0;
+	while (i < env->map.nb_door)
+	{
+		env->map.door1[i].time_start = ft_get_time();
+		env->map.door1[i].interval = DOOR_TIME / 100;
+		env->map.door1[i].anim_state = 100;
+		env->map.door1[i].is_openning = CLOSE;
+		env->map.door1[i].img = env->map.door;
+		i++;
+	}
 	return (1);
 }
 
-// int zoom_img(t_image *img, double zoom)
-// {
-//     double  ratio;
-//     double  j;
-//     int     i;
-//     int     size;
 
-//     size = img->size_line * img->height;
-//     img->new_size_line = img->size_line * zoom;
-//     img->new_height = img->height * zoom;
-//     img->new_img = malloc((img->new_size_line * img->new_height) * sizeof(int));
-//     if (!img->new_img)
-//         return (0);
-//     ratio = 1 / zoom;
-//     i = 0;
-//     j = 0;
-//     printf("ratio == %f\n", ratio);
-//     while ((int)j < size && i < (img->new_size_line * img->new_height))
-//     {
-//         printf("i == %d j == %f j== %d\n", i, j, (int)j);
-//         printf("size == %d , new size == %d\n", size,  (img->new_size_line * img->new_height));
-//         int test = img->new_img[i];
-//         (void) test;
-//         int test2 = img->img[(int)j];
-//         (void) test2;
-//         j += ratio;
-//         i++;
-//     }
-//     return (1);
-// }
+int	get_door(t_env *env)
+{
+	init_sprite(env,"img/door/1.xpm", &env->map.door);
+	if (!env->map.door.ptr)
+		return (0);
+	if (!init_door(env))
+		return (0);
+	env->map.door.img = get_data(&env->map.door);
+	return (1);
+}
 
-// int zoom_img(t_image *img, double zoom)
-// {
-//      double  ratio;
-//      int     i;
-//      double  l;
-//      double  c;
-//      int     size;
+int zoom_img(t_image *img, double zoom)
+{
+    int l;
+    int c;
+    int l_ratio;
+	int c_ratio;
+	int	pixel;
 
-//      size = img->size_line * img->height;
-//      img->new_size_line = (int)(img->size_line * zoom);
-//      img->new_height = (int)(img->height * zoom);
-//      img->new_img = malloc((img->new_size_line * img->new_height) * sizeof(int));
-//     if (!img->new_img)
-//         return (0);
-
-//      ratio = 1 / zoom;
-//      i = 0;
-//      l = 0;
-// 	 c = 0;
-//      while (l < img->height)
-//      {
-// 		//printf("cur index == %f\n", l*img->new_size_line);
-// 		 printf("i == %d c == %f l == %f nbr line == %d\n", i/img->new_size_line, c, l, img->new_size_line);
-//          c = 0;
-// 		//printf("size == %d , new size == %d\n", size,  (img->new_size_line * img->new_height));
-// 		//printf("---> %d\n", img->new_size_line);
-// 			printf("rario == %f ---> %d, i == %d, nsize == %d, old == %d\n", ratio, img->new_size_line, i, img->new_size_line * img->new_height, size);
-//         while (c < img->size_line)
-//          {
-// 			printf("c == %f, index == %d\n", c, (int)(l * img->size_line + c));
-//              int new_pixel_value = img->img[(int)(l * img->size_line + c)];
-//              img->new_img[i] = new_pixel_value;
-//              c += ratio;
-//              i++;
-//          }
-//          l += ratio;
-//      }
-
-//      return (1);
-// }
-
-int zoom_img(t_image* img, double zoom) {
     img->new_size_line = (int)(img->size_line * zoom);
     img->new_height = (int)(img->height * zoom);
-    img->new_img = malloc(img->new_size_line * img->new_height * sizeof(int));
-
-    if (!img->new_img) {
-        return 0;
+    img->new_img = malloc((img->new_size_line * img->new_height) * sizeof(int));
+    if (!img->new_img)
+        return (0);
+    l = 0;
+    while (l < img->new_height)
+    {
+        c = 0;
+    	while (c < img->new_size_line)
+        {
+			l_ratio = (int)(l / zoom);
+			c_ratio = (int)(c / zoom);
+           	pixel = img->img[(int)(l_ratio * img->size_line + c_ratio)];
+          	img->new_img[l * img->new_size_line + c] = pixel;
+            c++;
+		}
+        l++;
     }
 
-    for (int l = 0; l < img->new_height; l++) {
-        for (int c = 0; c < img->new_size_line; c++) {
-            int original_row = (int)(l / zoom);
-            int original_col = (int)(c / zoom);
-            int original_pixel_value = img->img[original_row * img->size_line + original_col];
-            img->new_img[l * img->new_size_line + c] = original_pixel_value;
-        }
-    }
-
-    return 1;
+    return (1);
 }
 
 int get_weapon(t_env *env)
 {
-    env->map.gun.img[0].ptr = mlx_xpm_file_to_image(env->mlx.mlx, "img/weapon/gun/1.xpm", &env->map.gun.img[0].size_line, &env->map.gun.img[0].height);
-    env->map.gun.img[1].ptr = mlx_xpm_file_to_image(env->mlx.mlx, "img/weapon/gun/2.xpm", &env->map.gun.img[1].size_line, &env->map.gun.img[1].height);
-    env->map.gun.img[2].ptr = mlx_xpm_file_to_image(env->mlx.mlx, "img/weapon/gun/3.xpm", &env->map.gun.img[2].size_line, &env->map.gun.img[2].height);
-    env->map.gun.img[3].ptr = mlx_xpm_file_to_image(env->mlx.mlx, "img/weapon/gun/4.xpm", &env->map.gun.img[3].size_line, &env->map.gun.img[3].height);
-	if (!env->map.gun.img[0].ptr || !env->map.gun.img[1].ptr || !env->map.gun.img[2].ptr || !env->map.gun.img[3].ptr)
+	const t_image *i = env->map.gun.img;
+
+	init_sprite(env, "img/weapon/gun/1.xpm", &env->map.gun.img[0]);
+	init_sprite(env, "img/weapon/gun/2.xpm", &env->map.gun.img[1]);
+	init_sprite(env, "img/weapon/gun/3.xpm", &env->map.gun.img[2]);
+	init_sprite(env, "img/weapon/gun/4.xpm", &env->map.gun.img[3]);
+	if (!i[0].ptr || !i[1].ptr || !i[2].ptr || !i[3].ptr)
         return (0);
-    env->map.gun.img[0].img = (int *)mlx_get_data_addr(env->map.gun.img[0].ptr, &env->map.gun.img[0].bpp, &env->map.gun.img[0].size_line, &env->map.gun.img[0].endian);
-    env->map.gun.img[1].img = (int *)mlx_get_data_addr(env->map.gun.img[1].ptr, &env->map.gun.img[1].bpp, &env->map.gun.img[1].size_line, &env->map.gun.img[1].endian);
-    env->map.gun.img[2].img = (int *)mlx_get_data_addr(env->map.gun.img[2].ptr, &env->map.gun.img[2].bpp, &env->map.gun.img[2].size_line, &env->map.gun.img[2].endian);
-    env->map.gun.img[3].img = (int *)mlx_get_data_addr(env->map.gun.img[3].ptr, &env->map.gun.img[3].bpp, &env->map.gun.img[3].size_line, &env->map.gun.img[3].endian);
-
-
+	env->map.gun.img[0].img = get_data((t_image *)&env->map.gun.img[0]);
+	env->map.gun.img[1].img = get_data((t_image *)&env->map.gun.img[1]);
+	env->map.gun.img[2].img = get_data((t_image *)&env->map.gun.img[2]);
+	env->map.gun.img[3].img = get_data((t_image *)&env->map.gun.img[3]);
 	env->map.gun.img[0].size_line /= sizeof(int);
 	env->map.gun.img[1].size_line /= sizeof(int);
 	env->map.gun.img[2].size_line /= sizeof(int);
 	env->map.gun.img[3].size_line /= sizeof(int);
-   if ((int)WEAPON_RESIZE)
+   if ((int)W_SIZE)
    {
-   	if (!zoom_img(&env->map.gun.img[0], WEAPON_RESIZE) || !zoom_img(&env->map.gun.img[1], WEAPON_RESIZE) || !zoom_img(&env->map.gun.img[2], WEAPON_RESIZE) || !zoom_img(&env->map.gun.img[3], WEAPON_RESIZE))
-       	return (0);
+		if (!zoom_img((t_image *)&i[0], W_SIZE) || !zoom_img((t_image *)&i[1], W_SIZE) || \
+		!zoom_img((t_image *)&i[2], W_SIZE) || !zoom_img((t_image *)&i[3], W_SIZE))
+       		return (0);
     }
 	env->map.gun.cur_img = env->map.gun.img[0];
     return (1);

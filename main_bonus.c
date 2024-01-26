@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/25 20:03:18 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/25 23:33:29 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,33 +99,6 @@ int	check_char(char **map)
 		{
 			if (its_player(map[j][i]))
 				player++;
-			else if (map[j][i] != '1' && map[j][i] != '0' && \
-			!ft_isspace(map[j][i]))
-				return (write(2, "invalid char in map\n", 21), 0);
-			i++;
-		}
-		j++;
-	}
-	if (player > 1 || player == 0)
-		return (write(2, "only one player required\n", 26), 0);
-	return (1);
-}
-
-int	check_char_bonus(char **map)
-{
-	int	player;
-	int	i;
-	int	j;
-
-	j = 0;
-	player = 0;
-	while (map[j])
-	{
-		i = 0;
-		while (map[j][i] && map[j][i] != '\n')
-		{
-			if (its_player(map[j][i]))
-				player++;
 			else if (map[j][i] != '1' && map[j][i] != '0' && map[j][i] != 'D' \
 			&& !ft_isspace(map[j][i]))
 				return (write(2, "invalid char in map\n", 21), 0);
@@ -150,7 +123,7 @@ int	main(int argc, char **argv)
 	if (!check_char(env.map.map))
 		return (1);
 	get_pos_player(&env.map);
-	if (!check_map(&env.map))
+	if (!check_map(&env.map, &env))
 		return (1);
 	init_mp_info(&env.map);
 	if (!create_minimap(&env.mini, env.map.map))
@@ -159,12 +132,9 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!set_hooks_mlx(&env))
 		return (1);
+	printf("nb door == %d\n", env.map.nb_door);
 	env.map.gun.time_start = ft_get_time();
 	env.map.gun.interval = GUN_TIME / 4;
-	env.map.door1.time_start = ft_get_time();
-	env.map.door2.time_start = ft_get_time();
-	env.map.door1.interval = DOOR_TIME / 100;
-	env.map.door2.interval = DOOR_TIME / 100;
 	mlx_loop(env.mlx.mlx);
 	return (0);
 }
