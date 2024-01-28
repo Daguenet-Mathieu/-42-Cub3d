@@ -150,7 +150,5 @@ void	print_wall(t_env *env, t_get_next_wall wall)
 		init_print_value_door(&s, env, wall);
 		s.y_start = (HEIGHT_PLANE / 2) - (s.height_draw / 2);
 		draw_pixel(s, env, wall.i_rayon);
-		env->h.door_here = 0;
-		env->v.door_here = 0;
 	}
 }

@@ -58,6 +58,8 @@ void	print_crosshair(int *image)
 
 void	get_next_wall_loop(t_get_next_wall *s, t_env *env)
 {
+	env->h.door_here = 0;
+	env->v.door_here = 0;
 	if (s->i_rayon == WIDTH - 1)
 	{
 		s->i = s->i - env->map.between_rays;
