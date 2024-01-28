@@ -112,7 +112,7 @@ void	get_coord(char **map, t_door *doors)
 int	init_door(t_env *env)
 {
 	int	i;
-	
+
 	env->map.door1 = malloc(sizeof(t_door) * env->map.nb_door);
 	if (!env->map.door1)
 		return (0);
@@ -136,9 +136,10 @@ int	get_door(t_env *env)
 	init_sprite(env,"img/door/1.xpm", &env->map.door);
 	if (!env->map.door.ptr)
 		return (0);
+	env->map.door.img = get_data(&env->map.door);
+	env->map.door.size_line /= 4;
 	if (!init_door(env))
 		return (0);
-	env->map.door.img = get_data(&env->map.door);
 	return (1);
 }
 

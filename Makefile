@@ -17,7 +17,7 @@ CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($
 ifeq ($(CPU_INFO),4)
 	SPEED := 4
 else
-	SPEED := 1
+	SPEED := 2
 endif
 
 HEADER = cub3D.h

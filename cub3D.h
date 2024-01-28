@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
-# include "minimap/minimap.h" 
+# include "minimap/minimap.h"
 
 # define POV 60
 # define FISHBOWL -30

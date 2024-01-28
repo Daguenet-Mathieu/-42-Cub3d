@@ -132,7 +132,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!set_hooks_mlx(&env))
 		return (1);
-	printf("nb door == %d\n", env.map.nb_door);
 	env.map.gun.time_start = ft_get_time();
 	env.map.gun.interval = GUN_TIME / 4;
 	mlx_loop(env.mlx.mlx);

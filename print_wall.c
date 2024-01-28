@@ -21,7 +21,7 @@ void	init_print_value_x(t_print_wall *s, t_env *env, t_get_next_wall wall)
 		env->map.img = env->map.t_we.img;
 		s->ratio_leon = env->map.t_we.height / wall.height;
 		s->column_t = s->index_wall * \
-			(double)env->map.t_we.height / (double)SIZE_CUBE;
+			(double)env->map.t_we.size_line / (double)SIZE_CUBE;
 		s->diff /= wall.height / env->map.t_we.height * 2;
 	}
 	else
@@ -30,7 +30,7 @@ void	init_print_value_x(t_print_wall *s, t_env *env, t_get_next_wall wall)
 		env->map.img = env->map.t_ea.img;
 		s->ratio_leon = env->map.t_ea.height / wall.height;
 		s->column_t = s->index_wall * \
-			(double)env->map.t_ea.height / (double)SIZE_CUBE;
+			(double)env->map.t_ea.size_line / (double)SIZE_CUBE;
 		s->diff /= wall.height / env->map.t_ea.height * 2;
 	}
 }
@@ -44,7 +44,7 @@ void	init_print_value_y(t_print_wall *s, t_env *env, t_get_next_wall wall)
 		env->map.img = env->map.t_no.img;
 		s->ratio_leon = env->map.t_no.height / wall.height;
 		s->column_t = s->index_wall * \
-			(double)env->map.t_no.height / (double)SIZE_CUBE;
+			(double)env->map.t_no.size_line / (double)SIZE_CUBE;
 		s->diff /= wall.height / env->map.t_no.height * 2;
 	}
 	else
@@ -53,7 +53,7 @@ void	init_print_value_y(t_print_wall *s, t_env *env, t_get_next_wall wall)
 		env->map.img = env->map.t_so.img;
 		s->ratio_leon = env->map.t_so.height / wall.height;
 		s->column_t = s->index_wall * \
-			(double)env->map.t_so.height / (double)SIZE_CUBE;
+			(double)env->map.t_so.size_line / (double)SIZE_CUBE;
 		s->diff /= wall.height / env->map.t_so.height * 2;
 	}
 }

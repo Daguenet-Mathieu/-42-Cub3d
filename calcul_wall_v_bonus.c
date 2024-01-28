@@ -53,15 +53,21 @@ void	find_wall_v(t_env *env, double a_p)
 	{
 		nb = its_wall(env->map.map, env->v.grid_y, env->v.grid_x);
 		if (nb == 1)
+		{
+			if (env->v.door_here == 0)
+			{
+				env->v.y_door = env->v.new_y;
+				env->v.x_door = env->v.new_x;
+			}
 			return ;
-		if (nb == 2)
+		}
+		if (nb == 2 && env->v.door_here == 0)
 		{
 			env->v.grid_x_door = env->v.grid_x;
-			env->v.grid_y_door = env->v.grid_y; 
-			printf("y = %d\nx= %d\n", env->v.grid_y, env->v.grid_x);
+			env->v.grid_y_door = env->v.grid_y;
 			env->v.y_door = env->v.new_y;
 			env->v.x_door = env->v.new_x;
-			env->map.door_here = 1;
+			env->v.door_here = 1;
 		}
 		check_next_intersection_v(env);
 	}

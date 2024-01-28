@@ -28,12 +28,12 @@ int	its_wall(char **map, int grid_y, int grid_x)
 		return (1);
 	if (grid_y > (size_map(map) - 1))
 		return (1);
-	else if (grid_x > ft_strlen(map[grid_y]))
+	if (grid_x > ft_strlen(map[grid_y]))
 		return (1);
-	if(map[grid_y][grid_x] == 'd')
-		return (2);
 	if (map[grid_y][grid_x] == '1')
 		return (1);
+	if (map[grid_y][grid_x] == 'd')
+		return (2);
 	return (0);
 }
 
@@ -61,9 +61,8 @@ void	recalcul_a_p(double *a_p, double between_rays)
 
 double	calcul_distance_door(t_env *env, int *x, int *y)
 {
-	double			d;
-	double			d_h;
-	double			d_v;
+	double	d_h;
+	double	d_v;
 
 	*y = -1;
 	*x = -1;
@@ -74,21 +73,19 @@ double	calcul_distance_door(t_env *env, int *x, int *y)
 	if (d_h <= d_v)
 	{
 		*y = env->h.y_door;
-		d = d_h;
+		return (d_h);
 	}
 	else
 	{
 		*x = env->v.x_door;
-		d = d_v;
+		return (d_v);
 	}
-	return (d);
 }
 
 double	calcul_distance(t_env *env, int *x, int *y)
 {
-	double			d;
-	double			d_h;
-	double			d_v;
+	double	d_h;
+	double	d_v;
 
 	*y = -1;
 	*x = -1;
@@ -99,12 +96,11 @@ double	calcul_distance(t_env *env, int *x, int *y)
 	if (d_h <= d_v)
 	{
 		*y = env->h.new_y;
-		d = d_h;
+		return (d_h);
 	}
 	else
 	{
 		*x = env->v.new_x;
-		d = d_v;
+		return (d_v);
 	}
-	return (d);
 }

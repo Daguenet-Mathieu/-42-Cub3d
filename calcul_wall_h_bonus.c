@@ -47,21 +47,27 @@ void	check_next_intersection_h(t_env *env)
 void	find_wall_h(t_env *env, double a_p)
 {
 	int	nb;
-	
+
 	check_first_intersection_h(env, a_p);
 	while (1)
 	{
 		nb = its_wall(env->map.map, env->h.grid_y, env->h.grid_x);
 		if (nb == 1)
+		{
+			if (env->h.door_here == 0)
+			{
+				env->h.y_door = env->h.new_y;
+				env->h.x_door = env->h.new_x;
+			}
 			return ;
-		if (nb == 2)
+		}
+		if (nb == 2 && env->h.door_here == 0)
 		{
 			env->h.grid_x_door = env->h.grid_x;
 			env->h.grid_y_door = env->h.grid_y;
-			printf("y = %d\nx= %d\n", env->h.grid_y, env->h.grid_x);
 			env->h.y_door = env->h.new_y;
 			env->h.x_door = env->h.new_x;
-			env->map.door_here = 1;
+			env->h.door_here = 1;
 		}
 		check_next_intersection_h(env);
 	}

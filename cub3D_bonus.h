@@ -37,18 +37,19 @@
 # define EAST 0xDAA520
 # define WEST 0x7F00FF
 # define FLOOR 0x70726E
+# define DOOR -1
 # define SKY 0x2A303D
 # ifndef SPEED
 #  define SPEED 1
 # endif
-# define SPEED_2 3
+# define SPEED_2 1
 # define SPEED_MOUSE 5
 # define MARGIN 50
 # define WIDTH_PLAYER 1
 # define HEIGHT_PLAYER 1
 # define BONUS 1
 # define W_SIZE 3.5
-# define GUN_TIME 500000
+# define GUN_TIME 350000
 # define DOOR_TIME 3000000
 # define WHITE 0XFFFFFF
 # ifndef LEAK
@@ -140,7 +141,6 @@ typedef struct s_map
 	double	distance_wall;
 	double	distance_door;
 	double	between_rays;
-	int		door_here;
 	int		ceiling;
 	int		floor;
 	int		*cpy_c_f;
@@ -162,12 +162,10 @@ typedef struct s_print_wall
 {
 	int		i;
 	double	height_draw;
-	double	height_draw_door;
 	double	index_wall;
 	double	ratio_leon;
 	double	column_t;
 	double	diff;
-	double	diff_door;
 	int		orientation;
 	int		y_start;
 }	t_print_wall;
@@ -189,14 +187,15 @@ typedef struct s_calcul
 {
 	double	new_x;
 	double	new_y;
-	int		y_door;
-	int		x_door;
+	double	y_door;
+	double	x_door;
 	double	old_x;
 	double	old_y;
 	int		grid_x;
 	int		grid_y;
 	int		grid_x_door;
 	int		grid_y_door;
+	int		door_here;
 	double	ya;
 	double	xa;
 }			t_calcul;
