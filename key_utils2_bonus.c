@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:41:34 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/26 00:23:06 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:52:42 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	handle_keyrelease(int key_code, t_env *env)
 		ajust_key_release(&env->key.down, &env->key.up);
 	return (key_code);
 }
+
 void	ajust_key_press(int *key1, int *key2)
 {
 	if (*key2)
@@ -57,10 +58,12 @@ void	set_anime_state_door(t_door *door, int size, int x, int y)
 	{
 		if (door[i].x == x && door[i].y == y)
 		{
+			printf("ici???? openinig == %d\n", door[i].is_openning);
 			if (door[i].is_openning == CLOSE || door[i].is_openning == ON_DOWN)
 				door[i].is_openning = ON_TOP;
-			if (door[i].is_openning == OPEN || door[i].is_openning == ON_TOP)
+			else if (door[i].is_openning == OPEN || door[i].is_openning == ON_TOP)
 				door[i].is_openning = ON_DOWN;
+			printf("ici???? openinig == %d\n", door[i].is_openning);
 		}
 		i++;
 	}	
@@ -68,9 +71,9 @@ void	set_anime_state_door(t_door *door, int size, int x, int y)
 
 void	do_door(t_env *env)
 {
-	const int	x = (int)env->map.pixel_x_player;
-	const int	y = (int)env->map.pixel_y_player;
-	
+	const int	x = (int)env->map.pixel_x_player / SIZE_CUBE;
+	const int	y = (int)env->map.pixel_y_player / SIZE_CUBE;
+
 	if (env->map.map[y][x + 1] == 'd')
 	 	set_anime_state_door(env->map.door1, env->map.nb_door, x + 1, y);
 	if (env->map.map[y + 1][x] == 'd')

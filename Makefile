@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: auferran <auferran@student.42.fr>          +#+  +:+       +#+         #
+#    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/25 20:28:28 by auferran         ###   ########.fr        #
+#    Updated: 2024/01/28 18:08:23 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,7 @@ INC = -I ./mlx_linux/
 CC = clang #penser a remetttre cc avant de push
 
 FLAGS = -Wall -Werror -Wextra -D SPEED=$(SPEED) -g -gdwarf-4
+FLAGSLEAK = -Wall -Werror -Wextra -D SPEED=$(SPEED) LEAK=1 -g -gdwarf-4
 
 $(NAME) : $(OBJS) $(HEADER)
 		 make -C ./mlx_linux all
@@ -120,11 +121,11 @@ $(NAME) : $(OBJS) $(HEADER)
 
 $(NAME_BONUS) : $(OBJS_BONUS) $(HEADER_BONUS)
 		 make -C ./mlx_linux all
-		 $(CC) $(FLAGS) -D LEAK=0 $(OBJS_BONUS) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
+		 $(CC) $(FLAGS) -D LEAK=1 $(OBJS_BONUS) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
 
 $(NAME_LEAK) : $(OBJS_LEAK) $(HEADER_BONUS)
 		 make -C ./mlx_linux all
-		 $(CC) $(FLAGS) -D LEAK=1 $(OBJS_LEAK) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
+		 $(CC) $(FLAGSLEAK) -D LEAK=1 $(OBJS_LEAK) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
 
 %.o: %.c
 		$(CC) $(FLAGS) -MMD -I/usr/include -Imlx_linux -O3 -c $< -o $@

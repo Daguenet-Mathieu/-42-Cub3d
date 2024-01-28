@@ -15,7 +15,7 @@ int	check_time(unsigned long long time, unsigned long long interval)
 	new_time = ft_get_time();
 	if (new_time == (unsigned long long)-1)
 		return (-1);
-	//printf("start == %llu, interval == %llu, newtime == %llu\n", time , interval, new_time);
+	printf("start == %llu, interval == %llu, newtime == %llu\n", time , interval, new_time);
 	if ((time + interval) < new_time)
 		return (1);
 	else

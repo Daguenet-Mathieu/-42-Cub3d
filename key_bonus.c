@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:12:35 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/26 00:20:34 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:57:10 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,18 @@ void	check_anim_door(t_env *env, int *move)
 	i = 0;
 	while (i < env->map.nb_door)
 	{
-		if ((env->map.door1[i].anim_state == ON_TOP || env->map.door1[i].anim_state == ON_DOWN) && check_time(env->map.door1[i].time_start, env->map.door1[i].interval) == 1)
+		if ((env->map.door1[i].is_openning == ON_TOP || env->map.door1[i].is_openning == ON_DOWN) && check_time(env->map.door1[i].time_start, env->map.door1[i].interval) == 1)
 		{
 			*move = 1;
 			env->map.door1[i].time_start = ft_get_time();
-			if (env->map.door1[i].is_openning == ON_TOP)
+			if (env->map.door1[i].is_openning == ON_TOP && env->map.door1[i].anim_state != 100)
 				env->map.door1[i].anim_state += 1;
-			if (env->map.door1[i].is_openning == ON_DOWN)
+			if (env->map.door1[i].is_openning == ON_DOWN && env->map.door1[i].anim_state != 0)
 				env->map.door1[i].anim_state -= 1;
 			if (env->map.door1[i].anim_state == 0)
 				env->map.door1[i].is_openning = CLOSE;
 			if (env->map.door1[i].anim_state == 100)
-				env->map.door1[i].is_openning = OPEN;	
+				env->map.door1[i].is_openning = OPEN;
 			env->map.gun.cur_img = env->map.gun.img[env->map.gun.curr_img];
 		}
 		i++;
