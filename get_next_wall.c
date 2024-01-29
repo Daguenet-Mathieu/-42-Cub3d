@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:04:12 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/21 20:03:43 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/29 22:38:30 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 void	get_next_wall_loop(t_get_next_wall *s, t_env *env)
 {
-	s->x = -1;
-	s->y = -1;
+	if (s->i_rayon == WIDTH - 1)
+	{
+		s->i = s->i - env->map.between_rays;
+		s->i_rayon++;
+		return ;
+	}
 	find_wall_h(env, s->a_p);
 	find_wall_v(env, s->a_p);
 	env->map.distance_wall = \

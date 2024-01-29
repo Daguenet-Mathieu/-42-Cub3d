@@ -4,10 +4,10 @@ F 255,165,0
 
 C 255,99,80
 
-NO img/brique/small_north.xpm
-SO img/brique/small_south.xpm
-EA img/brique/east_smaller_wall.xpm
-WE img/brique/smaller_west.xpm
+NO img/brique/north_wall.xpm
+SO img/brique/south_wall.xpm
+EA img/brique/east_wall.xpm
+WE img/brique/west_wall.xpm
 
 
 111111111111111111111111

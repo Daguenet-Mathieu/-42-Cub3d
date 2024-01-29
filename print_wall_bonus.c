@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 21:54:03 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/26 04:20:27 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:25:17 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ void	print_wall(t_env *env, t_get_next_wall *wall)
 			s.height_draw = HEIGHT_PLANE;
 			s.diff = wall->height_door - s.height_draw;
 		}
-		printf("s.diff = %f\n", s.diff);
 		s.y_start = (HEIGHT_PLANE / 2) - ((s.height_draw - (tmp - wall->height_door)) / 2);
 		init_print_value_door(&s, env, *wall, state);
 		draw_pixel(s, env, wall->i_rayon);

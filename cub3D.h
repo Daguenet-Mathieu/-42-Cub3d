@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/25 21:28:49 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/29 22:48:49 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define FISHBOWL -30
 # define PLAYER_HEIGHT 32
 # define SIZE_CUBE 64
-# define WIDTH 1920
-# define HEIGHT_PLANE 1080
+# define WIDTH 1600
+# define HEIGHT_PLANE 900
 # define NORTH 0x0000FF
 # define SOUTH 0xFF0000
 # define EAST 0xDAA520
@@ -40,8 +40,8 @@
 # ifndef SPEED
 #  define SPEED 1
 # endif
-# define SPEED_2 3
-# define SPEED_MOUSE 5
+# define SPEED_2 0.5
+# define SPEED_MOUSE 2
 # define MARGIN 50
 # define WIDTH_PLAYER 1
 # define HEIGHT_PLAYER 1

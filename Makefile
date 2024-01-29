@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/29 19:28:24 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/29 21:17:49 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($
 ifeq ($(CPU_INFO),4)
 	SPEED := 6
 else
-	SPEED := 2
+	SPEED := 1
 endif
 
 ifeq ($(firstword $(MAKECMDGOALS)),leak)

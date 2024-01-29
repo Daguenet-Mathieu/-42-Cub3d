@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 20:05:22 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/25 20:14:16 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:45:45 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	free_tab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		free (tab[i]);
+		free(tab[i]);
 		i++;
 	}
+	free(tab);
 }
 
 void	free_struct_util(t_env *env)
@@ -115,8 +116,6 @@ int	set_hooks_mlx(t_env *env)
 	mlx_hook(env->mlx.mlx_win, 17, 0, mlx_close, env);
 	mlx_hook(env->mlx.mlx_win, 3, 1 << 1, handle_keyrelease, env);
 	mlx_hook(env->mlx.mlx_win, 2, 1L << 0, handle_keypress, env);
-	if (BONUS == 1)
-		mlx_mouse_hide(env->mlx.mlx, env->mlx.mlx_win);
 	mlx_loop_hook(env->mlx.mlx, &handle_key, env);
 	env->map.t_no.size_line /= 4;
 	env->map.t_so.size_line /= 4;

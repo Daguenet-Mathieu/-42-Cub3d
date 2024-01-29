@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/25 23:33:29 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/29 23:04:55 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int	main(int argc, char **argv)
 		return (1);
 	env.map.gun.time_start = ft_get_time();
 	env.map.gun.interval = GUN_TIME / 4;
+	display(1, &env, env.map.axe_player);
 	mlx_loop(env.mlx.mlx);
 	return (0);
 }

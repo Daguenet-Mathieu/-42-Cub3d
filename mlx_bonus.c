@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 20:05:22 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/26 00:24:18 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:41:42 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ void	free_tab(char **tab)
 	while (tab[i])
 	{
 		free (tab[i]);
+		i++;
+	}
+	free (tab);
+}
+
+void	destroy_gun(t_env *env, t_gun gun)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (gun.img[i].ptr)
+			mlx_destroy_image(env->mlx.mlx, gun.img[i].ptr);
+		if (gun.img[i].new_img)
+		free(gun.img[i].new_img);
 		i++;
 	}
 }
@@ -45,6 +61,11 @@ void	free_struct_util(t_env *env)
 void	free_struct(t_env *env)
 {
 	free_struct_util(env);
+	if (env->map.door.ptr)
+		mlx_destroy_image(env->mlx.mlx, env->map.door.ptr);
+	if (env->map.door1)
+		free (env->map.door1);
+	destroy_gun(env, env->map.gun);
 	if (env->mlx.s_image)
 		mlx_destroy_image(env->mlx.mlx, env->mlx.s_image);
 	if (env->map.t_no.ptr)

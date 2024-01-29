@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/28 18:05:56 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/29 23:04:24 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,25 @@
 # define FISHBOWL -30
 # define PLAYER_HEIGHT 32
 # define SIZE_CUBE 64
-# define WIDTH 1920
-# define HEIGHT_PLANE 1080
+# define WIDTH 1600
+# define HEIGHT_PLANE 900
 # define NORTH 0x0000FF
 # define SOUTH 0xFF0000
 # define EAST 0xDAA520
 # define WEST 0x7F00FF
 # define FLOOR 0x70726E
-# define DOOR -1
 # define SKY 0x2A303D
+# define DOOR -1
 # ifndef SPEED
 #  define SPEED 1
 # endif
-# define SPEED_2 1
-# define SPEED_MOUSE 5
+# define SPEED_2 0.5
+# define SPEED_MOUSE 2
 # define MARGIN 50
 # define WIDTH_PLAYER 1
 # define HEIGHT_PLAYER 1
 # define BONUS 1
-# define W_SIZE 3.5
+# define W_SIZE 3.0
 # define GUN_TIME 350000
 # define DOOR_TIME 3000000
 # define WHITE 0XFFFFFF
@@ -333,6 +333,8 @@ int		check_map(t_map *map, t_env *env);
 int		its_player(char c);
 int		check_time(unsigned long long time, unsigned long long intreval);
 unsigned long long	ft_get_time();
+
+void	display(int move, t_env *env, int player_axe);
 
 int		its_door(t_env env, int x, int y);
 

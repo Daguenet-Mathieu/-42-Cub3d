@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 02:14:03 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/22 20:43:35 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:42:56 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	init_direction_de_foufurieux(char c, double *axe_player)
 {
 	if (c == 'N')
 		*axe_player = 90;
-	if (c == 'E')
+	else if (c == 'W')
 		*axe_player = 180;
-	if (c == 'S')
+	else if (c == 'S')
 		*axe_player = 270;
-	if (c == 'W')
+	else if (c == 'E')
 		*axe_player = 0;
 }
 
@@ -63,10 +63,10 @@ void	get_pos_player(t_map *map)
 			break ;
 		i++;
 	}
-	map->map[i][j] = '0';
 	map->pixel_x_player = j * SIZE_CUBE + 32;
 	map->pixel_y_player = i * SIZE_CUBE + 32;
 	init_direction_de_foufurieux(map->map[i][j], &map->axe_player);
+	map->map[i][j] = '0';
 }
 
 void	init_mp_info(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/24 03:59:39 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:49:20 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!set_hooks_mlx(&env))
 		return (1);
+	set_map(&env);
+	get_next_wall(&env);
 	mlx_loop(env.mlx.mlx);
 	return (0);
 }

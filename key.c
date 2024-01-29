@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:12:35 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/25 21:29:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:45:08 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int	handle_key(t_env *env)
 	handdle_angle(env);
 	ft_memset(&pos, 0, sizeof(t_pos));
 	init_pos_t_d(&pos, env, &check_move);
-	if (BONUS == 1)
-		check_mouse(env);
 	handle_key_util(check_move, pos, env, &move);
 	ft_memset(&pos, 0, sizeof(t_pos));
 	check_move = 0;
