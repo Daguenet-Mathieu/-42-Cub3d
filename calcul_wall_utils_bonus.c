@@ -72,11 +72,15 @@ double	calcul_distance_door(t_env *env, int *x, int *y)
 		+ pow((double)env->map.pixel_y_player - (double)env->v.y_door, 2));
 	if (d_h <= d_v)
 	{
+		env->map.grid_x_door = env->h.grid_x_door;
+		env->map.grid_y_door = env->h.grid_y_door;
 		*y = env->h.y_door;
 		return (d_h);
 	}
 	else
 	{
+		env->map.grid_x_door = env->v.grid_x_door;
+		env->map.grid_y_door = env->v.grid_y_door;
 		*x = env->v.x_door;
 		return (d_v);
 	}

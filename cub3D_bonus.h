@@ -141,6 +141,8 @@ typedef struct s_map
 	double	distance_wall;
 	double	distance_door;
 	double	between_rays;
+	int		grid_x_door;
+	int		grid_y_door;
 	int		ceiling;
 	int		floor;
 	int		*cpy_c_f;
@@ -275,7 +277,7 @@ void	get_pos_player(t_map *map);
 
 void	get_next_wall(t_env *env);
 
-void	print_wall(t_env *env, t_get_next_wall wall);
+void	print_wall(t_env *env, t_get_next_wall *wall);
 
 int		get_shading_wall(int red, int green, int blue, double distance_wall);
 void	get_rgb(int	color, int *red, int *green, int *blue);

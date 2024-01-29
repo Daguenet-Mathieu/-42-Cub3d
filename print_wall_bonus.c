@@ -78,31 +78,28 @@ int	get_pixel(t_env *env, t_print_wall s, int size_line, int nb)
 	return (pixel_color);
 }
 
-void	init_print_value_door(t_print_wall *s, t_env *env, t_get_next_wall wall)
+void	init_print_value_door(t_print_wall *s, t_env *env, t_get_next_wall wall, int state)
 {
-	int		state;
-	int 	ratio;
+	int	ratio;
 
-	state = its_door(*env, env->h.grid_x_door, env->h.grid_y_door);
-	ratio = (s->height_draw * state) / 100;
-	(void) ratio;
-
+	ratio = env->map.door.height * state / 100;
 	if (wall.x_door > -1)
 		s->index_wall = fmod(env->v.y_door, SIZE_CUBE);
 	else if (wall.y_door > -1)
 		s->index_wall = fmod(env->h.x_door, SIZE_CUBE);
 	s->orientation = DOOR;
 	env->map.img = env->map.door.img;
-	s->ratio_leon = env->map.door.height / wall.height_door;
+	s->ratio_leon = ratio / wall.height_door;
 	s->column_t = s->index_wall * env->map.door.size_line / SIZE_CUBE;
-	s->diff /=  wall.height_door / env->map.door.height * 2;
+	s->diff /=  wall.height_door / ratio * 2;
 }
 
 void	draw_pixel(t_print_wall s, t_env *env, int i_rayon)
 {
-
 	while (s.i < (int)s.height_draw)
 	{
+		if (((s.y_start + s.i) * WIDTH) + i_rayon > (HEIGHT_PLANE * WIDTH))
+			return ;
 		if (s.orientation == NORTH)
 			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] = \
 				get_pixel(env, s, env->map.t_no.size_line, 0);
@@ -122,33 +119,39 @@ void	draw_pixel(t_print_wall s, t_env *env, int i_rayon)
 	}
 }
 
-void	print_wall(t_env *env, t_get_next_wall wall)
+void	print_wall(t_env *env, t_get_next_wall *wall)
 {
 	t_print_wall	s;
+	int				state;
+	int				tmp;
 
 	ft_memset(&s, 0, sizeof(t_print_wall));
-	s.height_draw = wall.height;
+	s.height_draw = wall->height;
 	if (s.height_draw > HEIGHT_PLANE)
 	{
 		s.height_draw = HEIGHT_PLANE;
-		s.diff = (wall.height - s.height_draw);
+		s.diff = wall->height - s.height_draw;
 	}
-	if (wall.x > -1)
-		init_print_value_x(&s, env, wall);
-	else if (wall.y > -1)
-		init_print_value_y(&s, env, wall);
+	if (wall->x > -1)
+		init_print_value_x(&s, env, *wall);
+	else if (wall->y > -1)
+		init_print_value_y(&s, env, *wall);
 	s.y_start = (HEIGHT_PLANE / 2) - (s.height_draw / 2);
-	draw_pixel(s, env, wall.i_rayon);
+	draw_pixel(s, env, wall->i_rayon);
 	if ((env->v.door_here == 1 || env->h.door_here == 1) && env->map.distance_door < env->map.distance_wall)
 	{
-		s.height_draw = wall.height_door;
+		state = its_door(*env, env->map.grid_x_door, env->map.grid_y_door);
+		tmp = wall->height_door;
+		wall->height_door = tmp * state / 100;
+		s.height_draw = wall->height_door;
 		if (s.height_draw > HEIGHT_PLANE)
 		{
 			s.height_draw = HEIGHT_PLANE;
-			s.diff = (wall.height_door - s.height_draw);
+			s.diff = wall->height_door - s.height_draw;
 		}
-		init_print_value_door(&s, env, wall);
-		s.y_start = (HEIGHT_PLANE / 2) - (s.height_draw / 2);
-		draw_pixel(s, env, wall.i_rayon);
+		printf("s.diff = %f\n", s.diff);
+		s.y_start = (HEIGHT_PLANE / 2) - ((s.height_draw - (tmp - wall->height_door)) / 2);
+		init_print_value_door(&s, env, *wall, state);
+		draw_pixel(s, env, wall->i_rayon);
 	}
 }

@@ -82,7 +82,7 @@ void	get_next_wall_loop(t_get_next_wall *s, t_env *env)
 		(SIZE_CUBE / env->map.distance_door) * env->map.projection_plane;
 	}
 	recalcul_a_p(&s->a_p, env->map.between_rays);
-	print_wall(env, *s);
+	print_wall(env, s);
 	s->i = s->i - env->map.between_rays;
 	s->i_rayon++;
 }
