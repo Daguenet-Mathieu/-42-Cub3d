@@ -6,18 +6,25 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/28 18:08:23 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/29 19:28:24 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 NAME_BONUS = cub3D_bonus
+NAME_LEAK = cub3D_leak
 CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($$4)}')
 
 ifeq ($(CPU_INFO),4)
-	SPEED := 4
+	SPEED := 6
 else
 	SPEED := 2
+endif
+
+ifeq ($(firstword $(MAKECMDGOALS)),leak)
+	LEAK := 1
+else
+	LEAK := 0
 endif
 
 HEADER = cub3D.h
@@ -43,8 +50,7 @@ SRCS =	main.c						\
 		minimap/minimap.c			\
 		minimap/minimap_utils.c		\
 		check_map.c					\
-		minimap/display_minimap.c	\
-		manage_mouse.c
+		minimap/display_minimap.c
 
 SRCS_BONUS =	main_bonus.c						\
 				mlx_bonus.c 						\
@@ -110,10 +116,9 @@ MLX = ${MLX_PATH} ${MLX_NAME}
 
 INC = -I ./mlx_linux/
 
-CC = clang #penser a remetttre cc avant de push
+CC = cc
 
-FLAGS = -Wall -Werror -Wextra -D SPEED=$(SPEED) -g -gdwarf-4
-FLAGSLEAK = -Wall -Werror -Wextra -D SPEED=$(SPEED) LEAK=1 -g -gdwarf-4
+FLAGS = -Wall -Werror -Wextra -D SPEED=$(SPEED) -D LEAK=$(LEAK) -g -gdwarf-4
 
 $(NAME) : $(OBJS) $(HEADER)
 		 make -C ./mlx_linux all
@@ -121,11 +126,11 @@ $(NAME) : $(OBJS) $(HEADER)
 
 $(NAME_BONUS) : $(OBJS_BONUS) $(HEADER_BONUS)
 		 make -C ./mlx_linux all
-		 $(CC) $(FLAGS) -D LEAK=1 $(OBJS_BONUS) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
+		 $(CC) $(FLAGS) $(OBJS_BONUS) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
 
 $(NAME_LEAK) : $(OBJS_LEAK) $(HEADER_BONUS)
 		 make -C ./mlx_linux all
-		 $(CC) $(FLAGSLEAK) -D LEAK=1 $(OBJS_LEAK) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
+		 $(CC) $(OBJS_LEAK) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
 
 %.o: %.c
 		$(CC) $(FLAGS) -MMD -I/usr/include -Imlx_linux -O3 -c $< -o $@
