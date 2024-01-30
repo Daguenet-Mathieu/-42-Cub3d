@@ -74,13 +74,7 @@ void	get_next_wall_loop(t_get_next_wall *s, t_env *env)
 	s->height = \
 	(SIZE_CUBE / env->map.distance_wall) * env->map.projection_plane;
 	if (env->h.door_here == 1 || env->v.door_here == 1)
-	{
-		env->map.distance_door = \
-		calcul_distance_door(env, &s->x_door, &s->y_door);
-		remove_fishbowl(&env->map.distance_door, s->i);
-		s->height_door = \
-		(SIZE_CUBE / env->map.distance_door) * env->map.projection_plane;
-	}
+		calcul_door(env, s);
 	recalcul_a_p(&s->a_p, env->map.between_rays);
 	print_wall(env, s);
 	s->i = s->i - env->map.between_rays;

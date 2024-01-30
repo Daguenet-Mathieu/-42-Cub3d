@@ -42,7 +42,7 @@
 # ifndef SPEED
 #  define SPEED 1
 # endif
-# define SPEED_2 0.5
+# define SPEED_2 1
 # define SPEED_MOUSE 2
 # define MARGIN 50
 # define WIDTH_PLAYER 1

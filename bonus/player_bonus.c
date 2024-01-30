@@ -56,6 +56,7 @@ void	get_pos_player(t_map *map)
 	int	j;
 
 	i = 0;
+	j = 0;
 	while (map->map[i])
 	{
 		j = 0;

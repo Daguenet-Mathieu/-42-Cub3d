@@ -20,7 +20,7 @@ CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($
 ifeq ($(CPU_INFO),4)
 	SPEED := 6
 else
-	SPEED := 1.5
+	SPEED := 2.5
 endif
 
 ifeq ($(firstword $(MAKECMDGOALS)),leak)
@@ -56,7 +56,7 @@ SRCS =	$(SUBDM)main.c						\
 		minimap/minimap_utils.c				\
 		minimap/display_minimap.c			\
 		$(SUBDM)shading.c					\
-		$(SUBDM)check_map.c					
+		$(SUBDM)check_map.c
 
 SRCS_BONUS =	$(SUBD)main_bonus.c							\
 				$(SUBD)mlx_bonus.c 							\
@@ -82,7 +82,8 @@ SRCS_BONUS =	$(SUBD)main_bonus.c							\
 				$(SUBD)check_map_bonus.c					\
 				$(SUBD)time_bonus.c							\
 				$(SUBD)manage_mouse_bonus.c					\
-				$(SUBD)shading_bonus.c
+				$(SUBD)shading_bonus.c						\
+				$(SUBD)door_bonus.c
 
 SRCS_LEAK =		$(SUBD)main_bonus.c							\
 				$(SUBD)mlx_bonus.c 							\
@@ -108,8 +109,9 @@ SRCS_LEAK =		$(SUBD)main_bonus.c							\
 				$(SUBD)check_map_bonus.c					\
 				$(SUBD)time_bonus.c							\
 				$(SUBD)manage_mouse_bonus.c					\
-				$(SUBD)shading_bonus.c
-				
+				$(SUBD)shading_bonus.c						\
+				$(SUBD)door_bonus.c
+
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 OBJS_LEAK = $(SRCS_LEAK:.c=.o)
@@ -122,7 +124,7 @@ MLX = ${MLX_PATH} ${MLX_NAME}
 
 INC = -I ./mlx_linux/
 
-CC = cc
+CC = clang
 
 FLAGS = -Wall -Werror -Wextra -fsanitize=address -D SPEED=$(SPEED) -D LEAK=$(LEAK) -g -gdwarf-4
 

@@ -49,33 +49,6 @@ void	recalcul_a_p(double *a_p, double between_rays)
 		*a_p = *a_p + 360;
 }
 
-double	calcul_distance_door(t_env *env, int *x, int *y)
-{
-	double	d_h;
-	double	d_v;
-
-	*y = -1;
-	*x = -1;
-	d_h = sqrt(pow((double)env->map.pixel_x_player - (double)env->h.x_door, 2) \
-		+ pow((double)env->map.pixel_y_player - (double)env->h.y_door, 2));
-	d_v = sqrt(pow((double)env->map.pixel_x_player - (double)env->v.x_door, 2) \
-		+ pow((double)env->map.pixel_y_player - (double)env->v.y_door, 2));
-	if (d_h <= d_v)
-	{
-		env->map.grid_x_door = env->h.grid_x_door;
-		env->map.grid_y_door = env->h.grid_y_door;
-		*y = env->h.y_door;
-		return (d_h);
-	}
-	else
-	{
-		env->map.grid_x_door = env->v.grid_x_door;
-		env->map.grid_y_door = env->v.grid_y_door;
-		*x = env->v.x_door;
-		return (d_v);
-	}
-}
-
 double	calcul_distance(t_env *env, int *x, int *y)
 {
 	double	d_h;

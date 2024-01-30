@@ -52,7 +52,7 @@ double	calcul_angle_l_r(double axe_player, int nb)
 
 	if (nb == 1)
 		angle = axe_player - 90;
-	if (nb == 2)
+	else
 		angle = axe_player + 90;
 	if (angle > 359)
 		angle -= 360;

@@ -42,7 +42,7 @@
 # ifndef SPEED
 #  define SPEED 1
 # endif
-# define SPEED_2 0.5
+# define SPEED_2 1
 # define SPEED_MOUSE 2
 # define MARGIN 50
 # define WIDTH_PLAYER 1
@@ -296,6 +296,10 @@ void	recalcul_a_p(double *a_p, double between_rays);
 double	calcul_distance(t_env *env, int *x, int *y);
 double	calcul_distance_door(t_env *env, int *x, int *y);
 void	remove_fishbowl(double *distance, double i);
+void	calcul_door(t_env *env, t_get_next_wall *s);
+
+void 	init_value_door(t_print_wall *s, t_get_next_wall *w, t_env *e, int *st);
+void	init_print_door(t_print_wall *s, t_env *env, t_get_next_wall w, int st);
 
 int		init_mlx(t_mlx *mlx);
 void	free_struct(t_env *env);
