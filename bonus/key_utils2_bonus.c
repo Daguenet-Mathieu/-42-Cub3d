@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:41:34 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/28 17:52:42 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:04:57 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ void	set_anime_state_door(t_door *door, int size, int x, int y)
 	{
 		if (door[i].x == x && door[i].y == y)
 		{
-			printf("ici???? openinig == %d\n", door[i].is_openning);
 			if (door[i].is_openning == CLOSE || door[i].is_openning == ON_DOWN)
 				door[i].is_openning = ON_TOP;
 			else if (door[i].is_openning == OPEN || door[i].is_openning == ON_TOP)
 				door[i].is_openning = ON_DOWN;
-			printf("ici???? openinig == %d\n", door[i].is_openning);
 		}
 		i++;
 	}	

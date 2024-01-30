@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 02:14:03 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/29 21:43:11 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:05:02 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	init_direction_de_foufurieux(char c, double *axe_player)
 		*axe_player = 270;
 	else if (c == 'E')
 		*axe_player = 0;
-	printf("c = %c\n", c);
-	printf("axe_player init = %f\n", *axe_player);
 }
 
 int	check_line(char *line, int *i)

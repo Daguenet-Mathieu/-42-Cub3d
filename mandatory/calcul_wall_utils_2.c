@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   calcul_wall_utils_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: auferran <auferran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:35:20 by auferran          #+#    #+#             */
-/*   Updated: 2023/12/08 15:35:21 by auferran         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:12:21 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	size_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
+}
 
 double	calcul_projection_plane(void)
 {

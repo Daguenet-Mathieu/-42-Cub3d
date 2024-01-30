@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/29 23:04:55 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:22:19 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,19 +119,19 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (write(2, "Incorrect number of arguments\n", 31));
 	if (!get_map(&env.map, argv[1]))
-		return (1);
+		return (free_struct(&env), 1);
 	if (!check_char(env.map.map))
-		return (1);
+		return (free_struct(&env), 1);
 	get_pos_player(&env.map);
 	if (!check_map(&env.map, &env))
-		return (1);
+		return (free_struct(&env), 1);
 	init_mp_info(&env.map);
 	if (!create_minimap(&env.mini, env.map.map))
 		return (free_struct(&env), 0);
 	if (init_win(&env))
-		return (1);
+		return (free_struct(&env), 1);
 	if (!set_hooks_mlx(&env))
-		return (1);
+		return (free_struct(&env), 1);
 	env.map.gun.time_start = ft_get_time();
 	env.map.gun.interval = GUN_TIME / 4;
 	display(1, &env, env.map.axe_player);

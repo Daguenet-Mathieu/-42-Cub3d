@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/29 21:49:20 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:26:09 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,32 @@ void	printmap(char **map)
 	write(1, "\n", 1);
 }
 
-void	set_map(t_env *env)
+void	set_map(t_env *env, int *ptr)
 {
 	int	y;
 	int	i;
+	int	x;
+	int	color;
 
 	y = 0;
 	while (y < ((HEIGHT_PLANE) / 2))
 	{
 		i = 0;
+		color = c_f_shading(env->map.ceiling, y);
 		while (i < (WIDTH))
-		{
-			env->mlx.image[(y * WIDTH) + i] = env->map.ceiling;
-			i++;
-		}
+			ptr[(y * WIDTH) + i++] = color;
 		y++;
 	}
-	while (y < ((HEIGHT_PLANE)))
+	x = 0;
+	y = HEIGHT_PLANE - 1;
+	while (y >= ((HEIGHT_PLANE / 2)))
 	{
 		i = 0;
+		color = c_f_shading(env->map.floor, x);
 		while (i < (WIDTH))
-		{
-			env->mlx.image[(y * WIDTH) + i] = env->map.floor;
-			i++;
-		}
-		y++;
+			ptr[(y * WIDTH) + i++] = color;
+		x++;
+		y--;
 	}
 }
 
@@ -104,33 +105,6 @@ int	check_char(char **map)
 	return (1);
 }
 
-int	check_char_bonus(char **map)
-{
-	int	player;
-	int	i;
-	int	j;
-
-	j = 0;
-	player = 0;
-	while (map[j])
-	{
-		i = 0;
-		while (map[j][i] && map[j][i] != '\n')
-		{
-			if (its_player(map[j][i]))
-				player++;
-			else if (map[j][i] != '1' && map[j][i] != '0' && map[j][i] != 'D' \
-			&& !ft_isspace(map[j][i]))
-				return (write(2, "invalid char in map\n", 21), 0);
-			i++;
-		}
-		j++;
-	}
-	if (player > 1 || player == 0)
-		return (write(2, "only one player required\n", 26), 0);
-	return (1);
-}
-
 int	main(int argc, char **argv)
 {
 	t_env	env;
@@ -139,21 +113,20 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (write(2, "Incorrect number of arguments\n", 31));
 	if (!get_map(&env.map, argv[1]))
-		return (1);
+		return (free_struct(&env), 1);
 	if (!check_char(env.map.map))
-		return (1);
+		return (free_struct(&env), 1);
 	get_pos_player(&env.map);
-	if (!check_map(&env.map))
-		return (1);
+	if (!check_map(&env.map, &env))
+		return (free_struct(&env), 1);
 	init_mp_info(&env.map);
 	if (!create_minimap(&env.mini, env.map.map))
-		return (free_struct(&env), 0);
+		return (free_struct(&env), 1);
 	if (init_win(&env))
-		return (1);
+		return (free_struct(&env), 1);
 	if (!set_hooks_mlx(&env))
-		return (1);
-	set_map(&env);
-	get_next_wall(&env);
+		return (free_struct(&env), 1);
+	display(1, &env, env.map.axe_player);
 	mlx_loop(env.mlx.mlx);
 	return (0);
 }

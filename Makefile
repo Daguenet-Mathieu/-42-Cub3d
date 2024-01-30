@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/30 01:17:39 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/30 03:04:05 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($
 ifeq ($(CPU_INFO),4)
 	SPEED := 6
 else
-	SPEED := 1
+	SPEED := 1.5
 endif
 
 ifeq ($(firstword $(MAKECMDGOALS)),leak)
@@ -33,11 +33,14 @@ HEADER = mandatory/cub3D.h
 HEADER_BONUS = bonus/cub3D_bonus.h
 
 SRCS =	$(SUBDM)main.c						\
+		$(SUBDM)free.c						\
+		$(SUBDM)img.c						\
 		$(SUBDM)mlx.c 						\
 		$(SUBDM)key.c						\
 		$(SUBDM)key_util.c					\
 		$(SUBDM)key_utils2.c				\
 		$(SUBDM)utils.c						\
+		$(SUBDM)utils_2.c					\
 		$(SUBDM)lst_utils.c					\
 		$(SUBDM)gnl.c						\
 		$(SUBDM)get_map_utils.c				\
@@ -52,6 +55,7 @@ SRCS =	$(SUBDM)main.c						\
 		minimap/minimap.c					\
 		minimap/minimap_utils.c				\
 		minimap/display_minimap.c			\
+		$(SUBDM)shading.c					\
 		$(SUBDM)check_map.c					
 
 SRCS_BONUS =	$(SUBD)main_bonus.c							\

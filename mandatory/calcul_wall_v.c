@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:34:56 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/21 22:52:44 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 01:30:11 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,29 @@ void	check_next_intersection_v(t_env *env)
 
 void	find_wall_v(t_env *env, double a_p)
 {
+	int	nb;
+
 	check_first_intersection_v(env, a_p);
-	if (its_wall(env->map.map, env->v.grid_y, env->v.grid_x))
-		return ;
-	while (!its_wall(env->map.map, env->v.grid_y, env->v.grid_x))
+	while (1)
+	{
+		nb = its_wall(env->map.map, env->v.grid_y, env->v.grid_x);
+		if (nb == 1)
+		{
+			if (env->v.door_here == 0)
+			{
+				env->v.y_door = env->v.new_y;
+				env->v.x_door = env->v.new_x;
+			}
+			return ;
+		}
+		if (nb == 2 && env->v.door_here == 0)
+		{
+			env->v.grid_x_door = env->v.grid_x;
+			env->v.grid_y_door = env->v.grid_y;
+			env->v.y_door = env->v.new_y;
+			env->v.x_door = env->v.new_x;
+			env->v.door_here = 1;
+		}
 		check_next_intersection_v(env);
+	}
 }

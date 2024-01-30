@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/30 00:51:06 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:08:22 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ enum e_door_state
 	CLOSE,
 };
 
+typedef unsigned long long t_ull;
 
 typedef struct s_case
 {
@@ -107,25 +108,25 @@ typedef struct s_img
 
 typedef struct s_gun
 {
-	t_image				img[4];
-	t_image				cur_img;
-	unsigned long long	time_start;
-	unsigned long long	interval;
-	int					curr_img;
-	int					anim_state;
+	t_image	img[4];
+	t_image	cur_img;
+	t_ull	time_start;
+	t_ull	interval;
+	int		curr_img;
+	int		anim_state;
 }	t_gun;
 
 typedef struct s_door
 {
-	t_image				img;
-	unsigned long long	time_start;
-	unsigned long long	interval;
-	int					anim_state;
-	int					is_openning;
-	int					x;
-	int					y;
-	int					calcul_x;
-	int					calcul_y;
+	t_image	img;
+	t_ull	time_start;
+	t_ull	interval;
+	int		anim_state;
+	int		is_openning;
+	int		x;
+	int		y;
+	int		calcul_x;
+	int		calcul_y;
 }	t_door;
 
 typedef struct s_map
@@ -333,8 +334,8 @@ char	line_check(char *line, int *j);
 int		verif_dulicate(char verif_line, t_map *map);
 int		check_map(t_map *map, t_env *env);
 int		its_player(char c);
-int		check_time(unsigned long long time, unsigned long long intreval);
-unsigned long long	ft_get_time();
+int		check_time(t_ull time, t_ull intreval);
+t_ull	ft_get_time();
 
 void	display(int move, t_env *env, int player_axe);
 

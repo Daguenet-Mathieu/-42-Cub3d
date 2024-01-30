@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_util.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madaguen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:41:17 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/21 19:41:20 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:40:34 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_collision(t_pos pos, t_env env)
 
 	x = (int)(env.map.pixel_x_player + pos.new_x) / SIZE_CUBE;
 	y = (int)(env.map.pixel_y_player + pos.new_y) / SIZE_CUBE;
-	if (env.map.map[y][x] == '1')
+	if (BONUS && env.map.map[y][x] == '1')
 		return (1);
 	return (0);
 }

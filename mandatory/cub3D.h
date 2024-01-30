@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/30 01:15:57 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:38:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
+ #include <sys/time.h>
 # include "../minimap/minimap.h"
 
 # define POV 60
@@ -37,6 +38,7 @@
 # define WEST 0x7F00FF
 # define FLOOR 0x70726E
 # define SKY 0x2A303D
+# define DOOR -1
 # ifndef SPEED
 #  define SPEED 1
 # endif
@@ -45,7 +47,14 @@
 # define MARGIN 50
 # define WIDTH_PLAYER 1
 # define HEIGHT_PLAYER 1
-# define BONUS 1
+# define BONUS 0
+# define W_SIZE 3.0
+# define GUN_TIME 350000
+# define DOOR_TIME 3000000
+# define WHITE 0XFFFFFF
+# ifndef LEAK
+#  define LEAK 0
+# endif
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 150
@@ -62,6 +71,21 @@ enum e_dir
 	F,
 };
 
+enum e_anim_state
+{
+	OFF,
+	ON_TOP,
+	ON_DOWN,
+};
+
+enum e_door_state
+{
+	OPEN = 3,
+	CLOSE,
+};
+
+typedef unsigned long long t_ull;
+
 typedef struct s_case
 {
 	unsigned int	x;
@@ -71,15 +95,39 @@ typedef struct s_case
 
 typedef struct s_img
 {
-	void				*ptr;
-	int					size_line;
-	int					height;
-	int					*img;
-	int					bpp;
-	int					endian;
-	unsigned long long	time_start;
-	unsigned long long	interval;
+	void	*ptr;
+	int		size_line;
+	int		new_size_line;
+	int		height;
+	int		new_height;
+	int		*img;
+	int		*new_img;
+	int		bpp;
+	int		endian;
 }	t_image;
+
+typedef struct s_gun
+{
+	t_image	img[4];
+	t_image	cur_img;
+	t_ull	time_start;
+	t_ull	interval;
+	int		curr_img;
+	int		anim_state;
+}	t_gun;
+
+typedef struct s_door
+{
+	t_image	img;
+	t_ull	time_start;
+	t_ull	interval;
+	int		anim_state;
+	int		is_openning;
+	int		x;
+	int		y;
+	int		calcul_x;
+	int		calcul_y;
+}	t_door;
 
 typedef struct s_map
 {
@@ -94,9 +142,13 @@ typedef struct s_map
 	double	axe_player;
 	double	projection_plane;
 	double	distance_wall;
+	double	distance_door;
 	double	between_rays;
+	int		grid_x_door;
+	int		grid_y_door;
 	int		ceiling;
 	int		floor;
+	int		*cpy_c_f;
 	char	*no;
 	char	*so;
 	char	*we;
@@ -105,9 +157,10 @@ typedef struct s_map
 	t_image	t_so;
 	t_image	t_we;
 	t_image	t_ea;
-	t_image	gun;
-	t_image	door1;
-	t_image	door2;
+	t_gun	gun;
+	t_door	*door1;
+	int		nb_door;
+	t_image	door;
 }	t_map;
 
 typedef struct s_print_wall
@@ -126,9 +179,12 @@ typedef struct s_get_next_wall
 {
 	int		x;
 	int		y;
+	int		x_door;
+	int		y_door;
 	double	i;
 	double	a_p;
 	double	height;
+	double	height_door;
 	int		i_rayon;
 }			t_get_next_wall;
 
@@ -136,10 +192,15 @@ typedef struct s_calcul
 {
 	double	new_x;
 	double	new_y;
+	double	y_door;
+	double	x_door;
 	double	old_x;
 	double	old_y;
 	int		grid_x;
 	int		grid_y;
+	int		grid_x_door;
+	int		grid_y_door;
+	int		door_here;
 	double	ya;
 	double	xa;
 }			t_calcul;
@@ -154,6 +215,7 @@ typedef struct s_key
 	int	arrow_left;
 	int	arrow_right;
 }	t_key;
+
 typedef struct s_pos
 {
 	double	new_y;
@@ -197,11 +259,13 @@ typedef struct s_env
 	t_calcul	h;
 	t_calcul	v;
 	t_key		key;
-}			t_env;
+	t_door		door;
+}	t_env;
 
 int		ft_strlen(char *str);
 void	ft_putstr(char *str);
 void	ft_memset(void *pointer, int value, size_t count);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*get_next_line(int fd);
 
 int		get_map(t_map *map, char *map_title);
@@ -216,7 +280,11 @@ void	get_pos_player(t_map *map);
 
 void	get_next_wall(t_env *env);
 
-void	print_wall(t_env *env, t_get_next_wall wall);
+void	print_wall(t_env *env, t_get_next_wall *wall);
+
+int		get_shading_wall(int red, int green, int blue, double distance_wall);
+void	get_rgb(int	color, int *red, int *green, int *blue);
+int		c_f_shading(int color, int y);
 
 void	find_wall_h(t_env *env, double a_p);
 void	find_wall_v(t_env *env, double a_p);
@@ -226,6 +294,7 @@ double	calcul_projection_plane(void);
 double	calcul_a_p(double axe_player);
 void	recalcul_a_p(double *a_p, double between_rays);
 double	calcul_distance(t_env *env, int *x, int *y);
+double	calcul_distance_door(t_env *env, int *x, int *y);
 void	remove_fishbowl(double *distance, double i);
 
 int		init_mlx(t_mlx *mlx);
@@ -242,7 +311,7 @@ int		handle_keypress(int key_code, t_env *env);
 int		handle_key(t_env *env);
 void	check_mouse(t_env *env);
 
-void	set_map(t_env *env);
+void	set_map(t_env *env, int *ptr);
 char	*ft_strdup(const char *str);
 int		ft_isspace(char c);
 
@@ -263,8 +332,25 @@ int		get_color(char *map);
 void	line_check_util(char *line, int i, int *j, char *ret);
 char	line_check(char *line, int *j);
 int		verif_dulicate(char verif_line, t_map *map);
-int		check_map(t_map *map);
+int		check_map(t_map *map, t_env *env);
 int		its_player(char c);
-int		check_map(t_map *map);
+int		check_time(t_ull time, t_ull intreval);
+t_ull	ft_get_time();
+
+int		size_map(char **map);
+
+void	display(int move, t_env *env, int player_axe);
+
+int		its_door(t_env env, int x, int y);
+
+void	free_tab(char **tab);
+void	destroy_gun(t_env *env, t_gun gun);
+void	free_struct_util(t_env *env);
+void	free_struct(t_env *env);
+int		mlx_close(t_env *env);
+
+int 	zoom_img(t_image *img, double zoom);
+void	init_sprite(t_env *env, char *img, t_image *i);
+int		*get_data(t_image *i);
 
 #endif

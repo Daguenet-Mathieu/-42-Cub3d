@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 21:54:03 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/30 01:00:39 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:00:34 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	get_pixel(t_env *env, t_print_wall s, int size_line, int nb)
 	j += s.i * size_line * s.ratio_leon;
 	j -= (int)j % size_line;
 	pixel = j + s.column_t;
-	if (pixel > env->map.size_line * env->map.height)
+	if (pixel > (env->map.size_line * env->map.height) || pixel < 0)
 		return (0);
 	pixel_color = env->map.img[(int)pixel];
 	if (nb == 1)

@@ -6,21 +6,11 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:35:12 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/21 22:53:30 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 02:12:11 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-int	size_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
-}
 
 int	its_wall(char **map, int grid_y, int grid_x)
 {
@@ -28,10 +18,12 @@ int	its_wall(char **map, int grid_y, int grid_x)
 		return (1);
 	if (grid_y > (size_map(map) - 1))
 		return (1);
-	else if (grid_x > ft_strlen(map[grid_y]))
+	if (grid_x > ft_strlen(map[grid_y]))
 		return (1);
 	if (map[grid_y][grid_x] == '1')
 		return (1);
+	if (map[grid_y][grid_x] == 'd')
+		return (2);
 	return (0);
 }
 
@@ -57,11 +49,37 @@ void	recalcul_a_p(double *a_p, double between_rays)
 		*a_p = *a_p + 360;
 }
 
+double	calcul_distance_door(t_env *env, int *x, int *y)
+{
+	double	d_h;
+	double	d_v;
+
+	*y = -1;
+	*x = -1;
+	d_h = sqrt(pow((double)env->map.pixel_x_player - (double)env->h.x_door, 2) \
+		+ pow((double)env->map.pixel_y_player - (double)env->h.y_door, 2));
+	d_v = sqrt(pow((double)env->map.pixel_x_player - (double)env->v.x_door, 2) \
+		+ pow((double)env->map.pixel_y_player - (double)env->v.y_door, 2));
+	if (d_h <= d_v)
+	{
+		env->map.grid_x_door = env->h.grid_x_door;
+		env->map.grid_y_door = env->h.grid_y_door;
+		*y = env->h.y_door;
+		return (d_h);
+	}
+	else
+	{
+		env->map.grid_x_door = env->v.grid_x_door;
+		env->map.grid_y_door = env->v.grid_y_door;
+		*x = env->v.x_door;
+		return (d_v);
+	}
+}
+
 double	calcul_distance(t_env *env, int *x, int *y)
 {
-	double			d;
-	double			d_h;
-	double			d_v;
+	double	d_h;
+	double	d_v;
 
 	*y = -1;
 	*x = -1;
@@ -72,12 +90,11 @@ double	calcul_distance(t_env *env, int *x, int *y)
 	if (d_h <= d_v)
 	{
 		*y = env->h.new_y;
-		d = d_h;
+		return (d_h);
 	}
 	else
 	{
 		*x = env->v.new_x;
-		d = d_v;
+		return (d_v);
 	}
-	return (d);
 }
