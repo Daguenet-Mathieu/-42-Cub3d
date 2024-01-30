@@ -6,13 +6,15 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/29 21:17:49 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/30 01:17:39 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 NAME_BONUS = cub3D_bonus
 NAME_LEAK = cub3D_leak
+SUBD = bonus/
+SUBDM = mandatory/
 CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($$4)}')
 
 ifeq ($(CPU_INFO),4)
@@ -27,83 +29,83 @@ else
 	LEAK := 0
 endif
 
-HEADER = cub3D.h
-HEADER_BONUS = cub3D_bonus.h
+HEADER = mandatory/cub3D.h
+HEADER_BONUS = bonus/cub3D_bonus.h
 
-SRCS =	main.c						\
-		mlx.c 						\
-		key.c						\
-		key_util.c					\
-		key_utils2.c				\
-		utils.c						\
-		lst_utils.c					\
-		gnl.c						\
-		get_map_utils.c				\
-		get_map.c					\
-		player.c					\
-		get_next_wall.c				\
-		calcul_wall_h.c				\
-		calcul_wall_v.c				\
-		calcul_wall_utils.c			\
-		calcul_wall_utils_2.c		\
-		print_wall.c				\
-		minimap/minimap.c			\
-		minimap/minimap_utils.c		\
-		check_map.c					\
-		minimap/display_minimap.c
+SRCS =	$(SUBDM)main.c						\
+		$(SUBDM)mlx.c 						\
+		$(SUBDM)key.c						\
+		$(SUBDM)key_util.c					\
+		$(SUBDM)key_utils2.c				\
+		$(SUBDM)utils.c						\
+		$(SUBDM)lst_utils.c					\
+		$(SUBDM)gnl.c						\
+		$(SUBDM)get_map_utils.c				\
+		$(SUBDM)get_map.c					\
+		$(SUBDM)player.c					\
+		$(SUBDM)get_next_wall.c				\
+		$(SUBDM)calcul_wall_h.c				\
+		$(SUBDM)calcul_wall_v.c				\
+		$(SUBDM)calcul_wall_utils.c			\
+		$(SUBDM)calcul_wall_utils_2.c		\
+		$(SUBDM)print_wall.c				\
+		minimap/minimap.c					\
+		minimap/minimap_utils.c				\
+		minimap/display_minimap.c			\
+		$(SUBDM)check_map.c					
 
-SRCS_BONUS =	main_bonus.c						\
-				mlx_bonus.c 						\
-				key_bonus.c							\
-				key_util_bonus.c					\
-				key_utils2_bonus.c					\
-				utils_bonus.c						\
-				utils_2_bonus.c						\
-				lst_utils_bonus.c					\
-				gnl_bonus.c							\
-				get_map_utils_bonus.c				\
-				get_map_bonus.c						\
-				player_bonus.c						\
-				get_next_wall_bonus.c				\
-				calcul_wall_h_bonus.c				\
-				calcul_wall_v_bonus.c				\
-				calcul_wall_utils_bonus.c			\
-				calcul_wall_utils_2_bonus.c			\
-				print_wall_bonus.c					\
-				minimap/minimap.c					\
-				minimap/minimap_utils.c				\
-				check_map_bonus.c					\
-				minimap/display_minimap.c			\
-				time_bonus.c						\
-				manage_mouse_bonus.c				\
-				shading_bonus.c
+SRCS_BONUS =	$(SUBD)main_bonus.c							\
+				$(SUBD)mlx_bonus.c 							\
+				$(SUBD)key_bonus.c							\
+				$(SUBD)key_util_bonus.c						\
+				$(SUBD)key_utils2_bonus.c					\
+				$(SUBD)utils_bonus.c						\
+				$(SUBD)utils_2_bonus.c						\
+				$(SUBD)lst_utils_bonus.c					\
+				$(SUBD)gnl_bonus.c							\
+				$(SUBD)get_map_utils_bonus.c				\
+				$(SUBD)get_map_bonus.c						\
+				$(SUBD)player_bonus.c						\
+				$(SUBD)get_next_wall_bonus.c				\
+				$(SUBD)calcul_wall_h_bonus.c				\
+				$(SUBD)calcul_wall_v_bonus.c				\
+				$(SUBD)calcul_wall_utils_bonus.c			\
+				$(SUBD)calcul_wall_utils_2_bonus.c			\
+				$(SUBD)print_wall_bonus.c					\
+				minimap/minimap.c							\
+				minimap/minimap_utils.c						\
+				minimap/display_minimap.c					\
+				$(SUBD)check_map_bonus.c					\
+				$(SUBD)time_bonus.c							\
+				$(SUBD)manage_mouse_bonus.c					\
+				$(SUBD)shading_bonus.c
 
-SRCS_LEAK =	main_bonus.c						\
-				mlx_bonus.c 						\
-				key_bonus.c							\
-				key_util_bonus.c					\
-				key_utils2_bonus.c					\
-				utils_bonus.c						\
-				utils_2_bonus.c						\
-				lst_utils_bonus.c					\
-				gnl_bonus.c							\
-				get_map_utils_bonus.c				\
-				get_map_bonus.c						\
-				player_bonus.c						\
-				get_next_wall_bonus.c				\
-				calcul_wall_h_bonus.c				\
-				calcul_wall_v_bonus.c				\
-				calcul_wall_utils_bonus.c			\
-				calcul_wall_utils_2_bonus.c			\
-				print_wall_bonus.c					\
-				minimap/minimap.c					\
-				minimap/minimap_utils.c				\
-				check_map_bonus.c					\
-				minimap/display_minimap.c			\
-				time_bonus.c						\
-				manage_mouse_bonus.c				\
-				shading_bonus.c
-
+SRCS_LEAK =		$(SUBD)main_bonus.c							\
+				$(SUBD)mlx_bonus.c 							\
+				$(SUBD)key_bonus.c							\
+				$(SUBD)key_util_bonus.c						\
+				$(SUBD)key_utils2_bonus.c					\
+				$(SUBD)utils_bonus.c						\
+				$(SUBD)utils_2_bonus.c						\
+				$(SUBD)lst_utils_bonus.c					\
+				$(SUBD)gnl_bonus.c							\
+				$(SUBD)get_map_utils_bonus.c				\
+				$(SUBD)get_map_bonus.c						\
+				$(SUBD)player_bonus.c						\
+				$(SUBD)get_next_wall_bonus.c				\
+				$(SUBD)calcul_wall_h_bonus.c				\
+				$(SUBD)calcul_wall_v_bonus.c				\
+				$(SUBD)calcul_wall_utils_bonus.c			\
+				$(SUBD)calcul_wall_utils_2_bonus.c			\
+				$(SUBD)print_wall_bonus.c					\
+				minimap/minimap.c							\
+				minimap/minimap_utils.c						\
+				minimap/display_minimap.c					\
+				$(SUBD)check_map_bonus.c					\
+				$(SUBD)time_bonus.c							\
+				$(SUBD)manage_mouse_bonus.c					\
+				$(SUBD)shading_bonus.c
+				
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 OBJS_LEAK = $(SRCS_LEAK:.c=.o)
@@ -118,7 +120,7 @@ INC = -I ./mlx_linux/
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -D SPEED=$(SPEED) -D LEAK=$(LEAK) -g -gdwarf-4
+FLAGS = -Wall -Werror -Wextra -fsanitize=address -D SPEED=$(SPEED) -D LEAK=$(LEAK) -g -gdwarf-4
 
 $(NAME) : $(OBJS) $(HEADER)
 		 make -C ./mlx_linux all
