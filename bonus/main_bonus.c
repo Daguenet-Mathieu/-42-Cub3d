@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/30 02:22:19 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/31 00:00:23 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ void	set_map(t_env *env, int *ptr)
 		i = 0;
 		color = c_f_shading(env->map.ceiling, y);
 		while (i < (WIDTH))
-		{
-			ptr[(y * WIDTH) + i] = color;
-			i++;
-		}
+			ptr[(y * WIDTH) + i++] = color;
 		y++;
 	}
 	x = 0;
@@ -58,10 +55,7 @@ void	set_map(t_env *env, int *ptr)
 		i = 0;
 		color = c_f_shading(env->map.floor, x);
 		while (i < (WIDTH))
-		{
-			ptr[(y * WIDTH) + i] = color;
-			i++;
-		}
+			ptr[(y * WIDTH) + i++] = color;
 		x++;
 		y--;
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   door_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/31 00:00:45 by madaguen          #+#    #+#             */
+/*   Updated: 2024/01/31 00:01:06 by madaguen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
 double	calcul_distance_door(t_env *env, int *x, int *y)
@@ -68,5 +80,5 @@ void	init_print_door(t_print_wall *s, t_env *env, t_get_next_wall w, int st)
 	env->map.height = env->map.door.height;
 	s->ratio_leon = ratio / w.height_door;
 	s->column_t = s->index_wall * env->map.door.size_line / SIZE_CUBE;
-	s->diff /=  w.height_door / ratio * 2;
+	s->diff /= w.height_door / ratio * 2;
 }

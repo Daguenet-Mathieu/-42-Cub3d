@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 19:41:17 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/26 01:31:19 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/31 00:20:16 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ int	check_collision(t_pos pos, t_env env)
 	if (its_door(env, x, y))
 		return (1);
 	return (0);
-}
-
-int	do_move(double *player, double new_pos)
-{
-	*player += new_pos;
-	return (1);
 }
 
 double	calcul_angle_l_r(double axe_player, int nb)

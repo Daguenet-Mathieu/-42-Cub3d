@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 21:54:03 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/30 02:17:34 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 23:45:43 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_print_value_x(t_print_wall *s, t_env *env, t_get_next_wall wall)
 		env->map.size_line = env->map.t_we.size_line;
 		env->map.height = env->map.t_we.height;
 		s->ratio_leon = env->map.t_we.height / wall.height;
-		s->column_t = s->index_wall * env->map.t_we.size_line/ SIZE_CUBE;
+		s->column_t = s->index_wall * env->map.t_we.size_line / SIZE_CUBE;
 		s->diff /= wall.height / env->map.t_we.height * 2;
 	}
 	else
@@ -67,9 +67,7 @@ int	get_pixel(t_env *env, t_print_wall s, int size_line, int nb)
 	double	j;
 	double	pixel;
 	int		pixel_color;
-	int		red;
-	int		green;
-	int		blue;
+	t_rgb	rgb;
 
 	j = s.diff * size_line;
 	j += s.i * size_line * s.ratio_leon;
@@ -82,8 +80,9 @@ int	get_pixel(t_env *env, t_print_wall s, int size_line, int nb)
 		env->map.distance_wall = env->map.distance_door;
 	if (env->map.distance_wall > 150)
 	{
-		get_rgb(pixel_color, &red, &green, &blue);
-		pixel_color = get_shading_wall(red, green, blue, env->map.distance_wall);
+		get_rgb(pixel_color, &rgb.red, &rgb.green, &rgb.blue);
+		pixel_color = get_shading_wall \
+		(rgb.red, rgb.green, rgb.blue, env->map.distance_wall);
 	}
 	return (pixel_color);
 }
@@ -92,7 +91,8 @@ void	draw_pixel(t_print_wall s, t_env *env, int i_rayon)
 {
 	while (s.i < (int)s.height_draw)
 	{
-		if (((s.y_start + s.i) * WIDTH) + i_rayon > (HEIGHT_PLANE * WIDTH))
+		if (((s.y_start + s.i) * WIDTH) + i_rayon > (HEIGHT_PLANE * WIDTH) || \
+		((s.y_start + s.i) * WIDTH) + i_rayon < 0)
 			return ;
 		if (s.orientation == NORTH)
 			env->mlx.image[((s.y_start + s.i) * WIDTH) + i_rayon] = \

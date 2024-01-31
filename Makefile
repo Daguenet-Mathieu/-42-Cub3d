@@ -6,7 +6,7 @@
 #    By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/15 19:17:38 by auferran          #+#    #+#              #
-#    Updated: 2024/01/30 03:04:05 by madaguen         ###   ########.fr        #
+#    Updated: 2024/01/31 01:51:10 by madaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CPU_INFO = $(shell cat /proc/cpuinfo  | grep "cpu cores" | uniq | awk '{printf($
 ifeq ($(CPU_INFO),4)
 	SPEED := 6
 else
-	SPEED := 2.5
+	SPEED := 1
 endif
 
 ifeq ($(firstword $(MAKECMDGOALS)),leak)
@@ -63,6 +63,7 @@ SRCS_BONUS =	$(SUBD)main_bonus.c							\
 				$(SUBD)key_bonus.c							\
 				$(SUBD)key_util_bonus.c						\
 				$(SUBD)key_utils2_bonus.c					\
+				$(SUBD)key_utils3_bonus.c					\
 				$(SUBD)utils_bonus.c						\
 				$(SUBD)utils_2_bonus.c						\
 				$(SUBD)lst_utils_bonus.c					\
@@ -83,13 +84,17 @@ SRCS_BONUS =	$(SUBD)main_bonus.c							\
 				$(SUBD)time_bonus.c							\
 				$(SUBD)manage_mouse_bonus.c					\
 				$(SUBD)shading_bonus.c						\
-				$(SUBD)door_bonus.c
+				$(SUBD)img_bonus.c							\
+				$(SUBD)init_door_bonus.c					\
+				$(SUBD)door_bonus.c							\
+				$(SUBD)free_bonus.c
 
 SRCS_LEAK =		$(SUBD)main_bonus.c							\
 				$(SUBD)mlx_bonus.c 							\
 				$(SUBD)key_bonus.c							\
 				$(SUBD)key_util_bonus.c						\
 				$(SUBD)key_utils2_bonus.c					\
+				$(SUBD)key_utils3_bonus.c					\
 				$(SUBD)utils_bonus.c						\
 				$(SUBD)utils_2_bonus.c						\
 				$(SUBD)lst_utils_bonus.c					\
@@ -110,7 +115,10 @@ SRCS_LEAK =		$(SUBD)main_bonus.c							\
 				$(SUBD)time_bonus.c							\
 				$(SUBD)manage_mouse_bonus.c					\
 				$(SUBD)shading_bonus.c						\
-				$(SUBD)door_bonus.c
+				$(SUBD)img_bonus.c							\
+				$(SUBD)init_door_bonus.c					\
+				$(SUBD)door_bonus.c							\
+				$(SUBD)free_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
@@ -126,7 +134,7 @@ INC = -I ./mlx_linux/
 
 CC = clang
 
-FLAGS = -Wall -Werror -Wextra -fsanitize=address -D SPEED=$(SPEED) -D LEAK=$(LEAK) -g -gdwarf-4
+FLAGS = -Wall -Werror -Wextra -D SPEED=$(SPEED) -D LEAK=$(LEAK) -g -gdwarf-4
 
 $(NAME) : $(OBJS) $(HEADER)
 		 make -C ./mlx_linux all
@@ -138,7 +146,7 @@ $(NAME_BONUS) : $(OBJS_BONUS) $(HEADER_BONUS)
 
 $(NAME_LEAK) : $(OBJS_LEAK) $(HEADER_BONUS)
 		 make -C ./mlx_linux all
-		 $(CC) $(OBJS_LEAK) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
+		 $(CC) $(FLAGS) $(OBJS_LEAK) $(INC) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -I/usr/include -lXext -lX11 -lm -lz -o $@
 
 %.o: %.c
 		$(CC) $(FLAGS) -MMD -I/usr/include -Imlx_linux -O3 -c $< -o $@
@@ -147,14 +155,14 @@ all : $(NAME)
 
 bonus : $(NAME_BONUS)
 
-leak : $(NAME_LEAK)
+leak : fclean $(NAME_LEAK)
 
 clean :
 		rm -f $(OBJS) $(OBJS_BONUS) $(OBJS_LEAK) $(DEPS)
 		make -C ./mlx_linux clean
 
 fclean : clean
-		rm -f $(NAME) $(NAME_BONUS) $(DEPS) $(DEPS_BONUS)
+		rm -f $(NAME) $(NAME_BONUS) $(NAME_LEAK) $(DEPS) $(DEPS_BONUS)
 
 re : fclean all
 

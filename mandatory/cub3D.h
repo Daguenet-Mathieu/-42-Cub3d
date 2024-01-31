@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:02:10 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/30 02:38:23 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 23:36:11 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
- #include <sys/time.h>
+# include <sys/time.h>
 # include "../minimap/minimap.h"
 
 # define POV 60
@@ -84,7 +84,7 @@ enum e_door_state
 	CLOSE,
 };
 
-typedef unsigned long long t_ull;
+typedef unsigned long long	t_ull;
 
 typedef struct s_case
 {
@@ -251,6 +251,13 @@ typedef struct s_verif_map
 	int		i;
 }	t_verif_map;
 
+typedef struct s_rgb
+{
+	int	red;
+	int	green;
+	int	blue;
+}	t_rgb;
+
 typedef struct s_env
 {
 	t_mlx		mlx;
@@ -283,7 +290,7 @@ void	get_next_wall(t_env *env);
 void	print_wall(t_env *env, t_get_next_wall *wall);
 
 int		get_shading_wall(int red, int green, int blue, double distance_wall);
-void	get_rgb(int	color, int *red, int *green, int *blue);
+void	get_rgb(int color, int *red, int *green, int *blue);
 int		c_f_shading(int color, int y);
 
 void	find_wall_h(t_env *env, double a_p);
@@ -332,10 +339,10 @@ int		get_color(char *map);
 void	line_check_util(char *line, int i, int *j, char *ret);
 char	line_check(char *line, int *j);
 int		verif_dulicate(char verif_line, t_map *map);
-int		check_map(t_map *map, t_env *env);
+int		check_map(t_map *map);
 int		its_player(char c);
 int		check_time(t_ull time, t_ull intreval);
-t_ull	ft_get_time();
+t_ull	ft_get_time(void);
 
 int		size_map(char **map);
 
@@ -349,7 +356,7 @@ void	free_struct_util(t_env *env);
 void	free_struct(t_env *env);
 int		mlx_close(t_env *env);
 
-int 	zoom_img(t_image *img, double zoom);
+int		zoom_img(t_image *img, double zoom);
 void	init_sprite(t_env *env, char *img, t_image *i);
 int		*get_data(t_image *i);
 

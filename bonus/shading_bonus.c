@@ -6,16 +6,16 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 20:58:09 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/30 00:03:57 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/31 00:22:03 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-void	get_rgb(int	color, int *red, int *green, int *blue)
+void	get_rgb(int color, int *red, int *green, int *blue)
 {
-	*red = (color>>16) & 0xFF;
-	*green = (color>>8) & 0xFF;
+	*red = (color >> 16) & 0xFF;
+	*green = (color >> 8) & 0xFF;
 	*blue = color & 0xFF;
 }
 
@@ -33,7 +33,7 @@ int	get_shading_wall(int red, int green, int blue, double distance_wall)
 		green = 255;
 	if (blue > 255)
 		blue = 255;
-	return (red<<16 | green<<8 | blue);
+	return (red << 16 | green << 8 | blue);
 }
 
 int	get_shading_floor_ceiling(int red, int green, int blue, int y)
@@ -51,7 +51,7 @@ int	get_shading_floor_ceiling(int red, int green, int blue, int y)
 		green = 255;
 	if (blue > 255)
 		blue = 255;
-	return (red<<16 | green<<8 | blue);
+	return (red << 16 | green << 8 | blue);
 }
 
 int	c_f_shading(int color, int y)

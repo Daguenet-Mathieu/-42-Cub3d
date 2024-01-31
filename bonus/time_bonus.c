@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   time_bonus.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/31 00:29:19 by madaguen          #+#    #+#             */
+/*   Updated: 2024/01/31 00:30:48 by madaguen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
-unsigned long long ft_get_time()
+unsigned long long	ft_get_time(void)
 {
-	struct timeval		tv;
+	struct timeval	tv;
+
 	if (gettimeofday(&tv, (void *)0) == -1)
 		return (-1);
-	return (tv.tv_sec * 1000000) + (tv.tv_usec);
+	return ((tv.tv_sec * 1000000) + (tv.tv_usec));
 }
 
 int	check_time(unsigned long long time, unsigned long long interval)

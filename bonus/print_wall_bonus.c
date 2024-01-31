@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 21:54:03 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/30 02:00:34 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/31 00:17:37 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_print_value_x(t_print_wall *s, t_env *env, t_get_next_wall wall)
 		env->map.size_line = env->map.t_we.size_line;
 		env->map.height = env->map.t_we.height;
 		s->ratio_leon = env->map.t_we.height / wall.height;
-		s->column_t = s->index_wall * env->map.t_we.size_line/ SIZE_CUBE;
+		s->column_t = s->index_wall * env->map.t_we.size_line / SIZE_CUBE;
 		s->diff /= wall.height / env->map.t_we.height * 2;
 	}
 	else
@@ -67,9 +67,7 @@ int	get_pixel(t_env *env, t_print_wall s, int size_line, int nb)
 	double	j;
 	double	pixel;
 	int		pixel_color;
-	int		red;
-	int		green;
-	int		blue;
+	t_rgb	rgb;
 
 	j = s.diff * size_line;
 	j += s.i * size_line * s.ratio_leon;
@@ -82,8 +80,9 @@ int	get_pixel(t_env *env, t_print_wall s, int size_line, int nb)
 		env->map.distance_wall = env->map.distance_door;
 	if (env->map.distance_wall > 150)
 	{
-		get_rgb(pixel_color, &red, &green, &blue);
-		pixel_color = get_shading_wall(red, green, blue, env->map.distance_wall);
+		get_rgb(pixel_color, &rgb.red, &rgb.green, &rgb.blue);
+		pixel_color = get_shading_wall \
+		(rgb.red, rgb.green, rgb.blue, env->map.distance_wall);
 	}
 	return (pixel_color);
 }
@@ -132,7 +131,8 @@ void	print_wall(t_env *env, t_get_next_wall *wall)
 		init_print_value_y(&s, env, *wall);
 	s.y_start = (HEIGHT_PLANE / 2) - (s.height_draw / 2);
 	draw_pixel(s, env, wall->i_rayon);
-	if ((env->v.door_here == 1 || env->h.door_here == 1) && env->map.distance_door < env->map.distance_wall)
+	if ((env->v.door_here == 1 || env->h.door_here == 1) \
+	&& env->map.distance_door < env->map.distance_wall)
 	{
 		init_value_door(&s, wall, env, &state);
 		init_print_door(&s, env, *wall, state);

@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:18:22 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/30 02:26:09 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 21:29:22 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	main(int argc, char **argv)
 	if (!check_char(env.map.map))
 		return (free_struct(&env), 1);
 	get_pos_player(&env.map);
-	if (!check_map(&env.map, &env))
+	if (!check_map(&env.map))
 		return (free_struct(&env), 1);
 	init_mp_info(&env.map);
 	if (!create_minimap(&env.mini, env.map.map))

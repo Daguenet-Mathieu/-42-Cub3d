@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:47:28 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/30 01:31:06 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/31 02:12:22 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	atouc(char *nb, int *j)
 
 	i = 0;
 	res = 0;
+	if (nb[i] == 0 || nb[i] == '\n')
+		return (-1);
 	while (nb[i] == 32 || (nb[i] >= 9 && nb[i] <= 13))
 		i++;
 	while (nb[i] && nb[i] >= '0' && nb[i] <= '9' && res < 256)
@@ -30,7 +32,7 @@ int	atouc(char *nb, int *j)
 		return (-1);
 	while (nb[i] == 32 || (nb[i] >= 9 && nb[i] <= 13))
 		i++;
-	if (nb[i] != '\0' && nb[i] != ',' && nb[i] == '\n')
+	if (i == 0 || (nb[i] != '\0' && nb[i] != ',' && nb[i] == '\n'))
 		return (-1);
 	if (nb[i] == ',' && nb[i + 1] == ',')
 		return (-1);
@@ -50,11 +52,11 @@ int	get_color(char *map)
 	if (rgb == -1)
 		return (-2);
 	color += rgb << 16;
-	rgb = atouc(map + i + 1, &i);
+	rgb = atouc(map + ++i, &i);
 	if (rgb == -1)
 		return (-2);
 	color += rgb << 8;
-	rgb = atouc(map + i + 2, &i);
+	rgb = atouc(map + ++i, &i);
 	if (rgb == -1)
 		return (-2);
 	color += rgb;

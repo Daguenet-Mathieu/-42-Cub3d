@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 23:17:07 by madaguen          #+#    #+#             */
-/*   Updated: 2024/01/25 22:59:27 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/31 01:38:48 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	create_minimap(t_minimap *mini, char **map)
 	i = 0;
 	size = mini->width * mini->height;
 	while (i < size)
-		mini->map[i++] = TRANSPARENT;
+		mini->map[i++] = 0;
 	draw_minimap(*mini, map);
 	return (1);
 }

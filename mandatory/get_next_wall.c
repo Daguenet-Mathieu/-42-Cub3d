@@ -6,7 +6,7 @@
 /*   By: madaguen <madaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:04:12 by auferran          #+#    #+#             */
-/*   Updated: 2024/01/30 01:31:17 by madaguen         ###   ########.fr       */
+/*   Updated: 2024/01/30 23:39:00 by madaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 void	print_weapon(int *image, t_image weapon)
 {
-	int	start = ((HEIGHT_PLANE - weapon.new_height) * WIDTH) + (((WIDTH / 4) * 3) - (weapon.new_size_line / 2));
-	int	size = weapon.new_height * weapon.new_size_line;
+	int	start;
+	int	size;
 	int	i;
 
 	i = 0;
+	start = ((HEIGHT_PLANE - weapon.new_height) \
+	* WIDTH) + (((WIDTH / 4) * 3) - (weapon.new_size_line / 2));
+	size = weapon.new_height * weapon.new_size_line;
 	while (i < size)
 	{
 		if ((unsigned int)weapon.new_img[i] != 0)
